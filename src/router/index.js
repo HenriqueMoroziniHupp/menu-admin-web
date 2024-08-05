@@ -1,11 +1,13 @@
-import AppLayout from '@/layout/AppLayout.vue';
-import { createRouter, createWebHistory } from 'vue-router';
+import AppLayout from '@/layout/AppLayout.vue'
+import { useAuthStore } from '@/store/authStore'
+import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
             path: '/',
+            meta: { requiresAuth: true },
             component: AppLayout,
             children: [
                 {
@@ -133,6 +135,14 @@ const router = createRouter({
             component: () => import('@/views/pages/auth/Error.vue')
         }
     ]
-});
+})
 
-export default router;
+router.beforeEach((to, from) => {
+    const authStore = useAuthStore()
+
+    if (to.name === 'login' && authStore.isAuthenticated) return { path: '/' }
+
+    if (to.meta.requiresAuth && !authStore.isAuthenticated && to.name !== 'login') return { name: 'login' }
+})
+
+export default router
