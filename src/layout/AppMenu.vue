@@ -6,7 +6,11 @@ import AppMenuItem from './AppMenuItem.vue';
 const model = ref([
     {
         label: 'Home',
-        items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/' }]
+        items: [
+            { label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/' },
+            { label: 'Categorias', icon: 'pi pi-fw pi-clone', to: '/categories' },
+            { label: 'Produtos', icon: 'pi pi-fw pi-list', to: '/products' },
+        ],
     },
     {
         label: 'UI Components',
