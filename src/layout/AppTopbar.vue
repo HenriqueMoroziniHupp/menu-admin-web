@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { useLayout } from '@/layout/composables/layout';
+import { API } from '@/settings/axios';
 import { useResetStore } from '@/store/resetStore';
 import { useUserStore } from '@/store/userStore';
 import type Menu from 'primevue/menu';
+import type { MenuItem } from 'primevue/menuitem';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import AppConfigurator from './AppConfigurator.vue';
@@ -15,10 +17,11 @@ const toggleUserMenu = (event) => userMenu.value.toggle(event)
 
 const logout = () => {
     useResetStore()
+    delete API.defaults.headers.common.Authorization
     router.replace({ name: 'login' })
 }
 
-const items = ref([
+const items = ref<MenuItem[]>([
     {
         separator: true
     },

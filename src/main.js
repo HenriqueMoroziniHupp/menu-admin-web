@@ -1,8 +1,10 @@
+import { API } from '@/settings/axios'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import { useAuthStore } from './store/authStore'
 
 import Aura from '@primevue/themes/aura'
 import PrimeVue from 'primevue/config'
@@ -29,5 +31,9 @@ app.use(PrimeVue, {
 })
 app.use(ToastService)
 app.use(ConfirmationService)
+app.use(() => {
+    const { authToken } = useAuthStore()
+    if(authToken) API.defaults.headers.common.Authorization = `Bearer ${authToken}`
+})
 
 app.mount('#app')
