@@ -108,7 +108,7 @@ const getStatusLabel = (status) => {
             return 'success';
 
         case 'INACTIVE':
-            return 'warn';
+            return 'danger';
 
         default:
             return null;
@@ -151,7 +151,7 @@ const getStatusLabel = (status) => {
                 </template>
 
                 <Column selectionMode="multiple" style="width: 3rem" :exportable="false"></Column>
-                <Column field="id" header="Id" sortable style="min-width: 12rem"></Column>
+                <Column field="id" header="Id" sortable style="min-width: 5rem"></Column>
                 <Column field="name" header="Nome" sortable style="min-width: 16rem"></Column>
                 <Column field="status" header="Status" sortable style="min-width: 12rem">
                     <template #body="slotProps">
