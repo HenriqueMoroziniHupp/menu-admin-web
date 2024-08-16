@@ -1,10 +1,6 @@
+import { IPostProduct, IPutProduct } from '@/interfaces/IProduct';
 import { API } from '../settings/axios';
 
-interface IPostCategory {
-    name: string;
-    status: string;
-    icon?: string
-}
 export default {
     async getProducts(slug: string) {
         return API({
@@ -20,7 +16,7 @@ export default {
         });
     },
 
-    async postProduct(data: IPostCategory) {
+    async postProduct(data: IPostProduct) {
         return API({
             method: 'POST',
             url: '/admin/products',
@@ -28,7 +24,7 @@ export default {
         });
     },
 
-    async putProduct(id: number, data: IPostCategory) {
+    async putProduct(id: number, data: IPutProduct) {
         return API({
             method: 'PUT',
             url: `/admin/products/${id}`,

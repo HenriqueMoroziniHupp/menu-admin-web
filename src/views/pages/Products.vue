@@ -1,36 +1,22 @@
 <script setup lang="ts">
+import { IProduct, IPutProduct } from '@/interfaces/IProduct';
 import categoryAPI from '@/service/CategoryService';
 import productsAPI from '@/service/ProductsService';
 import { useUserStore } from '@/store/userStore';
 import { FilterMatchMode } from '@primevue/core/api';
 import { useToast } from 'primevue/usetoast';
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
-type TProductStatus = 'ACTIVE' | 'OUTOFSTOCK' | 'INACTIVE'
-interface IProduct {
-    id: number
-    idCategory: number
-    name: string
-    description: string
-    status: TProductStatus
-    imageUrl?: string
-    image?: BinaryType
-    priceSmall?: number
-    priceMedium?: number
-    priceLarge?: number
-    priceSingle?: number
-}
 const userStore = useUserStore()
 const toast = useToast();
-
-
 const dt = ref();
 const loading = ref(false)
 const loadingTable = ref(false)
 const loadingCategory = ref(false)
 const categoriesOptions = ref();
-const product = ref({} as IProduct);
-const products = ref();
+const product = ref({} as IProduct | null);
+const productAux = ref({} as IProduct | null);
+const products = ref<IProduct[]>();
 const selectedProducts = ref();
 const editorDialog = ref(false);
 const deleteDialog = ref(false);
@@ -44,6 +30,19 @@ const statusOptions = ref([
 const filters = ref({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS }
 });
+
+const putProduct = computed(() => {
+    const diferencas = {} as IPutProduct;
+    const chaves = new Set([...Object.keys(product.value)]);
+
+    chaves.forEach(chave => {
+        if (product.value[chave] !== productAux.value[chave]) {
+            diferencas[chave] = product.value[chave];
+        }
+    });
+
+    return diferencas;
+})
 
 const fetchProducts = async () => {
     try {
@@ -59,11 +58,9 @@ const fetchProducts = async () => {
 }
 
 const fetchCategories = async () => {
-    console.log('Loading categories ...');
     if(categoriesOptions.value) return
 
     try {
-        console.log('%ctry: ', 'color: MidnightBlue; background: Aquamarine;');
         loadingCategory.value = true
         const response = await categoryAPI.getCategories(userStore.getSlug)
         categoriesOptions.value = response.data
@@ -76,9 +73,20 @@ const fetchCategories = async () => {
 }
 
 const openNew = () => {
-    product.value = { status: 'ACTIVE' } as IProduct;
+    product.value = resetProduct()
     submitted.value = false;
     editorDialog.value = true;
+};
+
+const openEdit = (item: IProduct) => {
+    product.value = { ...item, idCategory: item.category.id };
+    productAux.value = { ...product.value }
+    editorDialog.value = true;
+};
+
+const openDelete = (item: IProduct) => {
+    product.value = item;
+    deleteDialog.value = true;
 };
 
 const hideDialog = () => {
@@ -87,15 +95,22 @@ const hideDialog = () => {
     loading.value = false
 };
 
+const isValid = computed(() =>
+    !!product.value?.name
+    && !!product.value?.idCategory
+    && !!product.value.description
+    && !!product.value.status
+)
+
 const onSubmit = async () => {
     submitted.value = true;
-    if (!product.value.name) return
+    if (!isValid.value) return
     const isEdit = !!product.value.id
 
     try {
         loading.value = true;
         isEdit ?
-            await productsAPI.putProduct(product.value.id, { name: product.value.name, status: product.value.status })
+            await productsAPI.putProduct(product.value.id, putProduct.value)
             :await productsAPI.postProduct(product.value)
         await fetchProducts()
         editorDialog.value = false;
@@ -106,14 +121,7 @@ const onSubmit = async () => {
         loading.value = false
     }
 };
-const editProduct = (item: IProduct) => {
-    product.value = { ...item };
-    editorDialog.value = true;
-};
-const confirmDelete = (item: IProduct) => {
-    product.value = item;
-    deleteDialog.value = true;
-};
+
 const onSubmitDelete = async () => {
     try {
         loading.value = true;
@@ -143,6 +151,17 @@ const getStatusLabel = (status) => {
             return null;
     }
 };
+
+const resetProduct = (): IProduct => {
+    return {
+        name: undefined,
+        status: 'ACTIVE',
+        description: undefined,
+        category: undefined,
+        id: undefined,
+        idCategory: undefined
+    }
+}
 
 onMounted(async() => {
     await fetchProducts()
@@ -200,8 +219,8 @@ onMounted(async() => {
                 </Column>
                 <Column :exportable="false" style="min-width: 10rem">
                     <template #body="slotProps">
-                        <Button icon="pi pi-pencil" outlined rounded class="mr-2" @click="editProduct(slotProps.data)" />
-                        <Button icon="pi pi-trash" outlined rounded severity="danger" @click="confirmDelete(slotProps.data)" />
+                        <Button icon="pi pi-pencil" outlined rounded class="mr-2" @click="openEdit(slotProps.data)" />
+                        <Button icon="pi pi-trash" outlined rounded severity="danger" @click="openDelete(slotProps.data)" />
                     </template>
                 </Column>
             </DataTable>
@@ -235,7 +254,6 @@ onMounted(async() => {
                 <Button label="Cancel" icon="pi pi-times" text @click="hideDialog" />
                 <Button label="Save" icon="pi pi-check" @click="onSubmit" :loading />
             </template>
-            <small><pre>{{ product }}</pre></small>
         </Dialog>
 
         <Dialog v-model:visible="deleteDialog" :style="{ width: '450px' }" header="Confirm" :modal="true">

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ICategory } from '@/interfaces/ICategory';
 import categoryAPI from '@/service/CategoryService';
 import { useUserStore } from '@/store/userStore';
 import { FilterMatchMode } from '@primevue/core/api';
@@ -32,14 +33,6 @@ const categories = ref();
 const categoryDialog = ref(false);
 const deleteCategoryDialog = ref(false);
 
-type TCategoryStatus = 'ACTIVE' | 'INACTIVE'
-
-interface ICategory {
-    id: number,
-    name: string,
-    icon: string | null,
-    status: TCategoryStatus,
-}
 const category = ref({} as ICategory);
 const selectedCategories = ref();
 const filters = ref({
