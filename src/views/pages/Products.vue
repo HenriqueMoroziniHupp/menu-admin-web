@@ -3,19 +3,25 @@ import { IProduct, IPutProduct } from '@/interfaces/IProduct';
 import categoryAPI from '@/service/CategoryService';
 import productsAPI from '@/service/ProductsService';
 import { useUserStore } from '@/store/userStore';
+import type CropperCanvas from '@cropper/element-canvas';
+import type CropperImage from '@cropper/element-image';
 import { FilterMatchMode } from '@primevue/core/api';
+import Compressor from 'compressorjs';
 import { useToast } from 'primevue/usetoast';
 import { computed, onMounted, ref } from 'vue';
 
+const __cropperCanvas = ref<CropperCanvas>()
+const __cropperImage = ref<CropperImage>()
+
 const userStore = useUserStore()
 const toast = useToast();
-const dt = ref();
+const __dt = ref();
 const loading = ref(false)
 const loadingTable = ref(false)
 const loadingCategory = ref(false)
 const categoriesOptions = ref();
 const product = ref({} as IProduct | null);
-const productAux = ref({} as IProduct | null);
+const productTemp = ref({} as IProduct | null);
 const products = ref<IProduct[]>();
 const selectedProducts = ref();
 const editorDialog = ref(false);
@@ -25,23 +31,22 @@ const statusOptions = ref([
     { label: 'Active', value: 'ACTIVE' },
     { label: 'Inactive', value: 'INACTIVE' },
     { label: 'Out of Stock', value: 'OUTOFSTOCK' }
-
 ]);
 const filters = ref({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS }
 });
 
 const putProduct = computed(() => {
-    const diferencas = {} as IPutProduct;
-    const chaves = new Set([...Object.keys(product.value)]);
+    const diff = {} as IPutProduct;
+    const keys = new Set([...Object.keys(product.value)]);
 
-    chaves.forEach(chave => {
-        if (product.value[chave] !== productAux.value[chave]) {
-            diferencas[chave] = product.value[chave];
+    keys.forEach(key => {
+        if (product.value[key] !== productTemp.value[key]) {
+            diff[key] = product.value[key];
         }
     });
 
-    return diferencas;
+    return diff;
 })
 
 const fetchProducts = async () => {
@@ -65,22 +70,34 @@ const fetchCategories = async () => {
         const response = await categoryAPI.getCategories(userStore.getSlug)
         categoriesOptions.value = response.data
     } catch (error) {
-        toast.add({ severity: 'error', summary: 'Successful', detail: 'Error to load categoryes', life: 3000 });
+        toast.add({ severity: 'error', summary: 'Successful', detail: 'Error to load categories', life: 3000 });
 
     } finally {
         loadingCategory.value = false
     }
 }
 
+const resetProduct = (): IProduct => {
+    return {
+        name: undefined,
+        status: 'ACTIVE',
+        description: undefined,
+        category: undefined,
+        id: undefined,
+        idCategory: undefined
+    }
+}
+
 const openNew = () => {
     product.value = resetProduct()
+    imageSelected.value = null
     submitted.value = false;
     editorDialog.value = true;
 };
 
 const openEdit = (item: IProduct) => {
     product.value = { ...item, idCategory: item.category.id };
-    productAux.value = { ...product.value }
+    productTemp.value = { ...product.value }
     editorDialog.value = true;
 };
 
@@ -90,6 +107,8 @@ const openDelete = (item: IProduct) => {
 };
 
 const hideDialog = () => {
+    product.value = resetProduct()
+    imageSelected.value = null
     editorDialog.value = false;
     submitted.value = false;
     loading.value = false
@@ -152,20 +171,124 @@ const getStatusLabel = (status) => {
     }
 };
 
-const resetProduct = (): IProduct => {
-    return {
-        name: undefined,
-        status: 'ACTIVE',
-        description: undefined,
-        category: undefined,
-        id: undefined,
-        idCategory: undefined
-    }
-}
 
 onMounted(async() => {
     await fetchProducts()
 });
+
+const imageSelected = ref();
+
+const upload = (file) => {
+    imageSelected.value = file.files.slice(-1)[0]
+};
+
+const onUpload = () => {
+    toast.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 });
+};
+
+const REFdownloadLink = ref()
+
+async function processImageToBlob() {
+    if (!imageSelected.value) return
+
+    new Compressor(imageSelected.value, {
+        quality: 0.7,
+        maxWidth: 566,
+        convertTypes: ['image/png', 'image/webp'],
+        success(file) {
+            console.log('%cfile: ', 'color: MidnightBlue; background: Aquamarine;', file);
+            const url = URL.createObjectURL(file)
+            console.log('%curl: ', 'color: MidnightBlue; background: Aquamarine;', url);
+
+            const downloadLink = REFdownloadLink.value;
+            // Define o href e o nome do arquivo
+            downloadLink.href = url;
+            downloadLink.download = file.name;
+
+            // Simula o clique para iniciar o download
+            downloadLink.click();
+            // URL.revokeObjectURL(url);
+        },
+        error(error) {
+            console.warn(error)
+        },
+    })
+}
+
+const imageUrl = computed(() =>  imageSelected.value?.objectURL || product.value.imageUrl)
+
+const fileUpload = ref()
+
+function onCropperImageTransform(event: CustomEvent) {
+    const cropperCanvas = __cropperCanvas.value;
+
+    if (!cropperCanvas) return;
+
+    const cropperImage = __cropperImage.value;
+    const cropperCanvasRect = cropperCanvas.getBoundingClientRect();
+
+    // 1. Clone the cropper image.
+    const cropperImageClone = cropperImage.cloneNode() as CropperImage;
+
+    // 2. Apply the new matrix to the cropper image clone.
+    cropperImageClone.style.transform = `matrix(${event.detail.matrix.join(', ')})`;
+
+    // 3. Make the cropper image clone invisible.
+    cropperImageClone.style.opacity = '0';
+
+    // 4. Append the cropper image clone to the cropper canvas.
+    cropperCanvas.appendChild(cropperImageClone);
+
+    // 5. Compute the boundaries of the cropper image clone.
+    const cropperImageRect = cropperImageClone.getBoundingClientRect();
+
+    // 6. Remove the cropper image clone.
+    cropperCanvas.removeChild(cropperImageClone);
+
+    if (cropperImageRect.top > cropperCanvasRect.top
+        || cropperImageRect.right < cropperCanvasRect.right
+        || cropperImageRect.bottom < cropperCanvasRect.bottom
+        || cropperImageRect.left > cropperCanvasRect.left) event.preventDefault();
+}
+
+async function onCropper() {
+    let img = await __cropperCanvas.value.$toCanvas({
+        height: 480,
+    })
+
+    let url = img.toDataURL()
+
+    const downloadLink = document.getElementById('REFdownloadLink') as HTMLAnchorElement;
+    downloadLink.href = url;
+    downloadLink.download = 'filename.png';
+    // downloadLink.click();
+    // REFdownloadLink.value.href = img.toDataURL()
+    // REFdownloadLink.value.download = 'img.png'
+    // REFdownloadLink.value.click()
+
+
+    // let container = document.getElementById('cropper-container')
+    // container.appendChild(img)
+
+
+
+    // img.toBlob(function(blob) {
+    //     // Converter o Blob em um objeto File
+    //     const file = new File([blob], 'imagem-canvas.webp', {
+    //         type: 'image/webp',
+    //         lastModified: new Date().getTime()
+    //     });
+
+    //     // Agora você pode usar o objeto File como desejar
+    //     console.log(file);
+
+    //     // Exemplo: Enviar o arquivo via um formulário ou uma requisição AJAX
+    //     // const formData = new FormData();
+    //     // formData.append('file', file);
+    //     // enviarParaServidor(formData);
+    //     }, 'image/webp');
+
+}
 </script>
 
 <template>
@@ -178,7 +301,7 @@ onMounted(async() => {
             </Toolbar>
 
             <DataTable
-                ref="dt"
+                ref="__dt"
                 v-model:selection="selectedProducts"
                 :value="products"
                 dataKey="id"
@@ -226,24 +349,65 @@ onMounted(async() => {
             </DataTable>
         </div>
 
-        <Dialog v-model:visible="editorDialog" :style="{ width: '450px' }" header="Product Details" :modal="true" @show="fetchCategories">
-            <div class="flex flex-col gap-6">
-                <div>
+        <Dialog class="select-none" v-model:visible="editorDialog" :style="{ width: '450px' }" header="Product Details" :modal="true" @show="fetchCategories" @hide="hideDialog">
+            <div class="dialog__container flex flex-col gap-6">
+                <div class="product-image">
+                    <FileUpload ref="fileUpload" name="image" @uploader="processImageToBlob" accept="image/*" :maxFileSize="5000000" @select="upload">
+                        <template #header="{ chooseCallback, files }">
+                            <div class="flex flex-wrap justify-between items-center gap-4 pb-4">
+                                    <Button @click="chooseCallback()" :label="files.length ? 'Change Image' : 'Select Image'" icon="pi pi-images" rounded outlined severity="secondary"/>
+                                    <Button v-show="imageUrl" label="Cover" icon="pi pi-window-maximize" rounded outlined :disabled="!files.length" @click="__cropperImage.$center('cover')"/>
+                            </div>
+                        </template>
+                        <template v-if="imageUrl" #content="{ files, messages }">
+                                <img v-if="!files.length" :src="imageUrl" :alt="product.name" draggable="false" class="select-none block m-auto rounded-border aspect-video w-full object-cover" />
+                                <cropper-canvas
+                                    v-else
+                                    class="rounded-border aspect-video w-full"
+                                    :disabled="!imageSelected"
+                                    ref="__cropperCanvas"
+                                    background
+                                >
+                                    <cropper-image
+                                        ref="__cropperImage"
+                                        :src="imageUrl"
+                                        alt="Picture"
+                                        initial-center-size="cover"
+                                        scalable
+                                        translatable
+                                        @transform="onCropperImageTransform"
+                                    />
+                                    <cropper-handle
+                                        action="move"
+                                        plain
+                                    />
+                                </cropper-canvas>
+                            {{ messages[0] }}
+                        </template>
+                        <template #empty v-if="!product.imageUrl">
+                            <div class="flex items-center justify-center flex-col">
+                                <i @click="fileUpload.choose" class="pi pi-cloud-upload !border-2 !rounded-full !p-8 !text-4xl !text-muted-color cursor-pointer" />
+                                <p class="mt-6 mb-0">Drag and drop files to here to upload.</p>
+                            </div>
+                        </template>
+                    </FileUpload>
+                </div>
+                <div class="product-name">
                     <label for="name" class="block font-bold mb-3">Name</label>
                     <InputText id="name" v-model.trim="product.name" required="true" autofocus :invalid="submitted && !product.name" fluid :disabled="loading"/>
                     <small v-if="submitted && !product.name" class="text-red-500">Name is required.</small>
                 </div>
-                <div>
+                <div class="product-description">
                     <label for="description" class="block font-bold mb-3">Description</label>
                     <Textarea id="description" v-model="product.description" required="true" rows="3" cols="20" fluid />
                     <small v-if="submitted && !product.description" class="text-red-500">Description is required.</small>
 
                 </div>
-                <div>
+                <div class="product-status">
                     <label for="productStatus" class="block font-bold mb-3">Product Status</label>
                     <Select id="productStatus" v-model="product.status" :options="statusOptions" optionLabel="label" optionValue="value" va placeholder="Select a Status" fluid :disabled="loading"></Select>
                 </div>
-                <div>
+                <div class="product-category">
                     <label for="productCategory" class="block font-bold mb-3">Product Category</label>
                     <Select id="productCategory" v-model="product.idCategory" :invalid="submitted && !product.idCategory" :options="categoriesOptions" optionLabel="name" optionValue="id" placeholder="Select a Category" fluid :loading="loadingCategory"></Select>
                     <small v-if="submitted && !product.idCategory" class="text-red-500">Category is required.</small>
@@ -251,7 +415,7 @@ onMounted(async() => {
             </div>
 
             <template #footer>
-                <Button label="Cancel" icon="pi pi-times" text @click="hideDialog" />
+                <Button label="Cancel" icon="pi pi-times" text @click="editorDialog = false" />
                 <Button label="Save" icon="pi pi-check" @click="onSubmit" :loading />
             </template>
         </Dialog>
@@ -271,3 +435,16 @@ onMounted(async() => {
         </Dialog>
     </div>
 </template>
+
+<style lang="scss">
+.p-dialog-header {
+    /* padding-bottom: 0.5rem !important; */
+}
+.p-fileupload-content, .p-fileupload-header {
+    padding: 0 !important;
+}
+
+.p-fileupload {
+    border: none !important
+}
+</style>

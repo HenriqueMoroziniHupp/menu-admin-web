@@ -11,7 +11,13 @@ export default defineConfig({
         noDiscovery: true
     },
     plugins: [
-        vue(),
+        vue({
+            template: {
+                compilerOptions: {
+                    isCustomElement: tag => tag.startsWith('cropper-')
+                }
+            }
+        }),
         Components({
             resolvers: [PrimeVueResolver()]
         })
