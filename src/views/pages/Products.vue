@@ -3,15 +3,19 @@ import { IProduct, IPutProduct } from '@/interfaces/IProduct';
 import categoryAPI from '@/service/CategoryService';
 import productsAPI from '@/service/ProductsService';
 import { useUserStore } from '@/store/userStore';
-import type CropperCanvas from '@cropper/element-canvas';
-import type CropperImage from '@cropper/element-image';
+import CropperCanvas from '@cropper/element-canvas';
+import CropperHandle from '@cropper/element-handle';
+import CropperImage from '@cropper/element-image';
 import { FilterMatchMode } from '@primevue/core/api';
 import Compressor from 'compressorjs';
 import { useToast } from 'primevue/usetoast';
 import { computed, onMounted, ref } from 'vue';
 
-const __cropperCanvas = ref<CropperCanvas>()
-const __cropperImage = ref<CropperImage>()
+CropperCanvas.$define()
+CropperImage.$define()
+CropperHandle.$define()
+const __cropperCanvas = ref<InstanceType<typeof CropperCanvas>>()
+const __cropperImage = ref<InstanceType<typeof CropperImage>>()
 
 const userStore = useUserStore()
 const toast = useToast();
@@ -354,9 +358,9 @@ async function onCropper() {
                 <div class="product-image">
                     <FileUpload ref="fileUpload" name="image" @uploader="processImageToBlob" accept="image/*" :maxFileSize="5000000" @select="upload">
                         <template #header="{ chooseCallback, files }">
-                            <div class="flex flex-wrap justify-between items-center gap-4 pb-4">
-                                    <Button @click="chooseCallback()" :label="files.length ? 'Change Image' : 'Select Image'" icon="pi pi-images" rounded outlined severity="secondary"/>
-                                    <Button v-show="imageUrl" label="Cover" icon="pi pi-window-maximize" rounded outlined :disabled="!files.length" @click="__cropperImage.$center('cover')"/>
+                            <div v-show="imageUrl" class="flex flex-wrap justify-between items-center gap-4 pb-4">
+                                    <Button @click="chooseCallback()" label="Change Image" icon="pi pi-images" rounded outlined severity="secondary"/>
+                                    <Button label="Cover" icon="pi pi-arrow-down-left-and-arrow-up-right-to-center" style="font-size: 1rem" rounded outlined :disabled="!files.length" @click="__cropperImage.$center('cover')"/>
                             </div>
                         </template>
                         <template v-if="imageUrl" #content="{ files, messages }">
