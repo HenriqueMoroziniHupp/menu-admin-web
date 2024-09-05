@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IProduct, IPutProduct } from '@/interfaces/IProduct';
+import { IProduct } from '@/interfaces/IProduct';
 import categoryAPI from '@/service/CategoryService';
 import productsAPI from '@/service/ProductsService';
 import { useUserStore } from '@/store/userStore';
@@ -7,7 +7,6 @@ import CropperCanvas from '@cropper/element-canvas';
 import CropperHandle from '@cropper/element-handle';
 import CropperImage from '@cropper/element-image';
 import { FilterMatchMode } from '@primevue/core/api';
-import Compressor from 'compressorjs';
 import { useToast } from 'primevue/usetoast';
 import { computed, onMounted, ref } from 'vue';
 
@@ -41,7 +40,7 @@ const filters = ref({
 });
 
 const putProduct = computed(() => {
-    const diff = {} as IPutProduct;
+    const diff = {} as IProduct;
     const keys = new Set([...Object.keys(product.value)]);
 
     keys.forEach(key => {
@@ -132,9 +131,11 @@ const onSubmit = async () => {
 
     try {
         loading.value = true;
+        if(imageSelected.value) await onCropper()
+
         isEdit ?
-            await productsAPI.putProduct(product.value.id, putProduct.value)
-            :await productsAPI.postProduct(product.value)
+            await productsAPI.putProduct(product.value.id, toFormData(putProduct.value) as IProduct)
+            :await productsAPI.postProduct(toFormData(product.value) as IProduct)
         await fetchProducts()
         editorDialog.value = false;
         toast.add({ severity: 'success', summary: 'Successful', detail: 'Success to save product', life: 3000 });
@@ -190,35 +191,6 @@ const onUpload = () => {
     toast.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 });
 };
 
-const REFdownloadLink = ref()
-
-async function processImageToBlob() {
-    if (!imageSelected.value) return
-
-    new Compressor(imageSelected.value, {
-        quality: 0.7,
-        maxWidth: 566,
-        convertTypes: ['image/png', 'image/webp'],
-        success(file) {
-            console.log('%cfile: ', 'color: MidnightBlue; background: Aquamarine;', file);
-            const url = URL.createObjectURL(file)
-            console.log('%curl: ', 'color: MidnightBlue; background: Aquamarine;', url);
-
-            const downloadLink = REFdownloadLink.value;
-            // Define o href e o nome do arquivo
-            downloadLink.href = url;
-            downloadLink.download = file.name;
-
-            // Simula o clique para iniciar o download
-            downloadLink.click();
-            // URL.revokeObjectURL(url);
-        },
-        error(error) {
-            console.warn(error)
-        },
-    })
-}
-
 const imageUrl = computed(() =>  imageSelected.value?.objectURL || product.value.imageUrl)
 
 const fileUpload = ref()
@@ -255,43 +227,38 @@ function onCropperImageTransform(event: CustomEvent) {
         || cropperImageRect.left > cropperCanvasRect.left) event.preventDefault();
 }
 
+function toFormData(obj: IProduct) {
+    const formData = new FormData();
+
+    for (const key in obj) {
+        if (obj.hasOwnProperty(key) && obj[key] !== undefined) {
+            formData.append(key, obj[key]);
+        }
+    }
+
+    return formData
+}
+
 async function onCropper() {
-    let img = await __cropperCanvas.value.$toCanvas({
-        height: 480,
-    })
+    try {
+        const canvas = await __cropperCanvas.value.$toCanvas({
+            height: 480,
+        })
 
-    let url = img.toDataURL()
-
-    const downloadLink = document.getElementById('REFdownloadLink') as HTMLAnchorElement;
-    downloadLink.href = url;
-    downloadLink.download = 'filename.png';
-    // downloadLink.click();
-    // REFdownloadLink.value.href = img.toDataURL()
-    // REFdownloadLink.value.download = 'img.png'
-    // REFdownloadLink.value.click()
-
-
-    // let container = document.getElementById('cropper-container')
-    // container.appendChild(img)
-
-
-
-    // img.toBlob(function(blob) {
-    //     // Converter o Blob em um objeto File
-    //     const file = new File([blob], 'imagem-canvas.webp', {
-    //         type: 'image/webp',
-    //         lastModified: new Date().getTime()
-    //     });
-
-    //     // Agora você pode usar o objeto File como desejar
-    //     console.log(file);
-
-    //     // Exemplo: Enviar o arquivo via um formulário ou uma requisição AJAX
-    //     // const formData = new FormData();
-    //     // formData.append('file', file);
-    //     // enviarParaServidor(formData);
-    //     }, 'image/webp');
-
+        await new Promise<void>((resolve, reject) => {
+            canvas.toBlob((blob) => {
+                if (blob) {
+                    const file = new File([blob], Date.now().toString(), { type: 'image/webp' });
+                    product.value.image = file;
+                    resolve();
+                } else {
+                    reject(new Error("Failed to create Image Blob."));
+                }
+            }, 'image/webp', 0.6);
+        })
+    } catch (error) {
+        console.error('Cropper failed: ',error)
+    }
 }
 </script>
 
@@ -356,11 +323,11 @@ async function onCropper() {
         <Dialog class="select-none" v-model:visible="editorDialog" :style="{ width: '450px' }" header="Product Details" :modal="true" @show="fetchCategories" @hide="hideDialog">
             <div class="dialog__container flex flex-col gap-6">
                 <div class="product-image">
-                    <FileUpload ref="fileUpload" name="image" @uploader="processImageToBlob" accept="image/*" :maxFileSize="5000000" @select="upload">
+                    <FileUpload ref="fileUpload" name="image" accept="image/*" :maxFileSize="50000000" @select="upload">
                         <template #header="{ chooseCallback, files }">
                             <div v-show="imageUrl" class="flex flex-wrap justify-between items-center gap-4 pb-4">
                                     <Button @click="chooseCallback()" label="Change Image" icon="pi pi-images" rounded outlined severity="secondary"/>
-                                    <Button label="Cover" icon="pi pi-arrow-down-left-and-arrow-up-right-to-center" style="font-size: 1rem" rounded outlined :disabled="!files.length" @click="__cropperImage.$center('cover')"/>
+                                    <Button v-show="files.length" label="Cover" icon="pi pi-arrow-down-left-and-arrow-up-right-to-center" style="font-size: 1rem" rounded outlined :disabled="!files.length" @click="__cropperImage.$center('cover')"/>
                             </div>
                         </template>
                         <template v-if="imageUrl" #content="{ files, messages }">
