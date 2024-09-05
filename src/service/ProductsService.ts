@@ -1,4 +1,4 @@
-import { IPostProduct, IPutProduct } from '@/interfaces/IProduct';
+import { IProduct } from '@/interfaces/IProduct';
 import { API } from '../settings/axios';
 
 export default {
@@ -16,15 +16,15 @@ export default {
         });
     },
 
-    async postProduct(data: IPostProduct) {
+    async postProduct(data: IProduct) {
         return API({
             method: 'POST',
             url: '/admin/products',
-            data
+            data,
         });
     },
 
-    async putProduct(id: number, data: IPutProduct) {
+    async putProduct(id: number, data: IProduct) {
         return API({
             method: 'PUT',
             url: `/admin/products/${id}`,
