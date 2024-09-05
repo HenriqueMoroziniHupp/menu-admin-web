@@ -161,7 +161,6 @@ const getStatusLabel = (status) => {
         </div>
 
         <Dialog v-model:visible="categoryDialog" :style="{ width: '450px' }" header="Product Details" :modal="true">
-            <pre>{{ category }}</pre>
             <div class="flex flex-col gap-6">
                 <div>
                     <label for="name" class="block font-bold mb-3">Name</label>
