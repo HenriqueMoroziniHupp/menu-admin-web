@@ -16,3 +16,10 @@ export interface IProduct {
     priceLarge?: number
     priceSingle?: number
 }
+
+export interface IProdByCat {
+    id: number,
+    name: string,
+    status: string,
+    products: IProduct[]
+}

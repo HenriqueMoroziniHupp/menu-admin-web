@@ -37,5 +37,12 @@ export default {
             method: 'DELETE',
             url: `/admin/products/${id}`,
         });
+    },
+
+    async getCategoriesWithProducts(slug: string) {
+        return API({
+            method: 'GET',
+            url: `${slug}/products`
+        })
     }
 };

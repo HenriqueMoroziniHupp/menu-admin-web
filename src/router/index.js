@@ -143,7 +143,19 @@ const router = createRouter({
             path: '/auth/error',
             name: 'error',
             component: () => import('@/views/pages/auth/Error.vue')
-        }
+        },
+        {
+            path: '/app',
+            meta: { requiresAuth: true },
+            component: () => import('@/layout/AppCardapio.vue'),
+            children: [
+                {
+                    path: '',
+                    name: 'AppHome',
+                    component: () => import('@/views/pages/AppCardapio.vue')
+                }
+            ]
+        },
     ]
 })
 
