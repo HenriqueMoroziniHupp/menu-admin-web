@@ -4,7 +4,7 @@ import { ICategory } from '@/interfaces/ICategory';
 import productsAPI from '@/service/ProductsService';
 import { useUserStore } from '@/store/userStore';
 import { FilterMatchMode } from '@primevue/core/api';
-import { onMounted, ref, shallowRef } from 'vue';
+import { onMounted, onUnmounted, ref, shallowRef } from 'vue';
 import { useToast } from 'primevue/usetoast';
 
 interface IProdByCat {
@@ -34,11 +34,12 @@ onMounted(async() => {
     const response = await productsAPI.getCategoriesWithProducts(userStore.getSlug)
     productsByCategory.value = response.data as IProdByCat[]
 
-    window.addEventListener('scroll', function() {
-        handlerParallax()
-        handlerFixedCategories()
-    });
+    window.addEventListener('scroll', handlerListener);
 });
+
+onUnmounted(() => {
+    window.removeEventListener('scroll', handlerListener)
+})
 
 function throttle(fn, limit) {
     let lastCall = 0;
@@ -63,10 +64,21 @@ const handlerFixedCategories = throttle(() => {
     isFixed.value = __categories.value.getBoundingClientRect().top === 0
 }, 200)
 
+const handlerListener = () => {
+    handlerParallax()
+    handlerFixedCategories()
+}
+
 const scrollToCategory = (categoryId) => {
     const categoryElement = document.getElementById(categoryId);
     if (categoryElement) {
-        categoryElement.scrollIntoView({ behavior: 'smooth' });
+        const elementPosition = categoryElement.getBoundingClientRect().top + window.scrollY;
+        const offsetPosition = elementPosition - 70;
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+        });
     }
 }
 </script>

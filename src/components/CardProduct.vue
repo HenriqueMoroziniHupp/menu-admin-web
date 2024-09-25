@@ -26,7 +26,7 @@ function hasPrice(product: IProduct) {
 <template>
     <Card class="card-product">
         <template #header>
-            <div class="image-wrapper parallax-image absolute ">
+            <div class="image-wrapper parallax-image absolute aspect-video">
                 <DeferredContent>
                     <img
                         class="select-none block m-auto aspect-video w-full object-cover"
@@ -48,7 +48,7 @@ function hasPrice(product: IProduct) {
             <template v-if="hasPrice(product)">
                 <Badge v-if="product.priceSingle" :value="`Tamanho Unico: ${formatPrice(product.priceSingle)}`"></Badge>
                 <div v-else class="flex flex-wrap gap-2">
-                    <Badge v-if="product.priceSingle" :value="`Pequeno:  ${formatPrice(product.priceSingle)}`"></Badge>
+                    <Badge v-if="product.priceSmall" :value="`Pequeno:  ${formatPrice(product.priceSmall)}`"></Badge>
                     <Badge v-if="product.priceMedium" :value="`Medio:  ${formatPrice(product.priceMedium)}`"></Badge>
                     <Badge v-if="product.priceLarge" :value="`Grande:  ${formatPrice(product.priceLarge)}`"></Badge>
                 </div>
@@ -66,10 +66,11 @@ function hasPrice(product: IProduct) {
 }
 
 .card-product {
-  overflow: hidden;
-  display: flex;
-  flex-grow: 1;
-  flex-basis: 22rem;
+    max-width: 42rem;
+    overflow: hidden;
+    display: flex;
+    flex-grow: 1;
+    flex-basis: 22rem;
 }
 
 .image-wrapper {
