@@ -120,7 +120,6 @@ const hideDialog = () => {
 const isValid = computed(() =>
     !!product.value?.name
     && !!product.value?.idCategory
-    && !!product.value.description
     && !!product.value.status
 )
 
@@ -298,20 +297,20 @@ async function onCropper() {
                 </template>
 
                 <Column selectionMode="multiple" style="width: 3rem" :exportable="false"></Column>
-                <Column field="id" header="Id" sortable style="min-width: 5rem"></Column>
+                <Column field="id" header="Id" sortable></Column>
                 <Column header="Image">
                     <template #body="slotProps">
                         <img :src="slotProps.data.imageUrl" :alt="slotProps.data.image" class="rounded" style="width: 64px" />
                     </template>
                 </Column>
-                <Column field="name" header="Nome" sortable style="min-width: 16rem"></Column>
-                <Column field="category.name" header="Category" sortable style="min-width: 10rem"></Column>
-                <Column field="status" header="Status" sortable style="min-width: 12rem">
+                <Column field="name" header="Nome" sortable></Column>
+                <Column field="category.name" header="Category" sortable></Column>
+                <Column field="status" header="Status" sortable>
                     <template #body="slotProps">
                         <Tag :value="slotProps.data.status" :severity="getStatusLabel(slotProps.data.status)" />
                     </template>
                 </Column>
-                <Column :exportable="false" style="min-width: 10rem">
+                <Column :exportable="false">
                     <template #body="slotProps">
                         <Button icon="pi pi-pencil" outlined rounded class="mr-2" @click="openEdit(slotProps.data)" />
                         <Button icon="pi pi-trash" outlined rounded severity="danger" @click="openDelete(slotProps.data)" />
@@ -321,73 +320,109 @@ async function onCropper() {
         </div>
 
         <Dialog class="select-none" v-model:visible="editorDialog" :style="{ width: '450px' }" header="Product Details" :modal="true" @show="fetchCategories" @hide="hideDialog">
-            <div class="dialog__container flex flex-col gap-6">
-                <div class="product-image">
-                    <FileUpload ref="fileUpload" name="image" accept="image/*" :maxFileSize="50000000" @select="upload">
-                        <template #header="{ chooseCallback, files }">
-                            <div v-show="imageUrl" class="flex flex-wrap justify-between items-center gap-4 pb-4">
-                                    <Button @click="chooseCallback()" label="Change Image" icon="pi pi-images" rounded outlined severity="secondary"/>
-                                    <Button v-show="files.length" label="Cover" icon="pi pi-arrow-down-left-and-arrow-up-right-to-center" style="font-size: 1rem" rounded outlined :disabled="!files.length" @click="__cropperImage.$center('cover')"/>
-                            </div>
-                        </template>
-                        <template v-if="imageUrl" #content="{ files, messages }">
-                                <img v-if="!files.length" :src="imageUrl" :alt="product.name" draggable="false" class="select-none block m-auto rounded-border aspect-video w-full object-cover" />
-                                <cropper-canvas
-                                    v-else
-                                    class="rounded-border aspect-video w-full"
-                                    :disabled="!imageSelected"
-                                    ref="__cropperCanvas"
-                                    background
-                                >
-                                    <cropper-image
-                                        ref="__cropperImage"
-                                        :src="imageUrl"
-                                        alt="Picture"
-                                        initial-center-size="cover"
-                                        scalable
-                                        translatable
-                                        @transform="onCropperImageTransform"
-                                    />
-                                    <cropper-handle
-                                        action="move"
-                                        plain
-                                    />
-                                </cropper-canvas>
-                            {{ messages[0] }}
-                        </template>
-                        <template #empty v-if="!product.imageUrl">
-                            <div class="flex items-center justify-center flex-col">
-                                <i @click="fileUpload.choose" class="pi pi-cloud-upload !border-2 !rounded-full !p-8 !text-4xl !text-muted-color cursor-pointer" />
-                                <p class="mt-6 mb-0">Drag and drop files to here to upload.</p>
-                            </div>
-                        </template>
-                    </FileUpload>
-                </div>
-                <div class="product-name">
-                    <label for="name" class="block font-bold mb-3">Name</label>
-                    <InputText id="name" v-model.trim="product.name" required="true" autofocus :invalid="submitted && !product.name" fluid :disabled="loading"/>
-                    <small v-if="submitted && !product.name" class="text-red-500">Name is required.</small>
-                </div>
-                <div class="product-description">
-                    <label for="description" class="block font-bold mb-3">Description</label>
-                    <Textarea id="description" v-model="product.description" required="true" rows="3" cols="20" fluid />
-                    <small v-if="submitted && !product.description" class="text-red-500">Description is required.</small>
+            <form @submit="onSubmit">
+                <div class="dialog__container flex flex-col gap-6">
+                    <div class="product-image">
+                        <FileUpload ref="fileUpload" name="image" accept="image/*" :maxFileSize="50000000" @select="upload">
+                            <template #header="{ chooseCallback, files }">
+                                <div v-show="imageUrl" class="flex flex-wrap justify-between items-center gap-4 pb-4">
+                                        <Button @click="chooseCallback()" label="Change Image" icon="pi pi-images" rounded outlined severity="secondary"/>
+                                        <Button v-show="files.length" label="Cover" icon="pi pi-arrow-down-left-and-arrow-up-right-to-center" style="font-size: 1rem" rounded outlined :disabled="!files.length" @click="__cropperImage.$center('cover')"/>
+                                </div>
+                            </template>
+                            <template v-if="imageUrl" #content="{ files, messages }">
+                                    <img v-if="!files.length" :src="imageUrl" :alt="product.name" draggable="false" class="select-none block m-auto rounded-border aspect-video w-full object-cover" />
+                                    <cropper-canvas
+                                        v-else
+                                        class="rounded-border aspect-video w-full"
+                                        :disabled="!imageSelected"
+                                        ref="__cropperCanvas"
+                                        background
+                                    >
+                                        <cropper-image
+                                            ref="__cropperImage"
+                                            :src="imageUrl"
+                                            alt="Picture"
+                                            initial-center-size="cover"
+                                            scalable
+                                            translatable
+                                            @transform="onCropperImageTransform"
+                                        />
+                                        <cropper-handle
+                                            action="move"
+                                            plain
+                                        />
+                                    </cropper-canvas>
+                                {{ messages[0] }}
+                            </template>
+                            <template #empty v-if="!product.imageUrl">
+                                <div class="flex items-center justify-center flex-col">
+                                    <i @click="fileUpload.choose" class="pi pi-cloud-upload !border-2 !rounded-full !p-8 !text-4xl !text-muted-color cursor-pointer" />
+                                    <p class="mt-6 mb-0">Drag and drop files to here to upload.</p>
+                                </div>
+                            </template>
+                        </FileUpload>
+                    </div>
+                    <div class="product-name">
+                        <label for="name" class="block font-bold mb-3">Name</label>
+                        <InputText id="name" v-model.trim="product.name" required="true" autofocus :invalid="submitted && !product.name" fluid :disabled="loading"/>
+                        <small v-if="submitted && !product.name" class="text-red-500">Name is required.</small>
+                    </div>
+                    <div class="product-description">
+                        <label for="description" class="block font-bold mb-3">Description (Optional)</label>
+                        <Textarea id="description" v-model="product.description" :disabled="loading" rows="3" cols="20" fluid />
+                        <!-- <small v-if="submitted && !product.description" class="text-red-500">Description is required.</small> -->
+
+                    </div>
+                    <div class="product-status">
+                        <label for="productStatus" class="block font-bold mb-3">Product Status</label>
+                        <Select id="productStatus" v-model="product.status" :options="statusOptions" optionLabel="label" optionValue="value" va placeholder="Select a Status" fluid :disabled="loading"></Select>
+                    </div>
+                    <div class="product-category">
+                        <label for="productCategory" class="block font-bold mb-3">Product Category</label>
+                        <Select id="productCategory" v-model="product.idCategory" :invalid="submitted && !product.idCategory" :options="categoriesOptions" :disabled="loading" optionLabel="name" optionValue="id" placeholder="Select a Category" fluid :loading="loadingCategory"></Select>
+                        <small v-if="submitted && !product.idCategory" class="text-red-500">Category is required.</small>
+                    </div>
+
+
+                    <div class="product-price">
+                        <label for="productCategory" class="block font-bold mb-3">Price</label>
+                        <div class="product-price__wrapper flex flex-col gap-4">
+                            <Message v-if="product.priceSingle" severity="warn">Será exibido no item apenas o valor do preço unico</Message>
+                            <InputGroup >
+                                <InputGroupAddon>
+                                    Preço Unico
+                                </InputGroupAddon>
+                                <InputNumber placeholder="Insira o valor" :disabled="loading" :minFractionDigits="2" mode="currency" currency="BRL" v-model="product.priceSingle"/>
+                            </InputGroup>
+                            <InputGroup>
+                                <InputGroupAddon>
+                                    P
+                                </InputGroupAddon>
+                                <InputNumber placeholder="Insira o valor" :disabled="loading" :minFractionDigits="2" mode="currency" currency="BRL" v-model="product.priceSmall"/>
+                            </InputGroup>
+                            <InputGroup>
+                                <InputGroupAddon>
+                                    M
+                                </InputGroupAddon>
+                                <InputNumber placeholder="Insira o valor" :disabled="loading" :minFractionDigits="2" mode="currency" currency="BRL" v-model="product.priceMedium"/>
+                            </InputGroup>
+                            <InputGroup>
+                                <InputGroupAddon>
+                                    G
+                                </InputGroupAddon>
+                                <InputNumber placeholder="Insira o valor" :disabled="loading" :minFractionDigits="2" mode="currency" currency="BRL" v-model="product.priceLarge"/>
+                            </InputGroup>
+
+                        </div>
+                    </div>
 
                 </div>
-                <div class="product-status">
-                    <label for="productStatus" class="block font-bold mb-3">Product Status</label>
-                    <Select id="productStatus" v-model="product.status" :options="statusOptions" optionLabel="label" optionValue="value" va placeholder="Select a Status" fluid :disabled="loading"></Select>
-                </div>
-                <div class="product-category">
-                    <label for="productCategory" class="block font-bold mb-3">Product Category</label>
-                    <Select id="productCategory" v-model="product.idCategory" :invalid="submitted && !product.idCategory" :options="categoriesOptions" optionLabel="name" optionValue="id" placeholder="Select a Category" fluid :loading="loadingCategory"></Select>
-                    <small v-if="submitted && !product.idCategory" class="text-red-500">Category is required.</small>
-                </div>
-            </div>
+            </form>
 
             <template #footer>
                 <Button label="Cancel" icon="pi pi-times" text @click="editorDialog = false" />
-                <Button label="Save" icon="pi pi-check" @click="onSubmit" :loading />
+                <Button label="Save" icon="pi pi-check" type="submit" @click="onSubmit" :loading />
             </template>
         </Dialog>
 
