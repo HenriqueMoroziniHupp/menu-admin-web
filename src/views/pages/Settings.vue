@@ -163,6 +163,7 @@ async function onCropper() {
             <form @submit="onSubmit">
                 <div class="dialog__container flex flex-col gap-6">
                     <div class="product-image">
+                        <label for="name" class="block font-bold mb-3">App Menu Banner</label>
                         <FileUpload ref="fileUpload" name="image" accept="image/*" :maxFileSize="50000000" @select="upload">
                             <template #header="{ chooseCallback, files }">
                                 <div v-show="bannerUrl" class="flex flex-wrap justify-between items-center gap-4 pb-4">

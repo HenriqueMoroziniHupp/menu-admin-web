@@ -27,7 +27,7 @@ export default {
 
     async deleteClient(id: number) {
         return API({
-            method: 'GET',
+            method: 'DELETE',
             url: `/admin/users/${id}`,
         });
     },
