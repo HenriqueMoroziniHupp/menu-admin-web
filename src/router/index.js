@@ -16,6 +16,11 @@ const router = createRouter({
                     component: () => import('@/views/Dashboard.vue')
                 },
                 {
+                    path: '/settings',
+                    name: 'Settings',
+                    component: () => import('@/views/pages/Settings.vue')
+                },
+                {
                     path: '/categories',
                     name: 'Categories',
                     component: () => import('@/views/pages/Categories.vue')
@@ -153,6 +158,18 @@ const router = createRouter({
                     path: '',
                     name: 'AppHome',
                     component: () => import('@/views/pages/AppCardapio.vue')
+                }
+            ]
+        },
+        {
+            path: '/private',
+            meta: { requiresAuth: true },
+            component: AppLayout,
+            children: [
+                {
+                    path: 'clients',
+                    name: 'Clients',
+                    component: () => import('@/views/pages/admin/Clients.vue')
                 }
             ]
         },
