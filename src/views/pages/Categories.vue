@@ -15,7 +15,7 @@ onMounted(async() => {
 const fetchCategories = async () => {
     try {
         loadingTable.value = true
-        const response = await categoryAPI.getCategories(userStore.getSlug)
+        const response = await categoryAPI.getCategories(userStore.slug)
         categories.value = response.data
     } catch (error) {
         toast.add({ severity: 'error', summary: 'Successful', detail: 'Error to load categoryes', life: 3000 });
@@ -142,40 +142,41 @@ const getStatusLabel = (status) => {
                         </IconField>
                     </div>
                 </template>
-
-                <Column selectionMode="multiple" style="width: 3rem" :exportable="false"></Column>
-                <Column field="id" header="Id" sortable style="min-width: 5rem"></Column>
-                <Column field="name" header="Nome" sortable style="min-width: 16rem"></Column>
-                <Column field="status" header="Status" sortable style="min-width: 12rem">
+                <Column field="name" header="Nome" sortable></Column>
+                <Column field="status" header="Status" sortable>
                     <template #body="slotProps">
                         <Tag :value="slotProps.data.status" :severity="getStatusLabel(slotProps.data.status)" />
                     </template>
                 </Column>
-                <Column :exportable="false" style="min-width: 12rem">
+                <Column :exportable="false">
                     <template #body="slotProps">
-                        <Button icon="pi pi-pencil" outlined rounded class="mr-2" @click="editProduct(slotProps.data)" />
-                        <Button icon="pi pi-trash" outlined rounded severity="danger" @click="confirmDeleteProduct(slotProps.data)" />
+                        <div class="flex">
+                            <Button icon="pi pi-pencil" outlined rounded class="mr-2" @click="editProduct(slotProps.data)" />
+                            <Button icon="pi pi-trash" outlined rounded severity="danger" @click="confirmDeleteProduct(slotProps.data)" />
+                        </div>
                     </template>
                 </Column>
             </DataTable>
         </div>
 
         <Dialog v-model:visible="categoryDialog" :style="{ width: '450px' }" header="Product Details" :modal="true">
-            <div class="flex flex-col gap-6">
-                <div>
-                    <label for="name" class="block font-bold mb-3">Name</label>
-                    <InputText id="name" v-model.trim="category.name" required="true" autofocus :invalid="submitted && !category.name" fluid :disabled="loading"/>
-                    <small v-if="submitted && !category.name" class="text-red-500">Name is required.</small>
+            <form @submit="saveCategory()">
+                <div class="flex flex-col gap-6">
+                    <div>
+                        <label for="name" class="block font-bold mb-3">Name</label>
+                        <InputText id="name" v-model.trim="category.name" required="true" autofocus :invalid="submitted && !category.name" fluid :disabled="loading"/>
+                        <small v-if="submitted && !category.name" class="text-red-500">Name is required.</small>
+                    </div>
+                    <div>
+                        <label for="inventoryStatus" class="block font-bold mb-3">Inventory Status</label>
+                        <Select id="inventoryStatus" v-model="category.status" :options="statusOptions" optionLabel="label" optionValue="value" va placeholder="Select a Status" fluid :disabled="loading"></Select>
+                    </div>
                 </div>
-                <div>
-                    <label for="inventoryStatus" class="block font-bold mb-3">Inventory Status</label>
-                    <Select id="inventoryStatus" v-model="category.status" :options="statusOptions" optionLabel="label" optionValue="value" va placeholder="Select a Status" fluid :disabled="loading"></Select>
-                </div>
-            </div>
+            </form>
 
             <template #footer>
                 <Button label="Cancel" icon="pi pi-times" text @click="hideDialog" />
-                <Button label="Save" icon="pi pi-check" @click="saveCategory" :loading />
+                <Button label="Save" icon="pi pi-check" type="submit" @click="saveCategory" :loading />
             </template>
         </Dialog>
 

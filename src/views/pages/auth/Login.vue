@@ -22,12 +22,9 @@ const onSubmit = async () => {
         hasError.value = false
         const data = { email: email.value, password: password.value }
         const response = await API.postAuth(data)
-        console.log('%cresponse: ', 'color: MidnightBlue; background: Aquamarine;', response);
         if (response.data.token) authStore.setToken(response.data.token)
 
         await userStore.getUser()
-
-        console.table(userStore.user);
 
         router.push({ name: 'dashboard' })
     } catch (error) {

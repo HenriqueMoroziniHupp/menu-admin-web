@@ -55,7 +55,7 @@ const putProduct = computed(() => {
 const fetchProducts = async () => {
     try {
         loadingTable.value = true
-        const response = await productsAPI.getProducts(userStore.getSlug)
+        const response = await productsAPI.getProducts(userStore.slug)
         products.value = response.data
     } catch (error) {
         toast.add({ severity: 'error', summary: 'Successful', detail: 'Error to load product', life: 3000 });
@@ -70,7 +70,7 @@ const fetchCategories = async () => {
 
     try {
         loadingCategory.value = true
-        const response = await categoryAPI.getCategories(userStore.getSlug)
+        const response = await categoryAPI.getCategories(userStore.slug)
         categoriesOptions.value = response.data
     } catch (error) {
         toast.add({ severity: 'error', summary: 'Successful', detail: 'Error to load categories', life: 3000 });
@@ -296,8 +296,6 @@ async function onCropper() {
                     </div>
                 </template>
 
-                <Column selectionMode="multiple" style="width: 3rem" :exportable="false"></Column>
-                <Column field="id" header="Id" sortable></Column>
                 <Column header="Image">
                     <template #body="slotProps">
                         <img :src="slotProps.data.imageUrl" :alt="slotProps.data.image" class="rounded" style="width: 64px" />
@@ -312,8 +310,10 @@ async function onCropper() {
                 </Column>
                 <Column :exportable="false">
                     <template #body="slotProps">
-                        <Button icon="pi pi-pencil" outlined rounded class="mr-2" @click="openEdit(slotProps.data)" />
-                        <Button icon="pi pi-trash" outlined rounded severity="danger" @click="openDelete(slotProps.data)" />
+                        <div class="flex">
+                            <Button icon="pi pi-pencil" outlined rounded class="mr-2" @click="openEdit(slotProps.data)" />
+                            <Button icon="pi pi-trash" outlined rounded severity="danger" @click="openDelete(slotProps.data)" />
+                        </div>
                     </template>
                 </Column>
             </DataTable>
