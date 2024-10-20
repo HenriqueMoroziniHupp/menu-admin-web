@@ -1,4 +1,4 @@
-import User from '@/service/User'
+import User from '@/service/UserService'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
@@ -20,13 +20,13 @@ export const useUserStore = defineStore('user', () => {
             user.value = response.data
         }
 
-        const getSlug = computed(() => user.value.slug)
+        const slug = computed(() => user.value.slug)
 
         function $reset() {
             user.value = null
         }
 
-        return { user, getUser, getSlug, $reset }
+        return { user: user, getUser, slug, $reset }
     },
     {
         persist: {
