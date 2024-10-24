@@ -1,17 +1,34 @@
-import AppLayout from '@/layout/AppLayout.vue';
-import { createRouter, createWebHistory } from 'vue-router';
+import AppLayout from '@/layout/AppLayout.vue'
+import { useAuthStore } from '@/store/authStore'
+import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
             path: '/',
+            meta: { requiresAuth: true },
             component: AppLayout,
             children: [
                 {
                     path: '/',
                     name: 'dashboard',
                     component: () => import('@/views/Dashboard.vue')
+                },
+                {
+                    path: '/settings',
+                    name: 'Settings',
+                    component: () => import('@/views/pages/Settings.vue')
+                },
+                {
+                    path: '/categories',
+                    name: 'Categories',
+                    component: () => import('@/views/pages/Categories.vue')
+                },
+                {
+                    path: '/products',
+                    name: 'Products',
+                    component: () => import('@/views/pages/Products.vue')
                 },
                 {
                     path: '/uikit/formlayout',
@@ -131,8 +148,28 @@ const router = createRouter({
             path: '/auth/error',
             name: 'error',
             component: () => import('@/views/pages/auth/Error.vue')
-        }
+        },
+        {
+            path: '/private',
+            meta: { requiresAuth: true },
+            component: AppLayout,
+            children: [
+                {
+                    path: 'clients',
+                    name: 'Clients',
+                    component: () => import('@/views/pages/admin/Clients.vue')
+                }
+            ]
+        },
     ]
-});
+})
 
-export default router;
+router.beforeEach((to, from) => {
+    const authStore = useAuthStore()
+
+    if (to.name === 'login' && authStore.isAuthenticated) return { path: '/' }
+
+    if (to.meta.requiresAuth && !authStore.isAuthenticated && to.name !== 'login') return { name: 'login' }
+})
+
+export default router

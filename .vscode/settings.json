@@ -1,23 +1,26 @@
 {
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": "explicit",
-        "source.organizeImports": "explicit"
+        "source.organizeImports": "never"
     },
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true
+        "editor.formatOnSave": false
     },
     "[vue]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true
+        "editor.formatOnSave": false
     },
     "[typescript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true
+        "editor.formatOnSave": false
     },
     "[json]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true
-    }
+        "editor.formatOnSave": false
+    },
+    "cSpell.words": [
+        "submenulabel"
+    ]
 }
