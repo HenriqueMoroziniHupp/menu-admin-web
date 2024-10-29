@@ -9,6 +9,7 @@
     },
     "dependencies": {
         "@primevue/themes": "^4.0.0",
+        "@vueuse/core": "^11.1.0",
         "axios": "^1.7.4",
         "chart.js": "3.3.2",
         "cropperjs": "^2.0.0-rc.2",
