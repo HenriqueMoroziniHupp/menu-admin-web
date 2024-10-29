@@ -123,6 +123,7 @@ const isValid = computed(() =>
     !!product.value?.name
     && !!product.value?.idCategory
     && !!product.value.status
+    && !!imageUrl.value
 )
 
 const onSubmit = async () => {
@@ -186,10 +187,6 @@ const imageSelected = ref();
 
 const upload = (file) => {
     imageSelected.value = file.files.slice(-1)[0]
-};
-
-const onUpload = () => {
-    toast.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 });
 };
 
 const imageUrl = computed(() =>  imageSelected.value?.objectURL || product.value.imageUrl)
@@ -361,6 +358,7 @@ async function onCropper() {
                                 <div class="flex items-center justify-center flex-col">
                                     <i @click="fileUpload.choose" class="pi pi-cloud-upload !border-2 !rounded-full !p-8 !text-4xl !text-muted-color cursor-pointer" />
                                     <p class="mt-6 mb-0">Drag and drop files to here to upload.</p>
+                                    <small v-if="submitted && !imageUrl" class="text-red-500">Image is required.</small>
                                 </div>
                             </template>
                         </FileUpload>
@@ -376,17 +374,15 @@ async function onCropper() {
                         <!-- <small v-if="submitted && !product.description" class="text-red-500">Description is required.</small> -->
 
                     </div>
-                    <div class="product-status">
-                        <label for="productStatus" class="block font-bold mb-3">Product Status</label>
-                        <Select id="productStatus" v-model="product.status" :options="statusOptions" optionLabel="label" optionValue="value" va placeholder="Select a Status" fluid :disabled="loading"></Select>
-                    </div>
                     <div class="product-category">
                         <label for="productCategory" class="block font-bold mb-3">Product Category</label>
                         <Select id="productCategory" v-model="product.idCategory" :invalid="submitted && !product.idCategory" :options="categoriesOptions" :disabled="loading" optionLabel="name" optionValue="id" placeholder="Select a Category" fluid :loading="loadingCategory"></Select>
                         <small v-if="submitted && !product.idCategory" class="text-red-500">Category is required.</small>
                     </div>
-
-
+                    <div class="product-status">
+                        <label for="productStatus" class="block font-bold mb-3">Product Status</label>
+                        <Select id="productStatus" v-model="product.status" :options="statusOptions" optionLabel="label" optionValue="value" va placeholder="Select a Status" fluid :disabled="loading"></Select>
+                    </div>
                     <div class="product-price">
                         <label for="productCategory" class="block font-bold mb-3">Price</label>
                         <div class="product-price__wrapper flex flex-col gap-4">
