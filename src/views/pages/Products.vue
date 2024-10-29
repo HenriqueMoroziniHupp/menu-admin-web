@@ -9,6 +9,7 @@ import CropperImage from '@cropper/element-image';
 import { FilterMatchMode } from '@primevue/core/api';
 import { useToast } from 'primevue/usetoast';
 import { computed, onMounted, ref } from 'vue';
+import { useBreakpoint } from '@/layout/composables/breakpoints'
 
 CropperCanvas.$define()
 CropperImage.$define()
@@ -16,6 +17,7 @@ CropperHandle.$define()
 const __cropperCanvas = ref<InstanceType<typeof CropperCanvas>>()
 const __cropperImage = ref<InstanceType<typeof CropperImage>>()
 
+const { xs } = useBreakpoint()
 const userStore = useUserStore()
 const toast = useToast();
 const __dt = ref();
@@ -319,7 +321,7 @@ async function onCropper() {
             </DataTable>
         </div>
 
-        <Dialog class="select-none" v-model:visible="editorDialog" :style="{ width: '450px' }" header="Product Details" :modal="true" @show="fetchCategories" @hide="hideDialog">
+        <Dialog :class="['select-none', { 'p-dialog-maximized': xs }]" v-model:visible="editorDialog" :style="{ width: '450px' }" header="Product Details" :modal="true" @show="fetchCategories" @hide="hideDialog">
             <form @submit="onSubmit">
                 <div class="dialog__container flex flex-col gap-6">
                     <div class="product-image">

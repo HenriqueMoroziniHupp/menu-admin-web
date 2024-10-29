@@ -18,7 +18,7 @@ const hasError = ref(false)
 
 const onSubmit = async () => {
     try {
-        loading.value = false
+        loading.value = true
         hasError.value = false
         const data = { email: email.value, password: password.value }
         const response = await API.postAuth(data)
