@@ -8,7 +8,8 @@ import { defineConfig } from 'vite';
 // https://vitejs.dev/config/
 export default defineConfig({
     optimizeDeps: {
-        noDiscovery: true
+        noDiscovery: true,
+        include: ['qr-code-styling']
     },
     plugins: [
         vue({
@@ -26,5 +27,8 @@ export default defineConfig({
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url))
         }
-    }
+    },
+    server: {
+        host: 'admin.upzini.localhost'
+    },
 });

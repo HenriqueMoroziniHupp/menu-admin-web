@@ -31,6 +31,11 @@ const router = createRouter({
                     component: () => import('@/views/pages/Products.vue')
                 },
                 {
+                    path: 'qrcode',
+                    name: 'QRCode',
+                    component: () => import('@/views/pages/QRCode.vue')
+                },
+                {
                     path: '/uikit/formlayout',
                     name: 'formlayout',
                     component: () => import('@/views/uikit/FormLayout.vue')
