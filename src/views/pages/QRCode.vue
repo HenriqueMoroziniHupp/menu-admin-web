@@ -86,10 +86,10 @@ const downloadDivAsImage = (elementId: string) => {
         <Toolbar class="mb-6">
             <template #start>
                 <Button @click="download" class="mr-2" icon="pi pi-download" label="Baixar QRCode simples"/>
-                <Button id="code" @click="downloadDivAsImage('qr-code')" :loading icon="pi pi-download" label="Baixar QRCode estilizado"/>
+                <Button id="code" @click="downloadDivAsImage('qr-code-card')" :loading icon="pi pi-download" label="Baixar QRCode estilizado"/>
             </template>
         </Toolbar>
-        <div class="qr-card bg-black p-4 rounded-xl w-fit">
+        <div id="qr-code-card" class="qr-card bg-black p-4 rounded-xl w-fit">
             <div id="qr-code" ref="__qrCode"/>
             <p class="p-4 text-white text-center text-6xl text-mono">CARDÁPIO</p>
             <p class="text-white text-center text-mono">Escaneie ou acesse o link abaixo</p>
