@@ -262,6 +262,7 @@ const submitForm = () => {
                         <label for="slug" class="block font-bold mb-3">Slug</label>
                         <InputText id="slug" v-model.trim="client.slug" required="true" autofocus :invalid="submitted && !client.slug" fluid :disabled="loading || isEditMode"/>
                         <small v-if="submitted && !client.slug" class="text-red-500">Slug is required.</small>
+                        <small v-if="client.slug?.length > 20" class="text-red-500">Slug muito grande quebrará o link  visivel no QRCode</small>
                     </div>
 
                     <div class="client-description">

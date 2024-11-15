@@ -69,7 +69,9 @@ const downloadDivAsImage = (elementId: string) => {
     loading.value = true
     const element = document.getElementById(elementId)
 
-    html2canvas(element).then(function (canvas) {
+    html2canvas(element, {
+        scale: window.innerWidth < 400 ? 4 : 2
+    }).then(function (canvas) {
         const imageUrl = canvas.toDataURL('image/png')
         const link = document.createElement('a')
 
@@ -89,23 +91,37 @@ const downloadDivAsImage = (elementId: string) => {
                 <Button id="code" @click="downloadDivAsImage('qr-code-card')" :loading icon="pi pi-download" label="Baixar QRCode estilizado"/>
             </template>
         </Toolbar>
-        <div id="qr-code-card" class="qr-card bg-black p-4 rounded-xl w-fit">
+        <div id="qr-code-card" class="qr-card bg-black p-4 rounded-xl">
             <div id="qr-code" ref="__qrCode"/>
-            <p class="p-4 text-white text-center text-6xl text-mono">CARDÁPIO</p>
-            <p class="text-white text-center text-mono">Escaneie ou acesse o link abaixo</p>
-            <p class="p-4 text-white text-center text-4xl text-mono">{{ menuSimpleURL }}</p>
+            <h1 class="title py-2 text-white text-center text-mono">CARDÁPIO</h1>
+            <p class="help  text-white text-center text-mono">Escaneie ou acesse o link abaixo</p>
+            <p class="link pt-2 pb-6 text-white text-center text-4xl text-mono">{{ menuSimpleURL }}</p>
         </div>
     </div>
 </template>
 
 <style lang="scss" scoped>
-#qr-code {
-    :deep(svg) {
-        // max-width: 100%;
-        // max-height: fit-content;
-        max-width: 512px;
-        max-height: 512px;
-        border-radius: 1rem;
+#qr-code-card {
+    max-width: 512px;
+    height: auto;
+    #qr-code {
+        :deep(svg) {
+            height: 100%;
+            width: 100%;
+            border-radius: 1rem;
+        }
+    }
+
+    .title {
+        font-size: clamp(2.5rem, 15vw, 6rem);
+    }
+
+    .help {
+        font-size: clamp(10px, 5.5vw, 1rem);
+    }
+
+    .link {
+        font-size: clamp(10px, 5.5vw, 2.25rem);
     }
 }
 </style>
