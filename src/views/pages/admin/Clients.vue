@@ -229,7 +229,7 @@ const submitForm = () => {
                     <template #body="slotProps">
                         <div class="flex">
                             <Button icon="pi pi-external-link" outlined severity="info" as="a" target="blank" :href="`https://${slotProps.data.slug}.upzini.com`" rounded class="mr-2"/>
-                            <Button icon="pi pi-pencil" outlined rounded class="mr-2" @click="openEdit(slotProps.data)" />
+                            <Button icon="pi pi-pencil" outlined rounded severity="success" class="mr-2" @click="openEdit(slotProps.data)" />
                             <Button icon="pi pi-trash" outlined rounded severity="danger" @click="openDelete(slotProps.data)" />
                         </div>
                     </template>

@@ -151,7 +151,7 @@ const getStatusLabel = (status) => {
                 <Column :exportable="false">
                     <template #body="slotProps">
                         <div class="flex">
-                            <Button icon="pi pi-pencil" outlined rounded class="mr-2" @click="editProduct(slotProps.data)" />
+                            <Button icon="pi pi-pencil" outlined rounded severity="success" class="mr-2" @click="editProduct(slotProps.data)" />
                             <Button icon="pi pi-trash" outlined rounded severity="danger" @click="confirmDeleteProduct(slotProps.data)" />
                         </div>
                     </template>

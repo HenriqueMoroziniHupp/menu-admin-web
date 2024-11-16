@@ -310,7 +310,7 @@ async function onCropper() {
                 <Column :exportable="false">
                     <template #body="slotProps">
                         <div class="flex">
-                            <Button icon="pi pi-pencil" outlined rounded class="mr-2" @click="openEdit(slotProps.data)" />
+                            <Button icon="pi pi-pencil" outlined rounded severity="success" class="mr-2" @click="openEdit(slotProps.data)" />
                             <Button icon="pi pi-trash" outlined rounded severity="danger" @click="openDelete(slotProps.data)" />
                         </div>
                     </template>
