@@ -7,7 +7,6 @@ import type Menu from 'primevue/menu';
 import type { MenuItem } from 'primevue/menuitem';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import AppConfigurator from './AppConfigurator.vue';
 
 const router = useRouter()
 const { user } = useUserStore()
@@ -31,7 +30,8 @@ const items = ref<MenuItem[]>([
             {
                 label: 'Settings',
                 icon: 'pi pi-cog',
-                shortcut: '⌘+O'
+                shortcut: '⌘+O',
+                action: () => router.push({ name: 'Settings' })
             },
             {
                 label: 'Logout',
@@ -61,40 +61,13 @@ const items = ref<MenuItem[]>([
                 <button type="button" class="layout-topbar-action" @click="toggleDarkMode">
                     <i :class="['pi', { 'pi-moon': isDarkTheme, 'pi-sun': !isDarkTheme }]"></i>
                 </button>
-                <div class="relative">
-                    <button
-                        v-styleclass="{ selector: '@next', enterFromClass: 'hidden', enterActiveClass: 'animate-scalein', leaveToClass: 'hidden', leaveActiveClass: 'animate-fadeout', hideOnOutsideClick: true }"
-                        type="button"
-                        class="layout-topbar-action layout-topbar-action-highlight"
-                    >
-                        <i class="pi pi-palette"></i>
-                    </button>
-                    <AppConfigurator />
-                </div>
-            </div>
 
-            <button
-                class="layout-topbar-menu-button layout-topbar-action"
-                v-styleclass="{ selector: '@next', enterFromClass: 'hidden', enterActiveClass: 'animate-scalein', leaveToClass: 'hidden', leaveActiveClass: 'animate-fadeout', hideOnOutsideClick: true }"
-            >
-                <i class="pi pi-ellipsis-v"></i>
-            </button>
-
-            <div class="layout-topbar-menu hidden lg:block">
                 <div class="layout-topbar-menu-content">
-                    <button type="button" class="layout-topbar-action">
-                        <i class="pi pi-calendar"></i>
-                        <span>Calendar</span>
-                    </button>
-                    <button type="button" class="layout-topbar-action">
-                        <i class="pi pi-inbox"></i>
-                        <span>Messages</span>
-                    </button>
                     <button type="button" class="layout-topbar-action" @click="toggleUserMenu">
                         <i class="pi pi-user"></i>
                         <span>Profile</span>
                     </button>
-                    <Menu ref="userMenu" id="overlay_menu" class="w-full md:w-60" :model="items" :popup="true">
+                    <Menu ref="userMenu" id="overlay_menu" class="w-60 isso" :model="items" :popup="true">
                         <template #start>
                             <button
                                 v-ripple
