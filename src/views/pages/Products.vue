@@ -10,6 +10,7 @@ import { FilterMatchMode } from '@primevue/core/api';
 import { useToast } from 'primevue/usetoast';
 import { computed, onMounted, ref } from 'vue';
 import { useBreakpoint } from '@/layout/composables/breakpoints'
+import { IPrice } from '@/interfaces/IPrice';
 
 CropperCanvas.$define()
 CropperImage.$define()
@@ -41,7 +42,7 @@ const filters = ref({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS }
 });
 
-const putProduct = computed(() => {
+const payloadProduct = computed(() => {
     const diff = {} as IProduct;
     const keys = new Set([...Object.keys(product.value)]);
 
@@ -51,7 +52,8 @@ const putProduct = computed(() => {
         }
     });
 
-    return diff;
+    const prices = product.value.prices.filter((price => price.name && price.price))
+    return { ...diff, prices };
 })
 
 const fetchProducts = async () => {
@@ -89,8 +91,26 @@ const resetProduct = (): IProduct => {
         description: undefined,
         category: undefined,
         id: undefined,
-        idCategory: undefined
+        idCategory: undefined,
+        prices: [
+            {
+                name: 'Pequeno',
+                price: null,
+            },
+            {
+                name: 'Médio',
+                price: null,
+            },
+            {
+                name: 'Grande',
+                price: null,
+            }
+        ]
     }
+}
+
+const pushPrice = () => {
+    product.value.prices.push({} as IPrice)
 }
 
 const openNew = () => {
@@ -136,8 +156,8 @@ const onSubmit = async () => {
         if(imageSelected.value) await onCropper()
 
         isEdit ?
-            await productsAPI.putProduct(product.value.id, toFormData(putProduct.value) as IProduct)
-            :await productsAPI.postProduct(toFormData(product.value) as IProduct)
+            await productsAPI.putProduct(product.value.id, toFormData(payloadProduct.value) as IProduct)
+            :await productsAPI.postProduct(toFormData(payloadProduct.value) as IProduct)
         await fetchProducts()
         editorDialog.value = false;
         toast.add({ severity: 'success', summary: 'Successful', detail: 'Success to save product', life: 3000 });
@@ -177,7 +197,6 @@ const getStatusLabel = (status) => {
             return null;
     }
 };
-
 
 onMounted(async() => {
     await fetchProducts()
@@ -225,16 +244,28 @@ function onCropperImageTransform(event: CustomEvent) {
         || cropperImageRect.left > cropperCanvasRect.left) event.preventDefault();
 }
 
-function toFormData(obj: IProduct) {
+function toFormData(obj: Record<string, any>, parentKey = ''): FormData {
     const formData = new FormData();
 
-    for (const key in obj) {
-        if (obj.hasOwnProperty(key) && obj[key] !== undefined) {
-            formData.append(key, obj[key]);
+    function appendFormData(objData: any, parentKey: string) {
+        if (Array.isArray(objData)) {
+            objData.forEach((value, index) => {
+                const key = `${parentKey}[${index}]`;
+                appendFormData(value, key);
+            });
+        } else if (typeof objData === 'object' && !(objData instanceof File) && objData !== null) {
+            for (const key in objData) {
+                if (objData.hasOwnProperty(key) && objData[key] !== undefined) {
+                    appendFormData(objData[key], parentKey ? `${parentKey}.${key}` : key);
+                }
+            }
+        } else {
+            formData.append(parentKey, objData);
         }
     }
 
-    return formData
+    appendFormData(obj, parentKey);
+    return formData;
 }
 
 async function onCropper() {
@@ -297,7 +328,7 @@ async function onCropper() {
 
                 <Column header="Image">
                     <template #body="slotProps">
-                        <img :src="slotProps.data.imageUrl" :alt="slotProps.data.image" class="rounded" style="width: 64px" />
+                        <img :src="slotProps.data.imageUrl" :alt="slotProps.data.image" class="rounded" style="width: 64px" @click="openEdit(slotProps.data)"/>
                     </template>
                 </Column>
                 <Column field="name" header="Nome" sortable></Column>
@@ -371,8 +402,6 @@ async function onCropper() {
                     <div class="product-description">
                         <label for="description" class="block font-bold mb-3">Description (Optional)</label>
                         <Textarea id="description" v-model="product.description" :disabled="loading" rows="3" cols="20" fluid />
-                        <!-- <small v-if="submitted && !product.description" class="text-red-500">Description is required.</small> -->
-
                     </div>
                     <div class="product-category">
                         <label for="productCategory" class="block font-bold mb-3">Product Category</label>
@@ -386,35 +415,17 @@ async function onCropper() {
                     <div class="product-price">
                         <label for="productCategory" class="block font-bold mb-3">Price</label>
                         <div class="product-price__wrapper flex flex-col gap-4">
-                            <Message v-if="product.priceSingle" severity="warn">Será exibido no item apenas o valor do preço unico</Message>
-                            <InputGroup >
-                                <InputGroupAddon>
-                                    Preço Unico
+                            <InputGroup v-for="(price, index) in product.prices">
+                                <InputText v-if="!price.id" v-model="price.name" placeholder="Nome personalizado"/>
+                                <InputGroupAddon v-else>
+                                    {{ price.name }}
                                 </InputGroupAddon>
-                                <InputNumber placeholder="Insira o valor" :disabled="loading" :minFractionDigits="2" mode="currency" currency="BRL" v-model="product.priceSingle"/>
+                                <InputNumber placeholder="Insira o valor" :disabled="loading" :minFractionDigits="2" mode="currency" currency="BRL" v-model="price.price"/>
+                                    <Button :icon="product.prices[index].id ? 'pi pi-trash' : 'pi pi-times'" :severity="product.prices[index].id ? 'danger' : 'secondary'" @click="product.prices.splice(index,1)"/>
                             </InputGroup>
-                            <InputGroup>
-                                <InputGroupAddon>
-                                    P
-                                </InputGroupAddon>
-                                <InputNumber placeholder="Insira o valor" :disabled="loading" :minFractionDigits="2" mode="currency" currency="BRL" v-model="product.priceSmall"/>
-                            </InputGroup>
-                            <InputGroup>
-                                <InputGroupAddon>
-                                    M
-                                </InputGroupAddon>
-                                <InputNumber placeholder="Insira o valor" :disabled="loading" :minFractionDigits="2" mode="currency" currency="BRL" v-model="product.priceMedium"/>
-                            </InputGroup>
-                            <InputGroup>
-                                <InputGroupAddon>
-                                    G
-                                </InputGroupAddon>
-                                <InputNumber placeholder="Insira o valor" :disabled="loading" :minFractionDigits="2" mode="currency" currency="BRL" v-model="product.priceLarge"/>
-                            </InputGroup>
-
+                            <Button class="w-40" label="Novo valor" icon="pi pi-plus" @click="pushPrice" />
                         </div>
                     </div>
-
                 </div>
             </form>
 
@@ -442,7 +453,7 @@ async function onCropper() {
 
 <style lang="scss">
 .p-dialog-header {
-    /* padding-bottom: 0.5rem !important; */
+    padding-bottom: 0.5rem !important;
 }
 .p-fileupload-content, .p-fileupload-header {
     padding: 0 !important;
