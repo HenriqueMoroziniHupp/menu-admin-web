@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { useUserStore } from '@/store/userStore';
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import AppMenuItem from './AppMenuItem.vue';
 
+const { t } = useI18n()
 const userStore = useUserStore()
 
 const model = ref([
@@ -17,11 +19,11 @@ const model = ref([
     {
         label: 'Home',
         items: [
-            { label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/' },
-            { label: 'Settings', icon: 'pi pi-fw pi-cog', to: '/settings' },
-            { label: 'Categorias', icon: 'pi pi-fw pi-clone', to: '/categories' },
-            { label: 'Produtos', icon: 'pi pi-fw pi-list', to: '/products' },
-            { label: 'QR Code', icon: 'pi pi-fw pi-qrcode', to: '/qrcode' },
+            { label: t('DASHBOARD.MODULE'), icon: 'pi pi-fw pi-home', to: '/' },
+            { label: t('SETTINGS.MODULE'), icon: 'pi pi-fw pi-cog', to: '/settings' },
+            { label: t('CATEGORIES.MODULE'), icon: 'pi pi-fw pi-clone', to: '/categories' },
+            { label: t('PRODUCTS.MODULE'), icon: 'pi pi-fw pi-list', to: '/products' },
+            { label: t('QR_CODE.MODULE'), icon: 'pi pi-fw pi-qrcode', to: '/qrcode' },
         ],
     },
 ]);

@@ -5,7 +5,9 @@ import { useUserStore } from '@/store/userStore';
 import { FilterMatchMode } from '@primevue/core/api';
 import { useToast } from 'primevue/usetoast';
 import { onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n()
 const userStore = useUserStore()
 
 onMounted(async() => {
@@ -18,8 +20,7 @@ const fetchCategories = async () => {
         const response = await categoryAPI.getCategories(userStore.slug)
         categories.value = response.data
     } catch (error) {
-        toast.add({ severity: 'error', summary: 'Successful', detail: 'Error to load categoryes', life: 3000 });
-
+        toast.add({ severity: 'error', summary: t('TOAST.SUMMARY.ERROR'), detail: t('CATEGORIES.TOAST.FETCH_ERROR'), life: 5000 });
     } finally {
         loadingTable.value = false
     }
@@ -40,8 +41,8 @@ const filters = ref({
 });
 const submitted = ref(false);
 const statusOptions = ref([
-    { label: 'Active', value: 'ACTIVE' },
-    { label: 'Inactive', value: 'INACTIVE' }
+{ label: t('CATEGORIES.STATUS.ACTIVE'), value: 'ACTIVE' },
+{ label: t('CATEGORIES.STATUS.INACTIVE'), value: 'INACTIVE' },
 ]);
 
 const openNew = () => {
@@ -54,7 +55,7 @@ const hideDialog = () => {
     submitted.value = false;
     loading.value = false
 };
-const saveCategory = async () => {
+const onSubmit = async () => {
     submitted.value = true;
     if (!category.value.name) return
     const isEdit = !!category.value.id
@@ -66,9 +67,11 @@ const saveCategory = async () => {
             :await categoryAPI.postCategory(category.value)
         await fetchCategories()
         categoryDialog.value = false;
-        toast.add({ severity: 'success', summary: 'Successful', detail: 'Success to save category', life: 3000 });
+        toast.add({ severity: 'success', summary: t('TOAST.SUMMARY.SUCCESS'), detail: t('CATEGORIES.TOAST.SUBMIT.SUCCESS'), life: 5000 });
+
     } catch (error) {
-        toast.add({ severity: 'error', summary: 'Successful', detail: 'Error to save category', life: 3000 });
+        toast.add({ severity: 'error', summary: t('TOAST.SUMMARY.ERROR'), detail: t('CATEGORIES.TOAST.SUBMIT.ERROR'), life: 5000 });
+
     } finally {
         loading.value = false
     }
@@ -81,15 +84,15 @@ const confirmDeleteProduct = (item: ICategory) => {
     category.value = item;
     deleteCategoryDialog.value = true;
 };
-const deleteProduct = async () => {
+const onSubmitDelete = async () => {
     try {
         loading.value = true;
         await categoryAPI.deleteCategory(category.value.id)
         await fetchCategories()
         deleteCategoryDialog.value = false;
-        toast.add({ severity: 'success', summary: 'Successful', detail: 'Error to delete', life: 3000 });
+        toast.add({ severity: 'success', summary: t('TOAST.SUMMARY.SUCCESS'), detail: t('TOAST.SUCCESS.DELETE'), life: 5000 });
     } catch (error) {
-        toast.add({ severity: 'error', summary: 'Successful', detail: 'Error to delete', life: 3000 });
+        toast.add({ severity: 'error', summary: t('TOAST.SUMMARY.ERROR'), detail: t('TOAST.ERROR.DELETE'), life: 5000 });
     } finally {
         loading.value = false
     }
@@ -114,7 +117,7 @@ const getStatusLabel = (status) => {
         <div class="card">
             <Toolbar class="mb-6">
                 <template #start>
-                    <Button label="New Category" icon="pi pi-plus" severity="primary" class="mr-2" @click="openNew" />
+                    <Button :label="$t('CATEGORIES.BUTTONS.NEW')" icon="pi pi-plus" severity="primary" class="mr-2" @click="openNew" />
                 </template>
             </Toolbar>
 
@@ -128,24 +131,24 @@ const getStatusLabel = (status) => {
                 :filters="filters"
                 paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                 :rowsPerPageOptions="[5, 10, 25]"
-                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
+                currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} categorias"
                 :loading="loadingTable"
             >
                 <template #header>
                     <div class="flex flex-wrap gap-2 items-center justify-between">
-                        <h4 class="m-0">Manage Categories</h4>
+                        <h4 class="m-0">{{ $t('CATEGORIES.DESCRIPTION') }}</h4>
                         <IconField>
                             <InputIcon>
                                 <i class="pi pi-search" />
                             </InputIcon>
-                            <InputText v-model="filters['global'].value" placeholder="Search..." />
+                            <InputText v-model="filters['global'].value" :placeholder="$t('CATEGORIES.SEARCH')" />
                         </IconField>
                     </div>
                 </template>
-                <Column field="name" header="Nome" sortable></Column>
-                <Column field="status" header="Status" sortable>
+                <Column field="name" :header="$t('CATEGORIES.TABLE.NAME')" sortable></Column>
+                <Column field="status" :header="$t('CATEGORIES.TABLE.STATUS')" sortable>
                     <template #body="slotProps">
-                        <Tag :value="slotProps.data.status" :severity="getStatusLabel(slotProps.data.status)" />
+                        <Tag :value="$t(`CATEGORIES.STATUS.${slotProps.data.status}`).toUpperCase()" :severity="getStatusLabel(slotProps.data.status)" />
                     </template>
                 </Column>
                 <Column :exportable="false">
@@ -159,38 +162,38 @@ const getStatusLabel = (status) => {
             </DataTable>
         </div>
 
-        <Dialog v-model:visible="categoryDialog" :style="{ width: '450px' }" header="Product Details" :modal="true">
-            <form @submit="saveCategory()">
+        <Dialog v-model:visible="categoryDialog" :style="{ width: '450px' }" :header="$t('CATEGORIES.MODAL_TITLE')" :modal="true">
+            <form @submit="onSubmit()">
                 <div class="flex flex-col gap-6">
                     <div>
-                        <label for="name" class="block font-bold mb-3">Name</label>
+                        <label for="name" class="block font-bold mb-3">{{ $t('CATEGORIES.INPUT.NAME.TITLE') }}</label>
                         <InputText id="name" v-model.trim="category.name" required="true" autofocus :invalid="submitted && !category.name" fluid :disabled="loading"/>
-                        <small v-if="submitted && !category.name" class="text-red-500">Name is required.</small>
+                        <small v-if="submitted && !category.name" class="text-red-500">{{ $t('CATEGORIES.INPUT.NAME.REQUIRED') }}</small>
                     </div>
                     <div>
-                        <label for="inventoryStatus" class="block font-bold mb-3">Inventory Status</label>
-                        <Select id="inventoryStatus" v-model="category.status" :options="statusOptions" optionLabel="label" optionValue="value" va placeholder="Select a Status" fluid :disabled="loading"></Select>
+                        <label for="inventoryStatus" class="block font-bold mb-3">{{ $t('CATEGORIES.INPUT.STATUS') }}</label>
+                        <Select id="inventoryStatus" v-model="category.status" :options="statusOptions" optionLabel="label" optionValue="value" fluid :disabled="loading"></Select>
                     </div>
                 </div>
             </form>
 
             <template #footer>
-                <Button label="Cancel" icon="pi pi-times" text @click="hideDialog" />
-                <Button label="Save" icon="pi pi-check" type="submit" @click="saveCategory" :loading />
+                <Button :label="$t('COMMON.BUTTONS.CANCEL')" icon="pi pi-times" text @click="hideDialog" />
+                <Button :label="$t('COMMON.BUTTONS.SAVE')" icon="pi pi-check" type="submit" @click="onSubmit" :loading />
             </template>
         </Dialog>
 
-        <Dialog v-model:visible="deleteCategoryDialog" :style="{ width: '450px' }" header="Confirm" :modal="true">
+        <Dialog v-model:visible="deleteCategoryDialog" :style="{ width: '480px' }" :header="$t('PRODUCTS.DELETE_MODAL.TITLE')" :modal="true">
             <div class="flex items-center gap-4">
                 <i class="pi pi-exclamation-triangle !text-3xl" />
-                <span v-if="category"
-                    >Are you sure you want to delete <b>{{ category.name }}</b
-                    >?</span
-                >
+                <i18n-t v-if="category" keypath="CATEGORIES.DELETE_MODAL.DESCRIPTION" tag="span" scope="global">
+                    <b>{{ category.name }}</b>
+                    <b>{{ $t('CATEGORIES.DELETE_MODAL.1') }}</b>
+                </i18n-t>
             </div>
             <template #footer>
-                <Button label="No" icon="pi pi-times" text @click="deleteCategoryDialog = false" />
-                <Button label="Yes" icon="pi pi-check" @click="deleteProduct" />
+                <Button :label="$t('COMMON.BUTTONS.YES')" icon="pi pi-check" text @click="onSubmitDelete" />
+                <Button :label="$t('COMMON.BUTTONS.NO')" icon="pi pi-times" @click="deleteCategoryDialog = false" />
             </template>
         </Dialog>
     </div>

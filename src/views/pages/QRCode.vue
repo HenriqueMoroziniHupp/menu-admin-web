@@ -87,15 +87,15 @@ const downloadDivAsImage = (elementId: string) => {
     <div class="card">
         <Toolbar class="mb-6">
             <template #start>
-                <Button @click="download" class="mr-2" icon="pi pi-download" label="Baixar QRCode simples"/>
-                <Button id="code" @click="downloadDivAsImage('qr-code-card')" :loading icon="pi pi-download" label="Baixar QRCode estilizado"/>
+                <Button @click="download" class="mr-2" icon="pi pi-download" :label="$t('QR_CODE.DOWNLOAD.SIMPLE')"/>
+                <Button id="code" @click="downloadDivAsImage('qr-code-card')" :loading icon="pi pi-download" :label="$t('QR_CODE.DOWNLOAD.STYLED')"/>
             </template>
         </Toolbar>
         <div id="qr-code-card" class="qr-card bg-black p-4 rounded-xl">
             <div id="qr-code" ref="__qrCode"/>
-            <h1 class="title py-2 text-white text-center text-mono">CARDÁPIO</h1>
-            <p class="help  text-white text-center text-mono">Escaneie ou acesse o link abaixo</p>
-            <p class="link pt-2 pb-6 text-white text-center text-4xl text-mono">{{ menuSimpleURL }}</p>
+            <h1 class="title pt-2 pb-6 text-white text-center text-mono">{{ $t('QR_CODE.CARD.MENU') }}</h1>
+            <p class="help text-white text-center text-mono">{{ $t('QR_CODE.CARD.INFO') }}</p>
+            <p class="link pt-4 pb-6 text-white text-center text-4xl text-mono">{{ menuSimpleURL }}</p>
         </div>
     </div>
 </template>
@@ -117,7 +117,7 @@ const downloadDivAsImage = (elementId: string) => {
     }
 
     .help {
-        font-size: clamp(10px, 5.5vw, 1rem);
+        font-size: clamp(10px, 5.5vw, 1.6rem);
     }
 
     .link {
