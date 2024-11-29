@@ -2,6 +2,7 @@ import { API } from '@/settings/axios'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { createApp } from 'vue'
+import i18n from './settings/i18n'
 import App from './App.vue'
 import router from './router'
 import { useAuthStore } from './store/authStore'
@@ -39,6 +40,7 @@ pinia.use(piniaPluginPersistedstate)
 
 app.use(router)
 app.use(pinia)
+app.use(i18n)
 app.use(PrimeVue, {
     theme: {
         preset: MyPreset,

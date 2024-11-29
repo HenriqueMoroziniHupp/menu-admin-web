@@ -7,7 +7,9 @@ import CropperHandle from '@cropper/element-handle';
 import CropperImage from '@cropper/element-image';
 import { useToast } from 'primevue/usetoast';
 import { computed, onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n()
 CropperCanvas.$define()
 CropperImage.$define()
 CropperHandle.$define()
@@ -41,7 +43,7 @@ const fetchClient = async () => {
         client.value = response.data
         clientTemp.value = { ... client.value }
     } catch (error) {
-        toast.add({ severity: 'error', summary: 'Successful', detail: 'Error to load product', life: 3000 });
+        toast.add({ severity: 'error', summary: t('TOAST.SUMMARY.ERROR'), detail: t('TOAST.ERROR.FETCH'), life: 5000 });
     } finally {
         loading.value = false
     }
@@ -62,9 +64,9 @@ const onSubmit = async () => {
 
         await userAPI.putClientSettings(userStore.slug, toFormData(putClient.value) as unknown as IClientSettings)
         await fetchClient()
-        toast.add({ severity: 'success', summary: 'Successful', detail: 'Success to save settings', life: 3000 });
+        toast.add({ severity: 'success', summary: t('TOAST.SUMMARY.SUCCESS'), detail: t('SETTINGS.TOAST.SUBMIT.SUCCESS'), life: 5000 });
     } catch (error) {
-        toast.add({ severity: 'error', summary: 'Successful', detail: 'Error to save settings', life: 3000 });
+        toast.add({ severity: 'error', summary: t('TOAST.SUMMARY.ERROR'), detail: t('SETTINGS.TOAST.SUBMIT.ERROR'), life: 5000 });
     } finally {
         loading.value = false
     }
@@ -146,7 +148,8 @@ async function onCropper() {
             }, 'image/webp', 0.6);
         })
     } catch (error) {
-        console.error('Cropper failed: ',error)
+        toast.add({ severity: 'error', summary: t('TOAST.SUMMARY.ERROR'), detail: t('TOAST.ERROR.IMAGE'), life: 5000 });
+        throw new Error(error)
     }
 }
 </script>
@@ -156,23 +159,23 @@ async function onCropper() {
         <div class="card">
             <Toolbar class="mb-6">
                 <template #start>
-                    <Button label="Save" icon="pi pi-check" type="submit" @click="onSubmit" :loading />
+                    <Button :label="$t('COMMON.BUTTONS.SAVE')" icon="pi pi-check" type="submit" @click="onSubmit" :loading />
                 </template>
             </Toolbar>
 
             <form @submit="onSubmit">
                 <div class="dialog__container flex flex-col gap-6">
                     <div class="product-image">
-                        <label for="name" class="block font-bold mb-3">App Menu Banner</label>
+                        <label for="name" class="block font-bold mb-3">{{ $t('SETTINGS.BANNER.TITLE') }}</label>
                         <FileUpload ref="fileUpload" name="image" accept="image/*" :maxFileSize="50000000" @select="upload">
                             <template #header="{ chooseCallback, files }">
                                 <div v-show="bannerUrl" class="flex flex-wrap justify-between items-center gap-4 pb-4">
-                                        <Button @click="chooseCallback()" label="Change Image" icon="pi pi-images" rounded outlined severity="secondary"/>
-                                        <Button v-show="files.length" label="Cover" icon="pi pi-arrow-down-left-and-arrow-up-right-to-center" style="font-size: 1rem" rounded outlined :disabled="!files.length" @click="__cropperImage.$center('cover')"/>
+                                        <Button @click="chooseCallback()" :label="$t('COMMON.BUTTONS.IMAGE')" icon="pi pi-images" rounded outlined severity="secondary"/>
+                                        <Button v-show="files.length" :label="$t('COMMON.BUTTONS.ADJUST')" icon="pi pi-arrow-down-left-and-arrow-up-right-to-center" style="font-size: 1rem" rounded outlined :disabled="!files.length" @click="__cropperImage.$center('cover')"/>
                                 </div>
                             </template>
                             <template v-if="bannerUrl" #content="{ files, messages }">
-                                <img v-if="!files.length" :src="bannerUrl" alt="Banner image" draggable="false" class="select-none block m-auto rounded-border aspect-video w-full object-cover" />
+                                <img v-if="!files.length" :src="bannerUrl" :alt="$t('SETTINGS.BANNER.TITLE')" draggable="false" class="select-none block m-auto rounded-border aspect-video w-full object-cover" />
                                 <cropper-canvas
                                     v-else
                                     class="rounded-border aspect-video w-full"
@@ -199,19 +202,19 @@ async function onCropper() {
                             <template #empty v-if="!client.bannerUrl">
                                 <div class="flex items-center justify-center flex-col">
                                     <i @click="fileUpload.choose" class="pi pi-cloud-upload !border-2 !rounded-full !p-8 !text-4xl !text-muted-color cursor-pointer" />
-                                    <p class="mt-6 mb-0">Drag and drop files to here to upload.</p>
-                                    <small v-if="submitted && !client.image" class="text-red-500">Imagem is required</small>
+                                    <p class="mt-6 mb-0">{{ $t('COMMON.UPLOADER.DESCRIPTION') }}</p>
+                                    <small v-if="submitted && !client.image" class="text-red-500">{{ $t('COMMON.UPLOADER.REQUIRED') }}</small>
                                 </div>
                             </template>
                         </FileUpload>
                     </div>
                     <div class="product-name">
-                        <label for="name" class="block font-bold mb-3">Name</label>
+                        <label for="name" class="block font-bold mb-3">{{ $t('SETTINGS.NAME.TITLE') }}</label>
                         <InputText id="name" v-model.trim="client.name" required="true" autofocus :invalid="submitted && !client.name" fluid :disabled="loading"/>
-                        <small v-if="submitted && !client.name" class="text-red-500">Name is required.</small>
+                        <small v-if="submitted && !client.name" class="text-red-500">{{ $t('SETTINGS.NAME.REQUIRED') }}</small>
                     </div>
                     <div class="product-description">
-                        <label for="description" class="block font-bold mb-3">Description (Optional)</label>
+                        <label for="description" class="block font-bold mb-3">{{ $t('SETTINGS.DESCRIPTION') }}</label>
                         <Textarea id="description" v-model="client.description" :disabled="loading" rows="3" cols="20" fluid />
                     </div>
                 </div>
