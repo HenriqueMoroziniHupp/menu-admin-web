@@ -41,7 +41,7 @@ const fetchClient = async () => {
         loading.value = true
         const response = await userAPI.getClientSettings(userStore.slug)
         client.value = response.data
-        clientTemp.value = { ... client.value }
+        clientTemp.value = { ...client.value }
     } catch (error) {
         toast.add({ severity: 'error', summary: t('TOAST.SUMMARY.ERROR'), detail: t('TOAST.ERROR.FETCH'), life: 5000 });
     } finally {
@@ -60,7 +60,7 @@ const onSubmit = async () => {
 
     try {
         loading.value = true;
-        if(imageSelected.value) await onCropper()
+        if (imageSelected.value) await onCropper()
 
         await userAPI.putClientSettings(userStore.slug, toFormData(putClient.value) as unknown as IClientSettings)
         await fetchClient()
@@ -72,7 +72,7 @@ const onSubmit = async () => {
     }
 };
 
-onMounted(async() => {
+onMounted(async () => {
     await fetchClient()
 });
 
@@ -82,7 +82,7 @@ const upload = (file) => {
     imageSelected.value = file.files.slice(-1)[0]
 };
 
-const bannerUrl = computed(() =>  imageSelected.value?.objectURL || client.value.bannerUrl)
+const bannerUrl = computed(() => imageSelected.value?.objectURL || client.value.bannerUrl)
 
 const fileUpload = ref()
 
@@ -159,63 +159,64 @@ async function onCropper() {
         <div class="card">
             <Toolbar class="mb-6">
                 <template #start>
-                    <Button :label="$t('COMMON.BUTTONS.SAVE')" icon="pi pi-check" type="submit" @click="onSubmit" :loading />
+                    <Button :label="$t('COMMON.BUTTONS.SAVE')" icon="pi pi-check" type="submit" @click="onSubmit"
+                        :loading />
                 </template>
             </Toolbar>
 
             <form @submit="onSubmit">
-                <div class="dialog__container flex flex-col gap-6">
+                <div class="flex flex-col gap-6">
                     <div class="product-image">
                         <label for="name" class="block font-bold mb-3">{{ $t('SETTINGS.BANNER.TITLE') }}</label>
-                        <FileUpload ref="fileUpload" name="image" accept="image/*" :maxFileSize="50000000" @select="upload">
+                        <FileUpload ref="fileUpload" name="image" accept="image/*" :maxFileSize="50000000"
+                            @select="upload">
                             <template #header="{ chooseCallback, files }">
                                 <div v-show="bannerUrl" class="flex flex-wrap justify-between items-center gap-4 pb-4">
-                                        <Button @click="chooseCallback()" :label="$t('COMMON.BUTTONS.IMAGE')" icon="pi pi-images" rounded outlined severity="secondary"/>
-                                        <Button v-show="files.length" :label="$t('COMMON.BUTTONS.ADJUST')" icon="pi pi-arrow-down-left-and-arrow-up-right-to-center" style="font-size: 1rem" rounded outlined :disabled="!files.length" @click="__cropperImage.$center('cover')"/>
+                                    <Button @click="chooseCallback()" :label="$t('COMMON.BUTTONS.IMAGE')"
+                                        icon="pi pi-images" rounded outlined severity="secondary" />
+                                    <Button v-show="files.length" :label="$t('COMMON.BUTTONS.ADJUST')"
+                                        icon="pi pi-arrow-down-left-and-arrow-up-right-to-center"
+                                        style="font-size: 1rem" rounded outlined :disabled="!files.length"
+                                        @click="__cropperImage.$center('cover')" />
                                 </div>
                             </template>
                             <template v-if="bannerUrl" #content="{ files, messages }">
-                                <img v-if="!files.length" :src="bannerUrl" :alt="$t('SETTINGS.BANNER.TITLE')" draggable="false" class="select-none block m-auto rounded-border aspect-video w-full object-cover" />
-                                <cropper-canvas
-                                    v-else
-                                    class="rounded-border aspect-video w-full"
-                                    :disabled="!imageSelected"
-                                    ref="__cropperCanvas"
-                                    background
-                                >
-                                    <cropper-image
-                                        ref="__cropperImage"
-                                        :src="bannerUrl"
-                                        alt="Picture"
-                                        initial-center-size="cover"
-                                        scalable
-                                        translatable
-                                        @transform="onCropperImageTransform"
-                                    />
-                                    <cropper-handle
-                                        action="move"
-                                        plain
-                                    />
-                                </cropper-canvas>
-                                {{ messages[0] }}
+                                <div class="w-full md:max-w-2xl">
+                                    <img v-if="!files.length" :src="bannerUrl" :alt="$t('SETTINGS.BANNER.TITLE')"
+                                        draggable="false"
+                                        class="select-none rounded-border aspect-video object-cover" />
+                                    <cropper-canvas v-else class="rounded-border aspect-video"
+                                        :disabled="!imageSelected" ref="__cropperCanvas" background>
+                                        <cropper-image ref="__cropperImage" :src="bannerUrl" alt="Picture"
+                                            initial-center-size="cover" scalable translatable
+                                            @transform="onCropperImageTransform" />
+                                        <cropper-handle action="move" plain />
+                                    </cropper-canvas>
+                                    {{ messages[0] }}
+                                </div>
                             </template>
                             <template #empty v-if="!client.bannerUrl">
                                 <div class="flex items-center justify-center flex-col">
-                                    <i @click="fileUpload.choose" class="pi pi-cloud-upload !border-2 !rounded-full !p-8 !text-4xl !text-muted-color cursor-pointer" />
+                                    <i @click="fileUpload.choose"
+                                        class="pi pi-cloud-upload !border-2 !rounded-full !p-8 !text-4xl !text-muted-color cursor-pointer" />
                                     <p class="mt-6 mb-0">{{ $t('COMMON.UPLOADER.DESCRIPTION') }}</p>
-                                    <small v-if="submitted && !client.image" class="text-red-500">{{ $t('COMMON.UPLOADER.REQUIRED') }}</small>
+                                    <small v-if="submitted && !client.image" class="text-red-500">{{
+                                        $t('COMMON.UPLOADER.REQUIRED') }}</small>
                                 </div>
                             </template>
                         </FileUpload>
                     </div>
                     <div class="product-name">
                         <label for="name" class="block font-bold mb-3">{{ $t('SETTINGS.NAME.TITLE') }}</label>
-                        <InputText id="name" v-model.trim="client.name" required="true" autofocus :invalid="submitted && !client.name" fluid :disabled="loading"/>
-                        <small v-if="submitted && !client.name" class="text-red-500">{{ $t('SETTINGS.NAME.REQUIRED') }}</small>
+                        <InputText id="name" v-model.trim="client.name" required="true" autofocus
+                            :invalid="submitted && !client.name" fluid :disabled="loading" />
+                        <small v-if="submitted && !client.name" class="text-red-500">{{ $t('SETTINGS.NAME.REQUIRED')
+                            }}</small>
                     </div>
                     <div class="product-description">
                         <label for="description" class="block font-bold mb-3">{{ $t('SETTINGS.DESCRIPTION') }}</label>
-                        <Textarea id="description" v-model="client.description" :disabled="loading" rows="3" cols="20" fluid />
+                        <Textarea id="description" v-model="client.description" :disabled="loading" rows="3" cols="20"
+                            fluid />
                     </div>
                 </div>
             </form>
@@ -224,7 +225,8 @@ async function onCropper() {
 </template>
 
 <style lang="scss">
-.p-fileupload-content, .p-fileupload-header {
+.p-fileupload-content,
+.p-fileupload-header {
     padding: 0 !important;
 }
 
