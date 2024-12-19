@@ -18,7 +18,14 @@ export default {
     },
     FOOTER: 'Developed by',
     DASHBOARD: {
-        MODULE: 'Dashboard'
+        MODULE: 'Dashboard',
+        PRODUCTS: 'Products',
+        CATEGORIES: 'Categories',
+        CLIENTS: 'Clients',
+        ACCESS: 'Access',
+        CHART: {
+            TITLE: 'Access'
+        },
     },
     SETTINGS: {
         MODULE: 'Settings',
@@ -171,4 +178,5 @@ export default {
             REQUIRED: 'Image is required',
         }
     },
+    MENU_APP: 'Abrir Cardápio'
 }
