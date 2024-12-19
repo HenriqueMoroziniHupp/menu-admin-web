@@ -56,11 +56,6 @@ const isOutsideClicked = (event) => {
         <app-sidebar></app-sidebar>
         <div class="layout-main-container">
             <div class="layout-main">
-                <!-- <router-view v-slot="{ Component }">
-                    <transition mode="out-in">
-                        <component :is="Component" />
-                    </transition>
-                </router-view> -->
                 <router-view></router-view>
             </div>
             <app-footer></app-footer>

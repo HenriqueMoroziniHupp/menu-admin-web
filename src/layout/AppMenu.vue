@@ -3,8 +3,10 @@ import { useUserStore } from '@/store/userStore';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import AppMenuItem from './AppMenuItem.vue';
+import { useUtils } from '@/composables/utils';
 
 const { t } = useI18n()
+const { menuURL } = useUtils()
 const userStore = useUserStore()
 
 const model = ref([
@@ -24,6 +26,7 @@ const model = ref([
             { label: t('CATEGORIES.MODULE'), icon: 'pi pi-fw pi-clone', to: '/categories' },
             { label: t('PRODUCTS.MODULE'), icon: 'pi pi-fw pi-list', to: '/products' },
             { label: t('QR_CODE.MODULE'), icon: 'pi pi-fw pi-qrcode', to: '/qrcode' },
+            { label: t('MENU_APP'), icon: 'pi pi-fw pi-external-link', url: menuURL, target: '_blank' },
         ],
     },
 ]);

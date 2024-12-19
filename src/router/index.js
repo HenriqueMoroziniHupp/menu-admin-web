@@ -1,4 +1,3 @@
-import AppLayout from '@/layout/AppLayout.vue'
 import { useAuthStore } from '@/store/authStore'
 import { useUserStore } from '@/store/userStore'
 import { createRouter, createWebHistory } from 'vue-router'
@@ -9,7 +8,7 @@ const router = createRouter({
         {
             path: '/',
             meta: { requiresAuth: true },
-            component: AppLayout,
+            component: () => import('@/layout/AppLayout.vue'),
             children: [
                 {
                     path: '/',
@@ -82,7 +81,7 @@ const router = createRouter({
         {
             path: '/private',
             meta: { requiresAuth: true, requireMaster: true },
-            component: AppLayout,
+            component: () => import('@/layout/AppLayout.vue'),
             children: [
                 {
                     path: 'clients',
