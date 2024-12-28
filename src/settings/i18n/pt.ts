@@ -91,9 +91,9 @@ export default {
                 TITLE: 'Nome',
                 REQUIRED: 'Nome é obrigatório',
             },
-            DESCRIPTION: 'Description (Optional)',
+            DESCRIPTION: 'Descrição (Opcional)',
             CATEGORY: {
-                TITLE: 'Name',
+                TITLE: 'Categoria',
                 PLACEHOLDER: 'Selecione uma categoria',
                 REQUIRED: 'Categoria é obrigatória.',
             },
