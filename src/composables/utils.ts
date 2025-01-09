@@ -4,8 +4,8 @@ import { useUserStore } from "@/store/userStore";
 const { slug } = useUserStore()
 
 export function useUtils() {
-    const menuURL = computed(() => `https://${slug}.upzini.shop`)
-    const menuSimpleURL = computed(() => `${slug}.upzini.shop`)
+    const menuURL = computed(() => `https://${slug}.upzini.com`)
+    const menuSimpleURL = computed(() => `${slug}.upzini.com`)
 
     return { menuURL, menuSimpleURL }
 }

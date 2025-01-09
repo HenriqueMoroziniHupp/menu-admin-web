@@ -18,7 +18,14 @@ export default {
     },
     FOOTER: 'Desenvolvido por',
     DASHBOARD: {
-        MODULE: 'Dashboard'
+        MODULE: 'Dashboard',
+        PRODUCTS: 'Produtos',
+        CATEGORIES: 'Categorias',
+        CLIENTS: 'Clientes',
+        ACCESS: 'Acessos',
+        CHART: {
+            TITLE: 'Acessos mensais'
+        },
     },
     SETTINGS: {
         MODULE: 'Configurações',
@@ -84,9 +91,9 @@ export default {
                 TITLE: 'Nome',
                 REQUIRED: 'Nome é obrigatório',
             },
-            DESCRIPTION: 'Description (Optional)',
+            DESCRIPTION: 'Descrição (Opcional)',
             CATEGORY: {
-                TITLE: 'Name',
+                TITLE: 'Categoria',
                 PLACEHOLDER: 'Selecione uma categoria',
                 REQUIRED: 'Categoria é obrigatória.',
             },
@@ -128,6 +135,7 @@ export default {
         }
     },
     QR_CODE: {
+        MODULE: 'QR Code',
         CARD: {
             MENU: 'CARDÁPIO',
             INFO: 'Escaneie ou acesse o link abaixo',
@@ -164,5 +172,6 @@ export default {
             DESCRIPTION: 'Selecione ou arraste e solte a imagem aqui',
             REQUIRED: 'Imagem é obrigatória',
         },
-    }
+    },
+    MENU_APP: 'Abrir Cardápio'
 }
