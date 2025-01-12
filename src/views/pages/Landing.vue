@@ -10,7 +10,7 @@ const smoothScroll = (id) => {
 <template>
     <div class="bg-surface-0 dark:bg-surface-900">
         <div id="home" class="landing-wrapper overflow-hidden">
-            <div class="py-6 px-6 mx-0 md:mx-12 lg:mx-20 lg:px-20 flex items-center justify-between relative lg:static">
+            <div class="py-2 px-6 mx-0 md:mx-12 lg:mx-20 lg:px-20 flex items-center justify-between relative lg:static">
                 <a class="flex items-center w-full" href="#">
                     <Image src="/pwa-192x192.png" alt="Logo" width="50" height="54" class="mr-2"/>
                     <span class="text-surface-900 dark:text-surface-0 font-medium text-2xl leading-normal mr-20">UPZINI</span>
@@ -56,12 +56,12 @@ const smoothScroll = (id) => {
 
             <div
                 id="hero"
-                class="flex flex-col pt-6 px-6 lg:px-20 overflow-hidden"
+                class="flex flex-col pt-6 px-0 md:px-6 lg:px-20 overflow-hidden"
                 style="background: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), radial-gradient(77.36% 256.97% at 77.36% 57.52%, rgb(238, 239, 175) 0%, rgb(195, 227, 250) 100%); clip-path: ellipse(150% 87% at 93% 13%)"
             >
                 <div class="mx-6 md:mx-20 mt-0 md:mt-6">
-                    <h1 class="text-6xl font-bold text-gray-900 leading-tight"><span class="font-light block">Simplifique seu cardápio</span>Digital, Moderno e Elegante</h1>
-                    <p class="font-normal text-2xl leading-normal md:mt-4 text-gray-700">Uma nova experiência, destaque seus pratos com belas imagens e impulsione seu negócio</p>
+                    <h1 class="text-5xl md:text-6xl font-bold text-gray-900 leading-tight"><span class="font-light block">Simplifique seu cardápio</span>Digital, Moderno e Elegante</h1>
+                    <p class="font-normal text-xl md:text-2xl leading-normal pt-2 md:mt-4 text-gray-700">Uma nova experiência, destaque seus pratos com belas imagens e impulsione seu negócio</p>
                     <Button label="Get Started" as="router-link" to="/" rounded class="!text-xl mt-8 !px-4"></Button>
                 </div>
                 <div class="flex justify-center md:justify-end">
@@ -72,8 +72,8 @@ const smoothScroll = (id) => {
             <div id="features" class="py-6 px-6 lg:px-20 mt-8 mx-0 lg:mx-20">
                 <div class="grid grid-cols-12 gap-4 justify-center">
                     <div class="col-span-12 text-center mt-20 mb-6">
-                        <div class="text-surface-900 dark:text-surface-0 font-normal mb-2 text-4xl">Marvelous Features</div>
-                        <span class="text-muted-color text-2xl">Placerat in egestas erat...</span>
+                        <div class="text-surface-900 dark:text-surface-0 font-normal mb-2 text-4xl">Conheça mais nosso</div>
+                        <span class="text-muted-color text-2xl">Cardápio e Sistema Admin</span>
                     </div>
 
                     <div class="col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 lg:pb-8 mt-6 lg:mt-0">
@@ -82,38 +82,10 @@ const smoothScroll = (id) => {
                         >
                             <div class="p-4 bg-surface-0 dark:bg-surface-900 h-full" style="border-radius: 8px">
                                 <div class="flex items-center justify-center bg-yellow-200 mb-4" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <i class="pi pi-fw pi-users !text-2xl text-yellow-700"></i>
+                                    <i class="pi pi-fw pi-face-smile !text-2xl text-yellow-700"></i>
                                 </div>
-                                <h5 class="mb-2 text-surface-900 dark:text-surface-0">Easy to Use</h5>
-                                <span class="text-surface-600 dark:text-surface-200">Posuere morbi leo urna molestie.</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 lg:pb-8 mt-6 lg:mt-0">
-                        <div
-                            style="height: 160px; padding: 2px; border-radius: 10px; background: linear-gradient(90deg, rgba(145, 226, 237, 0.2), rgba(251, 199, 145, 0.2)), linear-gradient(180deg, rgba(253, 228, 165, 0.2), rgba(172, 180, 223, 0.2))"
-                        >
-                            <div class="p-4 bg-surface-0 dark:bg-surface-900 h-full" style="border-radius: 8px">
-                                <div class="flex items-center justify-center bg-cyan-200 mb-4" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <i class="pi pi-fw pi-palette !text-2xl text-cyan-700"></i>
-                                </div>
-                                <h5 class="mb-2 text-surface-900 dark:text-surface-0">Fresh Design</h5>
-                                <span class="text-surface-600 dark:text-surface-200">Semper risus in hendrerit.</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pb-8 mt-6 lg:mt-0">
-                        <div
-                            style="height: 160px; padding: 2px; border-radius: 10px; background: linear-gradient(90deg, rgba(145, 226, 237, 0.2), rgba(172, 180, 223, 0.2)), linear-gradient(180deg, rgba(172, 180, 223, 0.2), rgba(246, 158, 188, 0.2))"
-                        >
-                            <div class="p-4 bg-surface-0 dark:bg-surface-900 h-full" style="border-radius: 8px">
-                                <div class="flex items-center justify-center bg-indigo-200" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <i class="pi pi-fw pi-map !text-2xl text-indigo-700"></i>
-                                </div>
-                                <div class="mt-6 mb-1 text-surface-900 dark:text-surface-0 text-xl font-semibold">Well Documented</div>
-                                <span class="text-surface-600 dark:text-surface-200">Non arcu risus quis varius quam quisque.</span>
+                                <h5 class="mb-1 text-surface-900 dark:text-surface-0 text-xl">Fácil de usar</h5>
+                                <span class="text-surface-600 dark:text-surface-200">Interface intuitiva, simples e direto ao ponto</span>
                             </div>
                         </div>
                     </div>
@@ -124,10 +96,38 @@ const smoothScroll = (id) => {
                         >
                             <div class="p-4 bg-surface-0 dark:bg-surface-900 h-full" style="border-radius: 8px">
                                 <div class="flex items-center justify-center bg-slate-200 mb-4" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <i class="pi pi-fw pi-id-card !text-2xl text-slate-700"></i>
+                                    <i class="pi pi-fw pi-qrcode !text-2xl text-slate-700"></i>
                                 </div>
-                                <div class="mt-6 mb-1 text-surface-900 dark:text-surface-0 text-xl font-semibold">Responsive Layout</div>
-                                <span class="text-surface-600 dark:text-surface-200">Nulla malesuada pellentesque elit.</span>
+                                <div class="mb-1 text-surface-900 dark:text-surface-0 text-xl">Acesso via QR Code</div>
+                                <span class="text-surface-600 dark:text-surface-200">Personalize e baixe seu QRCode para usar como quiser</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 lg:pb-8 mt-6 lg:mt-0">
+                        <div
+                            style="height: 160px; padding: 2px; border-radius: 10px; background: linear-gradient(90deg, rgba(145, 226, 237, 0.2), rgba(251, 199, 145, 0.2)), linear-gradient(180deg, rgba(253, 228, 165, 0.2), rgba(172, 180, 223, 0.2))"
+                        >
+                            <div class="p-4 bg-surface-0 dark:bg-surface-900 h-full" style="border-radius: 8px">
+                                <div class="flex items-center justify-center bg-cyan-200 mb-4" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+                                    <i class="pi pi-fw pi-pen-to-square !text-2xl text-cyan-700"></i>
+                                </div>
+                                <h5 class="mb-1 text-surface-900 dark:text-surface-0 text-xl">Ajustes Instantâneo</h5>
+                                <span class="text-surface-600 dark:text-surface-200">Adicione novos itens, altere imagem, preço, descrição, disponibilidade, sempre que precisar </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 mt-6 lg:mt-0">
+                        <div
+                            style="height: 160px; padding: 2px; border-radius: 10px; background: linear-gradient(90deg, rgba(145, 210, 204, 0.2), rgba(212, 162, 221, 0.2)), linear-gradient(180deg, rgba(251, 199, 145, 0.2), rgba(160, 210, 250, 0.2))"
+                        >
+                            <div class="p-4 bg-surface-0 dark:bg-surface-900 h-full" style="border-radius: 8px">
+                                <div class="flex items-center justify-center bg-blue-200 mb-4" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+                                    <i class="pi pi-fw pi-dollar !text-2xl text-blue-700"></i>
+                                </div>
+                                <div class="mb-1 text-surface-900 dark:text-surface-0 text-xl">Economize</div>
+                                <span class="text-surface-600 dark:text-surface-200">Ajuste seu cardápio sem se preocupar em reimprimir ou rasurar seu cardápio</span>
                             </div>
                         </div>
                     </div>
@@ -138,10 +138,52 @@ const smoothScroll = (id) => {
                         >
                             <div class="p-4 bg-surface-0 dark:bg-surface-900 h-full" style="border-radius: 8px">
                                 <div class="flex items-center justify-center bg-orange-200 mb-4" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <i class="pi pi-fw pi-star !text-2xl text-orange-700"></i>
+                                    <i class="pi pi-fw pi-objects-column !text-2xl text-orange-700"></i>
                                 </div>
-                                <div class="mt-6 mb-1 text-surface-900 dark:text-surface-0 text-xl font-semibold">Clean Code</div>
-                                <span class="text-surface-600 dark:text-surface-200">Condimentum lacinia quis vel eros.</span>
+                                <div class="mb-1 text-surface-900 dark:text-surface-0 text-xl ">Produtos e Categorias</div>
+                                <span class="text-surface-600 dark:text-surface-200">Separe facilmente seus produtos por categorias</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 mt-6 lg:mt-0">
+                        <div
+                            style="height: 160px; padding: 2px; border-radius: 10px; background: linear-gradient(90deg, rgba(145, 210, 204, 0.2), rgba(160, 210, 250, 0.2)), linear-gradient(180deg, rgba(187, 199, 205, 0.2), rgba(145, 210, 204, 0.2))"
+                        >
+                            <div class="p-4 bg-surface-0 dark:bg-surface-900 h-full" style="border-radius: 8px">
+                                <div class="flex items-center justify-center bg-teal-200 mb-4" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+                                    <i class="pi pi-fw pi-mobile !text-2xl text-teal-700"></i>
+                                </div>
+                                <div class="mb-1 text-surface-900 dark:text-surface-0 text-xl">Otimizado para Mobile</div>
+                                <span class="text-surface-600 dark:text-surface-200">Gerencie todo seu cardápio facilmente pelo celular</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-span-12 md:col-span-12 lg:col-span-4 p-0 lg-4 mt-6 lg:mt-0">
+                        <div
+                            style="height: 160px; padding: 2px; border-radius: 10px; background: linear-gradient(90deg, rgba(160, 210, 250, 0.2), rgba(212, 162, 221, 0.2)), linear-gradient(180deg, rgba(246, 158, 188, 0.2), rgba(212, 162, 221, 0.2))"
+                        >
+                            <div class="p-4 bg-surface-0 dark:bg-surface-900 h-full" style="border-radius: 8px">
+                                <div class="flex items-center justify-center bg-purple-200 mb-4" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+                                    <i class="pi pi-fw pi-search !text-2xl text-purple-700"></i>
+                                </div>
+                                <div class="mb-1 text-surface-900 dark:text-surface-0 text-xl">Busca Fácil</div>
+                                <span class="text-surface-600 dark:text-surface-200">Seus clientes encontram facilmente o item ao buscar pelo nome</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pb-8 mt-6 lg:mt-0">
+                        <div
+                            style="height: 160px; padding: 2px; border-radius: 10px; background: linear-gradient(90deg, rgba(145, 226, 237, 0.2), rgba(172, 180, 223, 0.2)), linear-gradient(180deg, rgba(172, 180, 223, 0.2), rgba(246, 158, 188, 0.2))"
+                        >
+                            <div class="p-4 bg-surface-0 dark:bg-surface-900 h-full" style="border-radius: 8px">
+                                <div class="flex items-center justify-center bg-indigo-200 mb-4" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+                                    <i class="pi pi-fw pi-map !text-2xl text-indigo-700"></i>
+                                </div>
+                                <div class="mb-1 text-surface-900 dark:text-surface-0 text-xl">Página de ajuda</div>
+                                <span class="text-surface-600 dark:text-surface-200">Temos vídeos aulas para caso de dúvidas</span>
                             </div>
                         </div>
                     </div>
@@ -154,50 +196,8 @@ const smoothScroll = (id) => {
                                 <div class="flex items-center justify-center bg-pink-200 mb-4" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
                                     <i class="pi pi-fw pi-moon !text-2xl text-pink-700"></i>
                                 </div>
-                                <div class="mt-6 mb-1 text-surface-900 dark:text-surface-0 text-xl font-semibold">Dark Mode</div>
-                                <span class="text-surface-600 dark:text-surface-200">Convallis tellus id interdum velit laoreet.</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 mt-6 lg:mt-0">
-                        <div
-                            style="height: 160px; padding: 2px; border-radius: 10px; background: linear-gradient(90deg, rgba(145, 210, 204, 0.2), rgba(160, 210, 250, 0.2)), linear-gradient(180deg, rgba(187, 199, 205, 0.2), rgba(145, 210, 204, 0.2))"
-                        >
-                            <div class="p-4 bg-surface-0 dark:bg-surface-900 h-full" style="border-radius: 8px">
-                                <div class="flex items-center justify-center bg-teal-200 mb-4" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <i class="pi pi-fw pi-shopping-cart !text-2xl text-teal-700"></i>
-                                </div>
-                                <div class="mt-6 mb-1 text-surface-900 dark:text-surface-0 text-xl font-semibold">Ready to Use</div>
-                                <span class="text-surface-600 dark:text-surface-200">Mauris sit amet massa vitae.</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 mt-6 lg:mt-0">
-                        <div
-                            style="height: 160px; padding: 2px; border-radius: 10px; background: linear-gradient(90deg, rgba(145, 210, 204, 0.2), rgba(212, 162, 221, 0.2)), linear-gradient(180deg, rgba(251, 199, 145, 0.2), rgba(160, 210, 250, 0.2))"
-                        >
-                            <div class="p-4 bg-surface-0 dark:bg-surface-900 h-full" style="border-radius: 8px">
-                                <div class="flex items-center justify-center bg-blue-200 mb-4" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <i class="pi pi-fw pi-globe !text-2xl text-blue-700"></i>
-                                </div>
-                                <div class="mt-6 mb-1 text-surface-900 dark:text-surface-0 text-xl font-semibold">Modern Practices</div>
-                                <span class="text-surface-600 dark:text-surface-200">Elementum nibh tellus molestie nunc non.</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-span-12 md:col-span-12 lg:col-span-4 p-0 lg-4 mt-6 lg:mt-0">
-                        <div
-                            style="height: 160px; padding: 2px; border-radius: 10px; background: linear-gradient(90deg, rgba(160, 210, 250, 0.2), rgba(212, 162, 221, 0.2)), linear-gradient(180deg, rgba(246, 158, 188, 0.2), rgba(212, 162, 221, 0.2))"
-                        >
-                            <div class="p-4 bg-surface-0 dark:bg-surface-900 h-full" style="border-radius: 8px">
-                                <div class="flex items-center justify-center bg-purple-200 mb-4" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <i class="pi pi-fw pi-eye !text-2xl text-purple-700"></i>
-                                </div>
-                                <div class="mt-6 mb-1 text-surface-900 dark:text-surface-0 text-xl font-semibold">Privacy</div>
-                                <span class="text-surface-600 dark:text-surface-200">Neque egestas congue quisque.</span>
+                                <div class="mb-1 text-surface-900 dark:text-surface-0 text-lg">Modo Claro e Escuro</div>
+                                <span class="text-surface-600 dark:text-surface-200">Alterna automaticamente de acordo com seu dispositivo</span>
                             </div>
                         </div>
                     </div>
