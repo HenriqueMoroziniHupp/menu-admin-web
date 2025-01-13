@@ -74,16 +74,17 @@ const smoothScroll = (id) => {
             <div id="features" class="py-6 px-6 lg:px-20 mt-8 mx-0 lg:mx-20">
                 <div class="grid grid-cols-12 gap-4 justify-center">
                     <div class="col-span-12 text-center mt-20 mb-6">
-                        <div class="text-surface-900 dark:text-surface-0 font-normal mb-2 text-4xl">Conheça mais nosso</div>
-                        <span class="text-muted-color text-2xl">Cardápio e Sistema Admin</span>
+                        <div class="text-surface-900 dark:text-surface-0 font-normal mb-2 text-4xl">Vantagens para você</div>
+                        <span class="text-muted-color text-2xl">Facilidade para seus clientes</span>
                     </div>
 
-                    <div class="col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 lg:pb-8 mt-6 lg:mt-0">
+                    <div class="feature-card col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 lg:pb-8 mt-6 lg:mt-0">
                         <div
-                            style="height: 160px; padding: 2px; border-radius: 10px; background: linear-gradient(90deg, rgba(253, 228, 165, 0.2), rgba(187, 199, 205, 0.2)), linear-gradient(180deg, rgba(253, 228, 165, 0.2), rgba(187, 199, 205, 0.2))"
+                            class="card-background"
+                            style="background: linear-gradient(90deg, rgba(253, 228, 165, 0.2), rgba(187, 199, 205, 0.2)), linear-gradient(180deg, rgba(253, 228, 165, 0.2), rgba(187, 199, 205, 0.2))"
                         >
-                            <div class="p-4 bg-surface-0 dark:bg-surface-900 h-full" style="border-radius: 8px">
-                                <div class="flex items-center justify-center bg-yellow-200 mb-4" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+                            <div class="card-content p-4 bg-surface-0 dark:bg-surface-900 h-full">
+                                <div class="card-icon flex items-center justify-center bg-yellow-200 mb-4">
                                     <i class="pi pi-fw pi-face-smile !text-2xl text-yellow-700"></i>
                                 </div>
                                 <h5 class="mb-1 text-surface-900 dark:text-surface-0 text-xl">Fácil de usar</h5>
@@ -92,12 +93,13 @@ const smoothScroll = (id) => {
                         </div>
                     </div>
 
-                    <div class="col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 lg:pb-8 mt-6 lg:mt-0">
+                    <div class="feature-card col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 lg:pb-8 mt-6 lg:mt-0">
                         <div
-                            style="height: 160px; padding: 2px; border-radius: 10px; background: linear-gradient(90deg, rgba(187, 199, 205, 0.2), rgba(251, 199, 145, 0.2)), linear-gradient(180deg, rgba(253, 228, 165, 0.2), rgba(145, 210, 204, 0.2))"
+                            class="card-background"
+                            style="background: linear-gradient(90deg, rgba(187, 199, 205, 0.2), rgba(251, 199, 145, 0.2)), linear-gradient(180deg, rgba(253, 228, 165, 0.2), rgba(145, 210, 204, 0.2))"
                         >
-                            <div class="p-4 bg-surface-0 dark:bg-surface-900 h-full" style="border-radius: 8px">
-                                <div class="flex items-center justify-center bg-slate-200 mb-4" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+                            <div class="card-content p-4 bg-surface-0 dark:bg-surface-900 h-full">
+                                <div class="card-icon flex items-center justify-center bg-slate-200 mb-4">
                                     <i class="pi pi-fw pi-qrcode !text-2xl text-slate-700"></i>
                                 </div>
                                 <div class="mb-1 text-surface-900 dark:text-surface-0 text-xl">Acesso via QR Code</div>
@@ -106,26 +108,28 @@ const smoothScroll = (id) => {
                         </div>
                     </div>
 
-                    <div class="col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 lg:pb-8 mt-6 lg:mt-0">
+                    <div class="feature-card col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 lg:pb-8 mt-6 lg:mt-0">
                         <div
-                            style="height: 160px; padding: 2px; border-radius: 10px; background: linear-gradient(90deg, rgba(145, 226, 237, 0.2), rgba(251, 199, 145, 0.2)), linear-gradient(180deg, rgba(253, 228, 165, 0.2), rgba(172, 180, 223, 0.2))"
+                            class="card-background"
+                            style="background: linear-gradient(90deg, rgba(145, 226, 237, 0.2), rgba(251, 199, 145, 0.2)), linear-gradient(180deg, rgba(253, 228, 165, 0.2), rgba(172, 180, 223, 0.2))"
                         >
-                            <div class="p-4 bg-surface-0 dark:bg-surface-900 h-full" style="border-radius: 8px">
-                                <div class="flex items-center justify-center bg-cyan-200 mb-4" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+                            <div class="card-content p-4 bg-surface-0 dark:bg-surface-900 h-full">
+                                <div class="card-icon flex items-center justify-center bg-cyan-200 mb-4">
                                     <i class="pi pi-fw pi-pen-to-square !text-2xl text-cyan-700"></i>
                                 </div>
                                 <h5 class="mb-1 text-surface-900 dark:text-surface-0 text-xl">Ajustes Instantâneo</h5>
-                                <span class="text-surface-600 dark:text-surface-200">Adicione novos itens, altere imagem, preço, descrição, disponibilidade, sempre que precisar </span>
+                                <span class="text-surface-600 dark:text-surface-200">Adicione novos itens, altere imagem, preço, descrição e disponibilidade sempre que precisar</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 mt-6 lg:mt-0">
+                    <div class="feature-card col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 mt-6 lg:pb-8 lg:mt-0">
                         <div
-                            style="height: 160px; padding: 2px; border-radius: 10px; background: linear-gradient(90deg, rgba(145, 210, 204, 0.2), rgba(212, 162, 221, 0.2)), linear-gradient(180deg, rgba(251, 199, 145, 0.2), rgba(160, 210, 250, 0.2))"
+                            class="card-background"
+                            style="background: linear-gradient(90deg, rgba(145, 210, 204, 0.2), rgba(212, 162, 221, 0.2)), linear-gradient(180deg, rgba(251, 199, 145, 0.2), rgba(160, 210, 250, 0.2))"
                         >
-                            <div class="p-4 bg-surface-0 dark:bg-surface-900 h-full" style="border-radius: 8px">
-                                <div class="flex items-center justify-center bg-blue-200 mb-4" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+                            <div class="card-content p-4 bg-surface-0 dark:bg-surface-900 h-full">
+                                <div class="card-icon flex items-center justify-center bg-blue-200 mb-4">
                                     <i class="pi pi-fw pi-dollar !text-2xl text-blue-700"></i>
                                 </div>
                                 <div class="mb-1 text-surface-900 dark:text-surface-0 text-xl">Economize</div>
@@ -134,12 +138,13 @@ const smoothScroll = (id) => {
                         </div>
                     </div>
 
-                    <div class="col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 lg:pb-8 mt-6 lg:mt-0">
+                    <div class="feature-card col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 lg:pb-8 mt-6 lg:mt-0">
                         <div
-                            style="height: 160px; padding: 2px; border-radius: 10px; background: linear-gradient(90deg, rgba(187, 199, 205, 0.2), rgba(246, 158, 188, 0.2)), linear-gradient(180deg, rgba(145, 226, 237, 0.2), rgba(160, 210, 250, 0.2))"
+                            class="card-background"
+                            style="background: linear-gradient(90deg, rgba(187, 199, 205, 0.2), rgba(246, 158, 188, 0.2)), linear-gradient(180deg, rgba(145, 226, 237, 0.2), rgba(160, 210, 250, 0.2))"
                         >
-                            <div class="p-4 bg-surface-0 dark:bg-surface-900 h-full" style="border-radius: 8px">
-                                <div class="flex items-center justify-center bg-orange-200 mb-4" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+                            <div class="card-content p-4 bg-surface-0 dark:bg-surface-900 h-full">
+                                <div class="card-icon flex items-center justify-center bg-orange-200 mb-4">
                                     <i class="pi pi-fw pi-objects-column !text-2xl text-orange-700"></i>
                                 </div>
                                 <div class="mb-1 text-surface-900 dark:text-surface-0 text-xl ">Produtos e Categorias</div>
@@ -148,12 +153,13 @@ const smoothScroll = (id) => {
                         </div>
                     </div>
 
-                    <div class="col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 mt-6 lg:mt-0">
+                    <div class="feature-card col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 mt-6 lg:pb-8 lg:mt-0">
                         <div
-                            style="height: 160px; padding: 2px; border-radius: 10px; background: linear-gradient(90deg, rgba(145, 210, 204, 0.2), rgba(160, 210, 250, 0.2)), linear-gradient(180deg, rgba(187, 199, 205, 0.2), rgba(145, 210, 204, 0.2))"
+                            class="card-background"
+                            style="background: linear-gradient(90deg, rgba(145, 210, 204, 0.2), rgba(160, 210, 250, 0.2)), linear-gradient(180deg, rgba(187, 199, 205, 0.2), rgba(145, 210, 204, 0.2))"
                         >
-                            <div class="p-4 bg-surface-0 dark:bg-surface-900 h-full" style="border-radius: 8px">
-                                <div class="flex items-center justify-center bg-teal-200 mb-4" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+                            <div class="card-content p-4 bg-surface-0 dark:bg-surface-900 h-full">
+                                <div class="card-icon flex items-center justify-center bg-teal-200 mb-4">
                                     <i class="pi pi-fw pi-mobile !text-2xl text-teal-700"></i>
                                 </div>
                                 <div class="mb-1 text-surface-900 dark:text-surface-0 text-xl">Otimizado para Mobile</div>
@@ -162,12 +168,13 @@ const smoothScroll = (id) => {
                         </div>
                     </div>
 
-                    <div class="col-span-12 md:col-span-12 lg:col-span-4 p-0 lg-4 mt-6 lg:mt-0">
+                    <div class="feature-card col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 lg-4 mt-6 lg:mt-0">
                         <div
-                            style="height: 160px; padding: 2px; border-radius: 10px; background: linear-gradient(90deg, rgba(160, 210, 250, 0.2), rgba(212, 162, 221, 0.2)), linear-gradient(180deg, rgba(246, 158, 188, 0.2), rgba(212, 162, 221, 0.2))"
+                            class="card-background"
+                            style="background: linear-gradient(90deg, rgba(160, 210, 250, 0.2), rgba(212, 162, 221, 0.2)), linear-gradient(180deg, rgba(246, 158, 188, 0.2), rgba(212, 162, 221, 0.2))"
                         >
-                            <div class="p-4 bg-surface-0 dark:bg-surface-900 h-full" style="border-radius: 8px">
-                                <div class="flex items-center justify-center bg-purple-200 mb-4" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+                            <div class="card-content p-4 bg-surface-0 dark:bg-surface-900 h-full">
+                                <div class="card-icon flex items-center justify-center bg-purple-200 mb-4">
                                     <i class="pi pi-fw pi-search !text-2xl text-purple-700"></i>
                                 </div>
                                 <div class="mb-1 text-surface-900 dark:text-surface-0 text-xl">Busca Fácil</div>
@@ -176,12 +183,13 @@ const smoothScroll = (id) => {
                         </div>
                     </div>
 
-                    <div class="col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pb-8 mt-6 lg:mt-0">
+                    <div class="feature-card col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8  mt-6 lg:mt-0">
                         <div
-                            style="height: 160px; padding: 2px; border-radius: 10px; background: linear-gradient(90deg, rgba(145, 226, 237, 0.2), rgba(172, 180, 223, 0.2)), linear-gradient(180deg, rgba(172, 180, 223, 0.2), rgba(246, 158, 188, 0.2))"
+                            class="card-background"
+                            style="background: linear-gradient(90deg, rgba(145, 226, 237, 0.2), rgba(172, 180, 223, 0.2)), linear-gradient(180deg, rgba(172, 180, 223, 0.2), rgba(246, 158, 188, 0.2))"
                         >
-                            <div class="p-4 bg-surface-0 dark:bg-surface-900 h-full" style="border-radius: 8px">
-                                <div class="flex items-center justify-center bg-indigo-200 mb-4" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+                            <div class="card-content p-4 bg-surface-0 dark:bg-surface-900 h-full">
+                                <div class="card-icon flex items-center justify-center bg-indigo-200 mb-4">
                                     <i class="pi pi-fw pi-map !text-2xl text-indigo-700"></i>
                                 </div>
                                 <div class="mb-1 text-surface-900 dark:text-surface-0 text-xl">Página de ajuda</div>
@@ -190,12 +198,13 @@ const smoothScroll = (id) => {
                         </div>
                     </div>
 
-                    <div class="col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pb-8 mt-6 lg:mt-0">
+                    <div class="feature-card col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 mt-6 lg:mt-0">
                         <div
-                            style="height: 160px; padding: 2px; border-radius: 10px; background: linear-gradient(90deg, rgba(251, 199, 145, 0.2), rgba(246, 158, 188, 0.2)), linear-gradient(180deg, rgba(172, 180, 223, 0.2), rgba(212, 162, 221, 0.2))"
+                            class="card-background"
+                            style="background: linear-gradient(90deg, rgba(251, 199, 145, 0.2), rgba(246, 158, 188, 0.2)), linear-gradient(180deg, rgba(172, 180, 223, 0.2), rgba(212, 162, 221, 0.2))"
                         >
-                            <div class="p-4 bg-surface-0 dark:bg-surface-900 h-full" style="border-radius: 8px">
-                                <div class="flex items-center justify-center bg-pink-200 mb-4" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+                            <div class="card-content p-4 bg-surface-0 dark:bg-surface-900 h-full">
+                                <div class="card-icon flex items-center justify-center bg-pink-200 mb-4">
                                     <i class="pi pi-fw pi-moon !text-2xl text-pink-700"></i>
                                 </div>
                                 <div class="mb-1 text-surface-900 dark:text-surface-0 text-lg">Modo Claro e Escuro</div>
@@ -447,3 +456,24 @@ const smoothScroll = (id) => {
         </div>
     </div>
 </template>
+
+<style scoped lang="scss">
+.feature-card {
+    .card-background {
+        min-height: 160px;
+        height: 100% !important;
+        padding: 2px;
+        border-radius: 10px;
+    }
+
+    .card-content {
+        border-radius: 8px;
+
+        .card-icon {
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 10px;
+        }
+    }
+}
+</style>
