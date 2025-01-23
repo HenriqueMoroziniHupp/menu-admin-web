@@ -63,7 +63,7 @@ const smoothScroll = (id) => {
                     <h1 class="text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
                         <span class="font-light block mb-2 md:mb-4">Simplifique seu cardápio</span>
                         Digital, Moderno e Elegante</h1>
-                    <p class="font-normal text-xl md:text-2xl leading-normal pt-2 md:mt-4 text-gray-700">Uma nova experiência, destaque seus pratos com belas imagens e impulsione seu negócio</p>
+                    <p class="font-normal text-xl md:text-2xl leading-normal pt-2 md:mt-4 text-gray-700">Uma nova experiência. Destaque seus pratos com belas imagens e impulsione seu negócio</p>
                     <Button label="Get Started" as="router-link" to="/" rounded class="!text-xl mt-8 !px-4"></Button>
                 </div>
                 <div class="flex justify-center md:justify-end">
@@ -231,8 +231,8 @@ const smoothScroll = (id) => {
 
             <div id="highlights" class="py-6 px-6 lg:px-20 mx-0 my-12 lg:mx-20">
                 <div class="text-center">
-                    <div class="text-surface-900 dark:text-surface-0 font-normal mb-2 text-4xl">Powerful Everywhere</div>
-                    <span class="text-muted-color text-2xl">Amet consectetur adipiscing elit...</span>
+                    <div class="text-surface-900 dark:text-surface-0 font-normal mb-2 text-4xl">Uma bela imagem</div>
+                    <span class="text-muted-color text-2xl">Vale mais que mil palavras...</span>
                 </div>
 
                 <div class="grid grid-cols-12 gap-4 mt-20 pb-2 md:pb-20">
@@ -244,9 +244,9 @@ const smoothScroll = (id) => {
                         <div class="flex items-center justify-center bg-purple-200 self-center lg:self-end" style="width: 4.2rem; height: 4.2rem; border-radius: 10px">
                             <i class="pi pi-fw pi-mobile !text-4xl text-purple-700"></i>
                         </div>
-                        <div class="leading-none text-surface-900 dark:text-surface-0 text-3xl font-normal">Congue Quisque Egestas</div>
-                        <span class="text-surface-700 dark:text-surface-100 text-2xl leading-normal ml-0 md:ml-2" style="max-width: 650px"
-                            >Lectus arcu bibendum at varius vel pharetra vel turpis nunc. Eget aliquet nibh praesent tristique magna sit amet purus gravida. Sit amet mattis vulputate enim nulla aliquet.</span
+                        <div class="leading-none text-surface-900 dark:text-surface-0 text-3xl font-normal">Seus pratos merecem ser vistos</div>
+                        <span class="text-surface-700 dark:text-surface-100 text-2xl leading-normal mx-auto" style="max-width: 650px"
+                            >Já sentiu vontade de comer algo só de ver uma bela foto na rede social? Por que não fazer o mesmo com os seus pratos? 🤩</span
                         >
                     </div>
                 </div>
@@ -256,9 +256,9 @@ const smoothScroll = (id) => {
                         <div class="flex items-center justify-center bg-yellow-200 self-center lg:self-start" style="width: 4.2rem; height: 4.2rem; border-radius: 10px">
                             <i class="pi pi-fw pi-desktop !text-3xl text-yellow-700"></i>
                         </div>
-                        <div class="leading-none text-surface-900 dark:text-surface-0 text-3xl font-normal">Celerisque Eu Ultrices</div>
-                        <span class="text-surface-700 dark:text-surface-100 text-2xl leading-normal mr-0 md:mr-2" style="max-width: 650px"
-                            >Adipiscing commodo elit at imperdiet dui. Viverra nibh cras pulvinar mattis nunc sed blandit libero. Suspendisse in est ante in. Mauris pharetra et ultrices neque ornare aenean euismod elementum nisi.</span
+                        <div class="leading-none text-surface-900 dark:text-surface-0 text-3xl font-normal">Ajuste, adicione, remova</div>
+                        <span class="text-surface-700 dark:text-surface-100 text-2xl leading-normal mx-auto" style="max-width: 650px"
+                            >Para que rasurar? Colar adesivo com novo preço? Dizer a todos clientes que o cardápio está desatualizado ou que o produto acabou? <br>💫 Basta ajustar seus itens feito mágica 🪄</span
                         >
                     </div>
 
@@ -276,9 +276,9 @@ const smoothScroll = (id) => {
                         <div class="flex items-center justify-center bg-purple-200 self-center lg:self-end" style="width: 4.2rem; height: 4.2rem; border-radius: 10px">
                             <i class="pi pi-fw pi-mobile !text-4xl text-purple-700"></i>
                         </div>
-                        <div class="leading-none text-surface-900 dark:text-surface-0 text-3xl font-normal">Congue Quisque Egestas</div>
-                        <span class="text-surface-700 dark:text-surface-100 text-2xl leading-normal ml-0 md:ml-2" style="max-width: 650px"
-                            >Lectus arcu bibendum at varius vel pharetra vel turpis nunc. Eget aliquet nibh praesent tristique magna sit amet purus gravida. Sit amet mattis vulputate enim nulla aliquet.</span
+                        <div class="leading-none text-surface-900 dark:text-surface-0 text-3xl font-normal">Controle na palma de sua mão</div>
+                        <span class="text-surface-700 dark:text-surface-100 text-2xl leading-normal mx-auto" style="max-width: 650px"
+                            >Tirou aquela foto top e deseja pôr no seu cardápio? Faça isso na mesma hora pelo celular. <br>Deixe seus clientes com ainda mais vontade 😋</span
                         >
                     </div>
                 </div>
@@ -286,19 +286,19 @@ const smoothScroll = (id) => {
 
             <div id="pricing" class="py-6 px-6 lg:px-20 my-2 md:my-6">
                 <div class="text-center mb-6">
-                    <div class="text-surface-900 dark:text-surface-0 font-normal mb-2 text-4xl">Matchless Pricing</div>
-                    <span class="text-muted-color text-2xl">Amet consectetur adipiscing elit...</span>
+                    <div class="text-surface-900 dark:text-surface-0 font-normal mb-2 text-4xl">Preço de uma pizza</div>
+                    <span class="text-muted-color text-2xl">Para impulsionar suas vendas</span>
                 </div>
 
                 <div class="grid grid-cols-12 gap-4 justify-between mt-20 md:mt-0">
                     <div class="col-span-12 lg:col-span-4 p-0 md:p-4">
                         <div class="p-4 flex flex-col border-surface-200 dark:border-surface-600 pricing-card cursor-pointer border-2 hover:border-primary duration-300 transition-all" style="border-radius: 10px">
-                            <div class="text-surface-900 dark:text-surface-0 text-center my-8 text-3xl">Free</div>
-                            <img src="/demo/images/landing/free.svg" class="w-10/12 mx-auto" alt="free" />
+                            <div class="text-surface-900 dark:text-surface-0 text-center my-8 text-3xl">Parceria</div>
+                            <!-- <img src="/demo/images/landing/free.svg" class="w-10/12 mx-auto" alt="free" /> -->
                             <div class="my-8 flex flex-col items-center gap-4">
                                 <div class="flex items-center">
-                                    <span class="text-5xl font-bold mr-2 text-surface-900 dark:text-surface-0">$0</span>
-                                    <span class="text-surface-600 dark:text-surface-200">per month</span>
+                                    <span class="text-5xl font-bold mr-2 text-surface-900 dark:text-surface-0">R$0</span>
+                                    <span class="text-surface-600 dark:text-surface-200">por mês</span>
                                 </div>
                                 <Button label="Get Started" class="p-button-rounded border-0 ml-4 font-light leading-tight bg-blue-500 text-white"></Button>
                             </div>
@@ -326,12 +326,12 @@ const smoothScroll = (id) => {
 
                     <div class="col-span-12 lg:col-span-4 p-0 md:p-4 mt-6 md:mt-0">
                         <div class="p-4 flex flex-col border-surface-200 dark:border-surface-600 pricing-card cursor-pointer border-2 hover:border-primary duration-300 transition-all" style="border-radius: 10px">
-                            <div class="text-surface-900 dark:text-surface-0 text-center my-8 text-3xl">Startup</div>
-                            <img src="/demo/images/landing/startup.svg" class="w-10/12 mx-auto" alt="startup" />
+                            <div class="text-surface-900 dark:text-surface-0 text-center my-8 text-3xl">Mensal</div>
+                            <!-- <img src="/demo/images/landing/startup.svg" class="w-10/12 mx-auto" alt="startup" /> -->
                             <div class="my-8 flex flex-col items-center gap-4">
                                 <div class="flex items-center">
-                                    <span class="text-5xl font-bold mr-2 text-surface-900 dark:text-surface-0">$1</span>
-                                    <span class="text-surface-600 dark:text-surface-200">per month</span>
+                                    <span class="text-5xl font-bold mr-2 text-surface-900 dark:text-surface-0">R$49</span>
+                                    <span class="text-surface-600 dark:text-surface-200">por mês</span>
                                 </div>
                                 <Button label="Get Started" class="p-button-rounded border-0 ml-4 font-light leading-tight bg-blue-500 text-white"></Button>
                             </div>
@@ -359,12 +359,12 @@ const smoothScroll = (id) => {
 
                     <div class="col-span-12 lg:col-span-4 p-0 md:p-4 mt-6 md:mt-0">
                         <div class="p-4 flex flex-col border-surface-200 dark:border-surface-600 pricing-card cursor-pointer border-2 hover:border-primary duration-300 transition-all" style="border-radius: 10px">
-                            <div class="text-surface-900 dark:text-surface-0 text-center my-8 text-3xl">Enterprise</div>
-                            <img src="/demo/images/landing/enterprise.svg" class="w-10/12 mx-auto" alt="enterprise" />
+                            <div class="text-surface-900 dark:text-surface-0 text-center my-8 text-3xl">Anual</div>
+                            <!-- <img src="/demo/images/landing/enterprise.svg" class="w-10/12 mx-auto" alt="enterprise" /> -->
                             <div class="my-8 flex flex-col items-center gap-4">
                                 <div class="flex items-center">
-                                    <span class="text-5xl font-bold mr-2 text-surface-900 dark:text-surface-0">$5</span>
-                                    <span class="text-surface-600 dark:text-surface-200">per month</span>
+                                    <span class="text-5xl font-bold mr-2 text-surface-900 dark:text-surface-0">R$499</span>
+                                    <span class="text-surface-600 dark:text-surface-200">por ano</span>
                                 </div>
                                 <Button label="Get Started" class="p-button-rounded border-0 ml-4 font-light leading-tight bg-blue-500 text-white"></Button>
                             </div>
