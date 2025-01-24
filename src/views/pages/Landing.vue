@@ -81,6 +81,21 @@ const smoothScroll = (id) => {
                     <div class="feature-card col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 lg:pb-8 mt-6 lg:mt-0">
                         <div
                             class="card-background"
+                            style="background: linear-gradient(90deg, rgba(237, 165, 165, 0.2), rgba(246, 158, 188, 0.2)), linear-gradient(180deg, rgba(225, 202, 166, 0.2), rgba(221, 162, 187, 0.2))"
+                        >
+                            <div class="card-content p-4 bg-surface-0 dark:bg-surface-900 h-full">
+                                <div class="card-icon flex items-center justify-center bg-red-200 mb-4">
+                                    <i class="pi pi-fw pi-heart !text-2xl text-red-700"></i>
+                                </div>
+                                <div class="mb-1 text-surface-900 dark:text-surface-0 text-xl">Destaque seu produto</div>
+                                <span class="text-surface-600 dark:text-surface-200">Desperte o desejo de consumo com fotos de tirar o folego</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 lg:pb-8 mt-6 lg:mt-0">
+                        <div
+                            class="card-background"
                             style="background: linear-gradient(90deg, rgba(251, 219, 137, 0.2), rgba(187, 199, 205, 0.2)), linear-gradient(180deg, rgba(253, 228, 165, 0.2), rgba(187, 199, 205, 0.2))"
                         >
                             <div class="card-content p-4 bg-surface-0 dark:bg-surface-900 h-full">
@@ -153,7 +168,7 @@ const smoothScroll = (id) => {
                         </div>
                     </div>
 
-                    <div class="feature-card col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 mt-6 lg:pb-8 lg:mt-0">
+                    <div class="feature-card col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 mt-6 lg:mt-0">
                         <div
                             class="card-background"
                             style="background: linear-gradient(90deg, rgba(142, 225, 216, 0.2), rgba(160, 210, 250, 0.2)), linear-gradient(180deg, rgba(171, 215, 238, 0.2), rgba(145, 210, 204, 0.2))"
@@ -186,21 +201,6 @@ const smoothScroll = (id) => {
                     <div class="feature-card col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 mt-6 lg:mt-0">
                         <div
                             class="card-background"
-                            style="background: linear-gradient(90deg, rgba(237, 165, 165, 0.2), rgba(246, 158, 188, 0.2)), linear-gradient(180deg, rgba(225, 202, 166, 0.2), rgba(221, 162, 187, 0.2))"
-                        >
-                            <div class="card-content p-4 bg-surface-0 dark:bg-surface-900 h-full">
-                                <div class="card-icon flex items-center justify-center bg-red-200 mb-4">
-                                    <i class="pi pi-fw pi-heart !text-2xl text-red-700"></i>
-                                </div>
-                                <div class="mb-1 text-surface-900 dark:text-surface-0 text-xl">Destaque seu produto</div>
-                                <span class="text-surface-600 dark:text-surface-200">Desperte o desejo de consumo com fotos de tirar o folego</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="feature-card col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 mt-6 lg:mt-0">
-                        <div
-                            class="card-background"
                             style="background: linear-gradient(90deg, rgba(251, 199, 145, 0.2), rgba(246, 158, 188, 0.2)), linear-gradient(180deg, rgba(172, 180, 223, 0.2), rgba(212, 162, 221, 0.2))"
                         >
                             <div class="card-content p-4 bg-surface-0 dark:bg-surface-900 h-full">
@@ -214,16 +214,15 @@ const smoothScroll = (id) => {
                     </div>
 
                     <div
-                        class="col-span-12 mt-20 mb-20 p-2 md:p-20"
+                        class="col-span-12 mt-20 mb-20 p-8 md:p-20"
                         style="border-radius: 20px; background: linear-gradient(0deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), radial-gradient(77.36% 256.97% at 77.36% 57.52%, #efe1af 0%, #c3dcfa 100%)"
                     >
                         <div class="flex flex-col justify-center items-center text-center px-4 py-4 md:py-0">
-                            <div class="text-gray-900 mb-2 text-3xl font-semibold">Joséphine Miller</div>
-                            <span class="text-gray-600 text-2xl">Peak Interactive</span>
-                            <p class="text-gray-900 sm:line-height-2 md:line-height-4 text-2xl mt-6" style="max-width: 800px">
-                                “Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.”
-                            </p>
-                            <img src="/demo/images/landing/peak-logo.svg" class="mt-6" alt="Company logo" />
+                            <div class="text-gray-900 mb-2 text-3xl font-semibold">Steve Jobs</div>
+                            <span class="text-gray-600 text-2xl">Cofundador da Apple</span>
+                            <i class="text-gray-900 sm:line-height-2 md:line-height-4 text-2xl mt-6" style="max-width: 800px">
+                                “As pessoas não sabem o que querem até mostrarmos a elas.”
+                            </i>
                         </div>
                     </div>
                 </div>
@@ -245,7 +244,7 @@ const smoothScroll = (id) => {
                             <i class="pi pi-fw pi-mobile !text-4xl text-purple-700"></i>
                         </div>
                         <div class="leading-none text-surface-900 dark:text-surface-0 text-3xl font-normal">Seus pratos merecem ser vistos</div>
-                        <span class="text-surface-700 dark:text-surface-100 text-2xl leading-normal mx-auto" style="max-width: 650px"
+                        <span class="text-surface-700 dark:text-surface-100 text-xl sm:text-2xl leading-normal mx-auto" style="max-width: 650px"
                             >Já sentiu vontade de comer algo só de ver uma bela foto na rede social? Por que não fazer o mesmo com os seus pratos? 🤩</span
                         >
                     </div>
@@ -257,7 +256,7 @@ const smoothScroll = (id) => {
                             <i class="pi pi-fw pi-desktop !text-3xl text-yellow-700"></i>
                         </div>
                         <div class="leading-none text-surface-900 dark:text-surface-0 text-3xl font-normal">Ajuste, adicione, remova</div>
-                        <span class="text-surface-700 dark:text-surface-100 text-2xl leading-normal mx-auto" style="max-width: 650px"
+                        <span class="text-surface-700 dark:text-surface-100 text-xl sm:text-2xl leading-normal mx-auto" style="max-width: 650px"
                             >Para que rasurar? Colar adesivo com novo preço? Dizer a todos clientes que o cardápio está desatualizado ou que o produto acabou? <br>💫 Basta ajustar seus itens feito mágica 🪄</span
                         >
                     </div>
@@ -277,7 +276,7 @@ const smoothScroll = (id) => {
                             <i class="pi pi-fw pi-mobile !text-4xl text-purple-700"></i>
                         </div>
                         <div class="leading-none text-surface-900 dark:text-surface-0 text-3xl font-normal">Controle na palma de sua mão</div>
-                        <span class="text-surface-700 dark:text-surface-100 text-2xl leading-normal mx-auto" style="max-width: 650px"
+                        <span class="text-surface-700 dark:text-surface-100 text-xl sm:text-2xl leading-normal mx-auto" style="max-width: 650px"
                             >Tirou aquela foto top e deseja pôr no seu cardápio? Faça isso na mesma hora pelo celular. <br>Deixe seus clientes com ainda mais vontade 😋</span
                         >
                     </div>
@@ -291,16 +290,15 @@ const smoothScroll = (id) => {
                 </div>
 
                 <div class="grid grid-cols-12 gap-4 justify-between mt-20 md:mt-0">
-                    <div class="col-span-12 lg:col-span-4 p-0 md:p-4">
+                    <div class="col-span-12 lg:col-span-4 p-0 md:m-4 mt-6 md:mt-0">
                         <div class="p-4 flex flex-col border-surface-200 dark:border-surface-600 pricing-card cursor-pointer border-2 hover:border-primary duration-300 transition-all" style="border-radius: 10px">
-                            <div class="text-surface-900 dark:text-surface-0 text-center my-8 text-3xl">Parceria</div>
-                            <!-- <img src="/demo/images/landing/free.svg" class="w-10/12 mx-auto" alt="free" /> -->
+                            <div class="text-surface-900 dark:text-surface-0 text-center my-8 mb-2 text-3xl">Parceria</div>
                             <div class="my-8 flex flex-col items-center gap-4">
                                 <div class="flex items-center">
                                     <span class="text-5xl font-bold mr-2 text-surface-900 dark:text-surface-0">R$0</span>
                                     <span class="text-surface-600 dark:text-surface-200">por mês</span>
                                 </div>
-                                <Button label="Get Started" class="p-button-rounded border-0 ml-4 font-light leading-tight bg-blue-500 text-white"></Button>
+                                <Button label="Get Started" class="p-button-rounded border-0 mt-4 font-light leading-tight bg-blue-500 text-white"></Button>
                             </div>
                             <Divider class="w-full bg-surface-200"></Divider>
                             <ul class="my-8 list-none p-0 flex text-surface-900 dark:text-surface-0 flex-col px-8">
@@ -324,16 +322,15 @@ const smoothScroll = (id) => {
                         </div>
                     </div>
 
-                    <div class="col-span-12 lg:col-span-4 p-0 md:p-4 mt-6 md:mt-0">
+                    <div class="col-span-12 lg:col-span-4 p-0 md:m-4 mt-6 md:mt-0">
                         <div class="p-4 flex flex-col border-surface-200 dark:border-surface-600 pricing-card cursor-pointer border-2 hover:border-primary duration-300 transition-all" style="border-radius: 10px">
-                            <div class="text-surface-900 dark:text-surface-0 text-center my-8 text-3xl">Mensal</div>
-                            <!-- <img src="/demo/images/landing/startup.svg" class="w-10/12 mx-auto" alt="startup" /> -->
+                            <div class="text-surface-900 dark:text-surface-0 text-center my-8 mb-2 text-3xl">Mensal</div>
                             <div class="my-8 flex flex-col items-center gap-4">
                                 <div class="flex items-center">
                                     <span class="text-5xl font-bold mr-2 text-surface-900 dark:text-surface-0">R$49</span>
                                     <span class="text-surface-600 dark:text-surface-200">por mês</span>
                                 </div>
-                                <Button label="Get Started" class="p-button-rounded border-0 ml-4 font-light leading-tight bg-blue-500 text-white"></Button>
+                                <Button label="Get Started" class="p-button-rounded border-0 mt-4 font-light leading-tight bg-blue-500 text-white"></Button>
                             </div>
                             <Divider class="w-full bg-surface-200"></Divider>
                             <ul class="my-8 list-none p-0 flex text-surface-900 dark:text-surface-0 flex-col px-8">
@@ -357,16 +354,16 @@ const smoothScroll = (id) => {
                         </div>
                     </div>
 
-                    <div class="col-span-12 lg:col-span-4 p-0 md:p-4 mt-6 md:mt-0">
+                    <div class="col-span-12 lg:col-span-4 p-0 md:m-4 mt-6 md:mt-0 relative">
                         <div class="p-4 flex flex-col border-surface-200 dark:border-surface-600 pricing-card cursor-pointer border-2 hover:border-primary duration-300 transition-all" style="border-radius: 10px">
-                            <div class="text-surface-900 dark:text-surface-0 text-center my-8 text-3xl">Anual</div>
-                            <!-- <img src="/demo/images/landing/enterprise.svg" class="w-10/12 mx-auto" alt="enterprise" /> -->
+                            <div class="ribbon" data-v-44da5c2c=""><span data-v-44da5c2c="">2 meses grátis</span></div>
+                            <div class="text-surface-900 dark:text-surface-0 text-center my-8 mb-2 text-3xl">Anual</div>
                             <div class="my-8 flex flex-col items-center gap-4">
                                 <div class="flex items-center">
                                     <span class="text-5xl font-bold mr-2 text-surface-900 dark:text-surface-0">R$499</span>
                                     <span class="text-surface-600 dark:text-surface-200">por ano</span>
                                 </div>
-                                <Button label="Get Started" class="p-button-rounded border-0 ml-4 font-light leading-tight bg-blue-500 text-white"></Button>
+                                <Button label="Get Started" class="p-button-rounded border-0 mt-4 font-light leading-tight bg-blue-500 text-white"></Button>
                             </div>
                             <Divider class="w-full bg-surface-200"></Divider>
                             <ul class="my-8 list-none p-0 flex text-surface-900 dark:text-surface-0 flex-col px-8">
@@ -474,6 +471,32 @@ const smoothScroll = (id) => {
             height: 3.5rem;
             border-radius: 10px;
         }
+    }
+}
+
+.ribbon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    overflow: hidden;
+    width: 146px;
+    height: 141px;
+    text-align: center;
+
+    span {
+        font-size: 14px;
+        font-weight: 700;
+        color: #fff;
+        line-height: 30px;
+        transform: rotate(45deg);
+        width: 188px;
+        display: block;
+        background: var(--primary-color);
+        box-shadow: 0 1px 4px 0 rgba(0,0,0,.3);
+        position: absolute;
+        top: 43px;
+        right: -36px;
     }
 }
 </style>
