@@ -81,11 +81,11 @@ const smoothScroll = (id) => {
                     <div class="feature-card col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 lg:pb-8 mt-6 lg:mt-0">
                         <div
                             class="card-background"
-                            style="background: linear-gradient(90deg, rgba(253, 228, 165, 0.2), rgba(187, 199, 205, 0.2)), linear-gradient(180deg, rgba(253, 228, 165, 0.2), rgba(187, 199, 205, 0.2))"
+                            style="background: linear-gradient(90deg, rgba(251, 219, 137, 0.2), rgba(187, 199, 205, 0.2)), linear-gradient(180deg, rgba(253, 228, 165, 0.2), rgba(187, 199, 205, 0.2))"
                         >
                             <div class="card-content p-4 bg-surface-0 dark:bg-surface-900 h-full">
                                 <div class="card-icon flex items-center justify-center bg-yellow-200 mb-4">
-                                    <i class="pi pi-fw pi-face-smile !text-2xl text-yellow-700"></i>
+                                    <i class="pi pi-fw pi-star !text-2xl text-yellow-700"></i>
                                 </div>
                                 <h5 class="mb-1 text-surface-900 dark:text-surface-0 text-xl">Fácil de usar</h5>
                                 <span class="text-surface-600 dark:text-surface-200">Interface intuitiva, simples e direto ao ponto</span>
@@ -96,7 +96,7 @@ const smoothScroll = (id) => {
                     <div class="feature-card col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 lg:pb-8 mt-6 lg:mt-0">
                         <div
                             class="card-background"
-                            style="background: linear-gradient(90deg, rgba(187, 199, 205, 0.2), rgba(251, 199, 145, 0.2)), linear-gradient(180deg, rgba(253, 228, 165, 0.2), rgba(145, 210, 204, 0.2))"
+                            style="background: linear-gradient(90deg, rgba(155, 155, 156, 0.2), rgba(251, 199, 145, 0.2)), linear-gradient(180deg, rgba(253, 228, 165, 0.2), rgba(145, 210, 204, 0.2))"
                         >
                             <div class="card-content p-4 bg-surface-0 dark:bg-surface-900 h-full">
                                 <div class="card-icon flex items-center justify-center bg-slate-200 mb-4">
@@ -111,7 +111,7 @@ const smoothScroll = (id) => {
                     <div class="feature-card col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 lg:pb-8 mt-6 lg:mt-0">
                         <div
                             class="card-background"
-                            style="background: linear-gradient(90deg, rgba(145, 226, 237, 0.2), rgba(251, 199, 145, 0.2)), linear-gradient(180deg, rgba(253, 228, 165, 0.2), rgba(172, 180, 223, 0.2))"
+                            style="background: linear-gradient(90deg, rgba(145, 226, 237, 0.2), rgba(251, 199, 145, 0.2)), linear-gradient(180deg, rgba(101, 206, 238, 0.2), rgba(172, 180, 223, 0.2))"
                         >
                             <div class="card-content p-4 bg-surface-0 dark:bg-surface-900 h-full">
                                 <div class="card-icon flex items-center justify-center bg-cyan-200 mb-4">
@@ -123,10 +123,10 @@ const smoothScroll = (id) => {
                         </div>
                     </div>
 
-                    <div class="feature-card col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 mt-6 lg:pb-8 lg:mt-0">
+                    <div class="feature-card col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 lg:pb-8 mt-6 lg:mt-0">
                         <div
                             class="card-background"
-                            style="background: linear-gradient(90deg, rgba(145, 210, 204, 0.2), rgba(212, 162, 221, 0.2)), linear-gradient(180deg, rgba(251, 199, 145, 0.2), rgba(160, 210, 250, 0.2))"
+                            style="background: linear-gradient(90deg, rgba(145, 210, 204, 0.2), rgba(212, 162, 221, 0.2)), linear-gradient(180deg, rgba(145, 221, 251, 0.2), rgba(160, 210, 250, 0.2))"
                         >
                             <div class="card-content p-4 bg-surface-0 dark:bg-surface-900 h-full">
                                 <div class="card-icon flex items-center justify-center bg-blue-200 mb-4">
@@ -141,7 +141,7 @@ const smoothScroll = (id) => {
                     <div class="feature-card col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 lg:pb-8 mt-6 lg:mt-0">
                         <div
                             class="card-background"
-                            style="background: linear-gradient(90deg, rgba(187, 199, 205, 0.2), rgba(246, 158, 188, 0.2)), linear-gradient(180deg, rgba(145, 226, 237, 0.2), rgba(160, 210, 250, 0.2))"
+                            style="background: linear-gradient(90deg, rgba(243, 207, 135, 0.2), rgba(246, 158, 188, 0.2)), linear-gradient(180deg, rgba(237, 200, 145, 0.2), rgba(160, 210, 250, 0.2))"
                         >
                             <div class="card-content p-4 bg-surface-0 dark:bg-surface-900 h-full">
                                 <div class="card-icon flex items-center justify-center bg-orange-200 mb-4">
@@ -156,7 +156,7 @@ const smoothScroll = (id) => {
                     <div class="feature-card col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 mt-6 lg:pb-8 lg:mt-0">
                         <div
                             class="card-background"
-                            style="background: linear-gradient(90deg, rgba(145, 210, 204, 0.2), rgba(160, 210, 250, 0.2)), linear-gradient(180deg, rgba(187, 199, 205, 0.2), rgba(145, 210, 204, 0.2))"
+                            style="background: linear-gradient(90deg, rgba(142, 225, 216, 0.2), rgba(160, 210, 250, 0.2)), linear-gradient(180deg, rgba(171, 215, 238, 0.2), rgba(145, 210, 204, 0.2))"
                         >
                             <div class="card-content p-4 bg-surface-0 dark:bg-surface-900 h-full">
                                 <div class="card-icon flex items-center justify-center bg-teal-200 mb-4">
@@ -168,7 +168,7 @@ const smoothScroll = (id) => {
                         </div>
                     </div>
 
-                    <div class="feature-card col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 lg-4 mt-6 lg:mt-0">
+                    <div class="feature-card col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 mt-6 lg:mt-0">
                         <div
                             class="card-background"
                             style="background: linear-gradient(90deg, rgba(160, 210, 250, 0.2), rgba(212, 162, 221, 0.2)), linear-gradient(180deg, rgba(246, 158, 188, 0.2), rgba(212, 162, 221, 0.2))"
@@ -183,17 +183,17 @@ const smoothScroll = (id) => {
                         </div>
                     </div>
 
-                    <div class="feature-card col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8  mt-6 lg:mt-0">
+                    <div class="feature-card col-span-12 md:col-span-12 lg:col-span-4 p-0 lg:pr-8 mt-6 lg:mt-0">
                         <div
                             class="card-background"
-                            style="background: linear-gradient(90deg, rgba(145, 226, 237, 0.2), rgba(172, 180, 223, 0.2)), linear-gradient(180deg, rgba(172, 180, 223, 0.2), rgba(246, 158, 188, 0.2))"
+                            style="background: linear-gradient(90deg, rgba(237, 165, 165, 0.2), rgba(246, 158, 188, 0.2)), linear-gradient(180deg, rgba(225, 202, 166, 0.2), rgba(221, 162, 187, 0.2))"
                         >
                             <div class="card-content p-4 bg-surface-0 dark:bg-surface-900 h-full">
-                                <div class="card-icon flex items-center justify-center bg-indigo-200 mb-4">
-                                    <i class="pi pi-fw pi-map !text-2xl text-indigo-700"></i>
+                                <div class="card-icon flex items-center justify-center bg-red-200 mb-4">
+                                    <i class="pi pi-fw pi-heart !text-2xl text-red-700"></i>
                                 </div>
-                                <div class="mb-1 text-surface-900 dark:text-surface-0 text-xl">Página de ajuda</div>
-                                <span class="text-surface-600 dark:text-surface-200">Temos vídeos aulas para caso de dúvidas</span>
+                                <div class="mb-1 text-surface-900 dark:text-surface-0 text-xl">Destaque seu produto</div>
+                                <span class="text-surface-600 dark:text-surface-200">Desperte o desejo de consumo com fotos de tirar o folego</span>
                             </div>
                         </div>
                     </div>
