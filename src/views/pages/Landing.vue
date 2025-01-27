@@ -239,24 +239,24 @@ const smoothScroll = (id) => {
                         <img src="/demo/images/landing/mockup-menu.webp" class="w-11/12" alt="mockup mobile" />
                     </div>
 
-                    <div class="col-span-12 lg:col-span-6 my-auto flex flex-col lg:items-end text-center lg:text-right gap-4">
+                    <div class="col-span-12 lg:col-span-6 my-auto flex flex-col items-center lg:items-end text-center lg:text-right gap-4">
                         <div class="flex items-center justify-center bg-purple-200 self-center lg:self-end" style="width: 4.2rem; height: 4.2rem; border-radius: 10px">
                             <i class="pi pi-fw pi-mobile !text-4xl text-purple-700"></i>
                         </div>
                         <div class="leading-none text-surface-900 dark:text-surface-0 text-3xl font-normal">Seus pratos merecem ser vistos</div>
-                        <span class="text-surface-700 dark:text-surface-100 text-xl sm:text-2xl leading-normal mx-auto" style="max-width: 650px"
+                        <span class="text-surface-700 dark:text-surface-100 text-xl sm:text-xl leading-normal" style="max-width: 650px"
                             >Já sentiu vontade de comer algo só de ver uma bela foto na rede social? Por que não fazer o mesmo com os seus pratos? 🤩</span
                         >
                     </div>
                 </div>
 
                 <div class="grid grid-cols-12 gap-4 my-20 py-2 md:py-20">
-                    <div class="col-span-12 lg:col-span-6 my-auto flex flex-col text-center lg:text-left lg:items-start gap-4">
+                    <div class="col-span-12 lg:col-span-6 my-auto flex flex-col items-center lg:items-start text-center lg:text-left gap-4">
                         <div class="flex items-center justify-center bg-yellow-200 self-center lg:self-start" style="width: 4.2rem; height: 4.2rem; border-radius: 10px">
                             <i class="pi pi-fw pi-desktop !text-3xl text-yellow-700"></i>
                         </div>
                         <div class="leading-none text-surface-900 dark:text-surface-0 text-3xl font-normal">Ajuste, adicione, remova</div>
-                        <span class="text-surface-700 dark:text-surface-100 text-xl sm:text-2xl leading-normal mx-auto" style="max-width: 650px"
+                        <span class="text-surface-700 dark:text-surface-100 text-xl sm:text-2xl leading-normal" style="max-width: 650px"
                             >Para que rasurar? Colar adesivo com novo preço? Dizer a todos clientes que o cardápio está desatualizado ou que o produto acabou? <br>💫 Basta ajustar seus itens feito mágica 🪄</span
                         >
                     </div>
@@ -271,12 +271,12 @@ const smoothScroll = (id) => {
                         <img src="/demo/images/landing/mockup-admin-mobile.webp" class="w-11/12" alt="mockup mobile" />
                     </div>
 
-                    <div class="col-span-12 lg:col-span-6 my-auto flex flex-col lg:items-end text-center lg:text-right gap-4">
+                    <div class="col-span-12 lg:col-span-6 my-auto flex flex-col items-center lg:items-end text-center lg:text-right gap-4">
                         <div class="flex items-center justify-center bg-purple-200 self-center lg:self-end" style="width: 4.2rem; height: 4.2rem; border-radius: 10px">
                             <i class="pi pi-fw pi-mobile !text-4xl text-purple-700"></i>
                         </div>
                         <div class="leading-none text-surface-900 dark:text-surface-0 text-3xl font-normal">Controle na palma de sua mão</div>
-                        <span class="text-surface-700 dark:text-surface-100 text-xl sm:text-2xl leading-normal mx-auto" style="max-width: 650px"
+                        <span class="text-surface-700 dark:text-surface-100 text-xl sm:text-2xl leading-normal" style="max-width: 650px"
                             >Tirou aquela foto top e deseja pôr no seu cardápio? Faça isso na mesma hora pelo celular. <br>Deixe seus clientes com ainda mais vontade 😋</span
                         >
                     </div>
