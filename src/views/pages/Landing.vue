@@ -33,17 +33,17 @@ const smoothScroll = (id) => {
                         </li>
                         <li>
                             <a @click="smoothScroll('#features')" class="px-0 py-4 text-surface-900 dark:text-surface-0 font-medium text-xl">
-                                <span>Features</span>
+                                <span>Vantagens</span>
                             </a>
                         </li>
                         <li>
                             <a @click="smoothScroll('#highlights')" class="px-0 py-4 text-surface-900 dark:text-surface-0 font-medium text-xl">
-                                <span>Highlights</span>
+                                <span>Destaques</span>
                             </a>
                         </li>
                         <li>
                             <a @click="smoothScroll('#pricing')" class="px-0 py-4 text-surface-900 dark:text-surface-0 font-medium text-xl">
-                                <span>Pricing</span>
+                                <span>Preço</span>
                             </a>
                         </li>
                     </ul>
@@ -65,6 +65,7 @@ const smoothScroll = (id) => {
                         Digital, Moderno e Elegante</h1>
                     <p class="font-normal text-xl md:text-2xl leading-normal pt-2 md:mt-4 text-gray-700">Uma nova experiência. Destaque seus pratos com belas imagens e impulsione seu negócio</p>
                     <Button label="Get Started" as="router-link" to="/" rounded class="!text-xl mt-8 !px-4"></Button>
+                    <Button label="Acessar demonstração" as="a" href="https://pioneiro.upzini.com" target="_blank" rel="noopener" rounded class="!text-xl mt-8 ml-4 !px-4"></Button>
                 </div>
                 <div class="flex justify-center md:justify-end">
                     <img src="/demo/images/landing/screen.webp" alt="Hero Image" class="md:w-8/12 w-auto" />
@@ -304,19 +305,19 @@ const smoothScroll = (id) => {
                             <ul class="my-8 list-none p-0 flex text-surface-900 dark:text-surface-0 flex-col px-8">
                                 <li class="py-2">
                                     <i class="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                    <span class="text-xl leading-normal">Responsive Layout</span>
+                                    <span class="text-xl leading-normal">Cardápio online</span>
                                 </li>
                                 <li class="py-2">
                                     <i class="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                    <span class="text-xl leading-normal">Unlimited Push Messages</span>
+                                    <span class="text-xl leading-normal">Gerador de QR Code</span>
                                 </li>
                                 <li class="py-2">
                                     <i class="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                    <span class="text-xl leading-normal">50 Support Ticket</span>
+                                    <span class="text-xl leading-normal">Cadastro ilimitado de produtos</span>
                                 </li>
                                 <li class="py-2">
                                     <i class="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                    <span class="text-xl leading-normal">Free Shipping</span>
+                                    <span class="text-xl leading-normal">Painel administrativo</span>
                                 </li>
                             </ul>
                         </div>
@@ -336,19 +337,19 @@ const smoothScroll = (id) => {
                             <ul class="my-8 list-none p-0 flex text-surface-900 dark:text-surface-0 flex-col px-8">
                                 <li class="py-2">
                                     <i class="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                    <span class="text-xl leading-normal">Responsive Layout</span>
+                                    <span class="text-xl leading-normal">Cardápio online</span>
                                 </li>
                                 <li class="py-2">
                                     <i class="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                    <span class="text-xl leading-normal">Unlimited Push Messages</span>
+                                    <span class="text-xl leading-normal">Gerador de QR Code</span>
                                 </li>
                                 <li class="py-2">
                                     <i class="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                    <span class="text-xl leading-normal">50 Support Ticket</span>
+                                    <span class="text-xl leading-normal">Cadastro ilimitado de produtos</span>
                                 </li>
                                 <li class="py-2">
                                     <i class="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                    <span class="text-xl leading-normal">Free Shipping</span>
+                                    <span class="text-xl leading-normal">Painel administrativo</span>
                                 </li>
                             </ul>
                         </div>
@@ -369,19 +370,19 @@ const smoothScroll = (id) => {
                             <ul class="my-8 list-none p-0 flex text-surface-900 dark:text-surface-0 flex-col px-8">
                                 <li class="py-2">
                                     <i class="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                    <span class="text-xl leading-normal">Responsive Layout</span>
+                                    <span class="text-xl leading-normal">Cardápio online</span>
                                 </li>
                                 <li class="py-2">
                                     <i class="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                    <span class="text-xl leading-normal">Unlimited Push Messages</span>
+                                    <span class="text-xl leading-normal">Gerador de QR Code</span>
                                 </li>
                                 <li class="py-2">
                                     <i class="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                    <span class="text-xl leading-normal">50 Support Ticket</span>
+                                    <span class="text-xl leading-normal">Cadastro ilimitado de produtos</span>
                                 </li>
                                 <li class="py-2">
                                     <i class="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                    <span class="text-xl leading-normal">Free Shipping</span>
+                                    <span class="text-xl leading-normal">Painel administrativo</span>
                                 </li>
                             </ul>
                         </div>
@@ -417,34 +418,16 @@ const smoothScroll = (id) => {
                     <div class="col-span-12 md:col-span-10">
                         <div class="grid grid-cols-12 gap-8 text-center md:text-left">
                             <div class="col-span-12 md:col-span-3">
-                                <h4 class="font-medium text-2xl leading-normal mb-4 text-surface-900 dark:text-surface-0">Company</h4>
-                                <a class="leading-normal text-xl block cursor-pointer mb-2 text-surface-700 dark:text-surface-100">About Us</a>
-                                <a class="leading-normal text-xl block cursor-pointer mb-2 text-surface-700 dark:text-surface-100">News</a>
-                                <a class="leading-normal text-xl block cursor-pointer mb-2 text-surface-700 dark:text-surface-100">Investor Relations</a>
-                                <a class="leading-normal text-xl block cursor-pointer mb-2 text-surface-700 dark:text-surface-100">Careers</a>
-                                <a class="leading-normal text-xl block cursor-pointer text-surface-700 dark:text-surface-100">Media Kit</a>
+                                <h4 class="font-medium text-2xl leading-normal mb-4 text-surface-900 dark:text-surface-0">Redes Sociais</h4>
+                                <a class="leading-normal text-xl block cursor-pointer mb-2 text-surface-700 dark:text-surface-100">Instagram</a>
+                                <a class="leading-normal text-xl block cursor-pointer mb-2 text-surface-700 dark:text-surface-100">Facebook</a>
+                                <a class="leading-normal text-xl block cursor-pointer text-surface-700 dark:text-surface-100">WhatsApp</a>
                             </div>
 
-                            <div class="col-span-12 md:col-span-3">
-                                <h4 class="font-medium text-2xl leading-normal mb-4 text-surface-900 dark:text-surface-0">Resources</h4>
-                                <a class="leading-normal text-xl block cursor-pointer mb-2 text-surface-700 dark:text-surface-100">Get Started</a>
-                                <a class="leading-normal text-xl block cursor-pointer mb-2 text-surface-700 dark:text-surface-100">Learn</a>
-                                <a class="leading-normal text-xl block cursor-pointer text-surface-700 dark:text-surface-100">Case Studies</a>
-                            </div>
-
-                            <div class="col-span-12 md:col-span-3">
-                                <h4 class="font-medium text-2xl leading-normal mb-4 text-surface-900 dark:text-surface-0">Community</h4>
-                                <a class="leading-normal text-xl block cursor-pointer mb-2 text-surface-700 dark:text-surface-100">Discord</a>
-                                <a class="leading-normal text-xl block cursor-pointer mb-2 text-surface-700 dark:text-surface-100">Events<img src="/demo/images/landing/new-badge.svg" class="ml-2" /></a>
-                                <a class="leading-normal text-xl block cursor-pointer mb-2 text-surface-700 dark:text-surface-100">FAQ</a>
-                                <a class="leading-normal text-xl block cursor-pointer text-surface-700 dark:text-surface-100">Blog</a>
-                            </div>
-
-                            <div class="col-span-12 md:col-span-3">
+                            <div class="col-span-12 md:col-span-9">
                                 <h4 class="font-medium text-2xl leading-normal mb-4 text-surface-900 dark:text-surface-0">Legal</h4>
-                                <a class="leading-normal text-xl block cursor-pointer mb-2 text-surface-700 dark:text-surface-100">Brand Policy</a>
-                                <a class="leading-normal text-xl block cursor-pointer mb-2 text-surface-700 dark:text-surface-100">Privacy Policy</a>
-                                <a class="leading-normal text-xl block cursor-pointer text-surface-700 dark:text-surface-100">Terms of Service</a>
+                                <a class="leading-normal text-xl block cursor-pointer mb-2 text-surface-700 dark:text-surface-100">Politica de Privacidade</a>
+                                <a class="leading-normal text-xl block cursor-pointer text-surface-700 dark:text-surface-100">Termos de Serviços</a>
                             </div>
                         </div>
                     </div>
