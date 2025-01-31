@@ -24,7 +24,7 @@ const smoothScroll = (id) => {
                 >
                     <i class="pi pi-bars !text-2xl"></i>
                 </Button>
-                <div class="items-center bg-surface-0 dark:bg-surface-900 grow justify-between hidden lg:flex absolute lg:static w-full left-0 top-full px-12 lg:px-0 z-20 rounded-border">
+                <div class="items-center bg-surface-0 dark:bg-surface-900 grow justify-between hidden lg:flex absolute lg:static w-full left-0 top-full px-12 lg:px-0 z-20 rounded-border pb-6 lg:pb-0">
                     <ul class="list-none p-0 m-0 flex lg:items-center select-none flex-col lg:flex-row cursor-pointer gap-8">
                         <li>
                             <a @click="smoothScroll('#hero')" class="px-0 py-4 text-surface-900 dark:text-surface-0 font-medium text-xl">
@@ -47,10 +47,6 @@ const smoothScroll = (id) => {
                             </a>
                         </li>
                     </ul>
-                    <div class="flex border-t lg:border-t-0 border-surface py-4 lg:py-0 mt-4 lg:mt-0 gap-2">
-                        <Button label="Login" text as="router-link" to="/auth/login" rounded></Button>
-                        <Button label="Register" to="/auth/login" rounded></Button>
-                    </div>
                 </div>
             </div>
 
@@ -64,10 +60,10 @@ const smoothScroll = (id) => {
                         <span class="font-light block mb-2 md:mb-4">Simplifique seu cardápio</span>
                         Digital, Moderno e Elegante</h1>
                     <p class="font-normal text-xl md:text-2xl leading-normal pt-2 md:mt-4 text-gray-700">Uma nova experiência. Destaque seus pratos com belas imagens e impulsione seu negócio</p>
-                    <Button label="Get Started" as="router-link" to="/" rounded class="!text-xl mt-8 !px-4"></Button>
-                    <Button label="Acessar demonstração" as="a" href="https://pioneiro.upzini.com" target="_blank" rel="noopener" rounded class="!text-xl mt-8 ml-4 !px-4"></Button>
+                    <Button label="Quero Contratar" as="router-link" to="/" rounded class="!text-lg md:!text-xl mt-8 !px-4"></Button>
+                    <Button label="Ver Demonstração" as="a" href="https://pioneiro.upzini.com" target="_blank" rel="noopener" rounded class="!text-lg md:!text-xl mt-8 ml-4 !px-4"></Button>
                 </div>
-                <div class="flex justify-center md:justify-end">
+                <div class="flex justify-center md:justify-end mt-6 md:mt-0">
                     <img src="/demo/images/landing/screen.webp" alt="Hero Image" class="md:w-8/12 w-auto" />
                 </div>
             </div>
@@ -291,15 +287,16 @@ const smoothScroll = (id) => {
                 </div>
 
                 <div class="grid grid-cols-12 gap-4 justify-between mt-20 md:mt-0">
-                    <div class="col-span-12 lg:col-span-4 p-0 md:m-4 mt-6 md:mt-0">
+                    <div class="col-span-12 lg:col-span-4 p-0 md:m-4 mt-6 md:mt-0 relative">
                         <div class="p-4 flex flex-col border-surface-200 dark:border-surface-600 pricing-card cursor-pointer border-2 hover:border-primary duration-300 transition-all" style="border-radius: 10px">
+                            <div class="ribbon"><span class="!bg-red-400">Vagas Limitadas</span></div>
                             <div class="text-surface-900 dark:text-surface-0 text-center my-8 mb-2 text-3xl">Parceria</div>
                             <div class="my-8 flex flex-col items-center gap-4">
                                 <div class="flex items-center">
                                     <span class="text-5xl font-bold mr-2 text-surface-900 dark:text-surface-0">R$0</span>
                                     <span class="text-surface-600 dark:text-surface-200">por mês</span>
                                 </div>
-                                <Button label="Get Started" class="p-button-rounded border-0 mt-4 font-light leading-tight bg-blue-500 text-white"></Button>
+                                <Button label="Entrar em Contato" class="p-button-rounded border-0 mt-4 font-light leading-tight bg-blue-500 text-white"></Button>
                             </div>
                             <Divider class="w-full bg-surface-200"></Divider>
                             <ul class="my-8 list-none p-0 flex text-surface-900 dark:text-surface-0 flex-col px-8">
@@ -331,7 +328,7 @@ const smoothScroll = (id) => {
                                     <span class="text-5xl font-bold mr-2 text-surface-900 dark:text-surface-0">R$49</span>
                                     <span class="text-surface-600 dark:text-surface-200">por mês</span>
                                 </div>
-                                <Button label="Get Started" class="p-button-rounded border-0 mt-4 font-light leading-tight bg-blue-500 text-white"></Button>
+                                <Button label="Quero Contratar" class="p-button-rounded border-0 mt-4 font-light leading-tight bg-blue-500 text-white"></Button>
                             </div>
                             <Divider class="w-full bg-surface-200"></Divider>
                             <ul class="my-8 list-none p-0 flex text-surface-900 dark:text-surface-0 flex-col px-8">
@@ -357,14 +354,14 @@ const smoothScroll = (id) => {
 
                     <div class="col-span-12 lg:col-span-4 p-0 md:m-4 mt-6 md:mt-0 relative">
                         <div class="p-4 flex flex-col border-surface-200 dark:border-surface-600 pricing-card cursor-pointer border-2 hover:border-primary duration-300 transition-all" style="border-radius: 10px">
-                            <div class="ribbon" data-v-44da5c2c=""><span data-v-44da5c2c="">2 meses grátis</span></div>
+                            <div class="ribbon"><span>2 meses grátis</span></div>
                             <div class="text-surface-900 dark:text-surface-0 text-center my-8 mb-2 text-3xl">Anual</div>
                             <div class="my-8 flex flex-col items-center gap-4">
                                 <div class="flex items-center">
                                     <span class="text-5xl font-bold mr-2 text-surface-900 dark:text-surface-0">R$499</span>
                                     <span class="text-surface-600 dark:text-surface-200">por ano</span>
                                 </div>
-                                <Button label="Get Started" class="p-button-rounded border-0 mt-4 font-light leading-tight bg-blue-500 text-white"></Button>
+                                <Button label="Quero Contratar" class="p-button-rounded border-0 mt-4 font-light leading-tight bg-blue-500 text-white"></Button>
                             </div>
                             <Divider class="w-full bg-surface-200"></Divider>
                             <ul class="my-8 list-none p-0 flex text-surface-900 dark:text-surface-0 flex-col px-8">
