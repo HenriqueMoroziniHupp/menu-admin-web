@@ -1,15 +1,7 @@
-<script setup>
-const isDesktop = () => {
-  const userAgent = navigator.userAgent.toLowerCase();
-
-  return !/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
-};
-
-if (isDesktop()) document.documentElement.classList.add('desktop');
+<script setup lang="ts">
+import Landing from './views/pages/Landing.vue';
 </script>
 
 <template>
-    <router-view />
+    <Landing />
 </template>
-
-<style scoped></style>
