@@ -7,7 +7,7 @@ const smoothScroll = (id) => {
 };
 
 const openWhatsApp = (plan) => {
-    const phone = '5517999814663';
+    const phone = '5527999814663';
     let message = '';
 
     switch(plan) {
