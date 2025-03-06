@@ -1,9 +1,18 @@
 <script setup>
+import { event } from 'vue-gtag';
+
 const smoothScroll = (id) => {
     document.body.click();
     document.querySelector(id).scrollIntoView({
         behavior: 'smooth'
     });
+
+    if(id === '#pricing') {
+        event('scrollToPricing', {
+            event_category: 'landing',
+            event_label: 'scrollToPricing'
+        });
+    }
 };
 
 const openWhatsApp = (plan) => {
@@ -22,8 +31,20 @@ const openWhatsApp = (plan) => {
             break;
     }
 
+    event('openWhatsApp', {
+        event_category: 'landing',
+        event_label: plan
+    });
+
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
+};
+
+const openDemo = () => {
+    event('openDemo', {
+        event_category: 'landing',
+        event_label: 'openDemo'
+    });
 };
 </script>
 
@@ -81,7 +102,7 @@ const openWhatsApp = (plan) => {
                         Digital, Moderno e Elegante</h1>
                     <h2 class="font-normal text-xl md:text-2xl leading-normal pt-2 md:mt-4 text-gray-700">Uma nova experiência. Destaque seus pratos com belas imagens e impulsione seu negócio</h2>
                     <Button @click="smoothScroll('#pricing')" label="Quero Contratar" rounded class="!text-lg md:!text-xl mt-8 !px-4"></Button>
-                    <Button label="Ver Demonstração" as="a" href="https://pioneiro.upzini.com" target="_blank" rel="noopener" rounded class="!text-lg md:!text-xl mt-8 ml-4 !px-4"></Button>
+                    <Button @click="openDemo" label="Ver Demonstração" as="a" href="https://pioneiro.upzini.com" target="_blank" rel="noopener" rounded class="!text-lg md:!text-xl mt-8 ml-4 !px-4"></Button>
                 </div>
                 <div class="flex justify-center md:justify-end mt-6 md:mt-0">
                     <img src="/demo/images/landing/screen.webp" alt="Hero Image" class="md:w-8/12 w-auto" />
