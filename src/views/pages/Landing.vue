@@ -101,8 +101,8 @@ const openDemo = () => {
                         <span class="font-light block mb-2 md:mb-4">Simplifique seu cardápio</span>
                         Digital, Moderno e Elegante</h1>
                     <h2 class="font-normal text-xl md:text-2xl leading-normal pt-2 md:mt-4 text-gray-700">Uma nova experiência. Destaque seus pratos com belas imagens e impulsione seu negócio</h2>
-                    <Button @click="smoothScroll('#pricing')" id="pricing" label="Quero Contratar" rounded class="!text-lg md:!text-xl mt-8 !px-4"></Button>
-                    <Button @click="openDemo" id="openDemo" label="Ver Demonstração" as="a" href="https://pioneiro.upzini.com" target="_blank" rel="noopener" rounded class="!text-lg md:!text-xl mt-8 ml-4 !px-4"></Button>
+                    <Button @click="smoothScroll('#pricing')" label="Quero Contratar" rounded class="!text-lg md:!text-xl mt-8 !px-4"></Button>
+                    <Button @click="openDemo" label="Ver Demonstração" as="a" href="https://pioneiro.upzini.com" target="_blank" rel="noopener" rounded class="!text-lg md:!text-xl mt-8 ml-4 !px-4"></Button>
                 </div>
                 <div class="flex justify-center md:justify-end mt-6 md:mt-0">
                     <img src="/demo/images/landing/screen.webp" alt="Hero Image" class="md:w-8/12 w-auto" />
@@ -337,7 +337,7 @@ const openDemo = () => {
                                     <span class="text-5xl font-bold mr-2 text-surface-900 dark:text-surface-0">R$0</span>
                                     <span class="text-surface-600 dark:text-surface-200">por mês</span>
                                 </div>
-                                <Button @click="openWhatsApp('parceria')" id="parceria" label="Entrar em Contato" class="p-button-rounded border-0 mt-4 font-light leading-tight bg-blue-500 text-white"></Button>
+                                <Button @click="openWhatsApp('parceria')" label="Entrar em Contato" class="p-button-rounded border-0 mt-4 font-light leading-tight bg-blue-500 text-white"></Button>
                             </div>
                             <Divider class="w-full bg-surface-200"></Divider>
                             <ul class="my-8 list-none p-0 flex text-surface-900 dark:text-surface-0 flex-col px-8">
@@ -369,7 +369,7 @@ const openDemo = () => {
                                     <span class="text-5xl font-bold mr-2 text-surface-900 dark:text-surface-0">R$49</span>
                                     <span class="text-surface-600 dark:text-surface-200">por mês</span>
                                 </div>
-                                <Button @click="openWhatsApp('mensal')" id="mensal" label="Quero Contratar" class="p-button-rounded border-0 mt-4 font-light leading-tight bg-blue-500 text-white"></Button>
+                                <Button @click="openWhatsApp('mensal')" label="Quero Contratar" class="p-button-rounded border-0 mt-4 font-light leading-tight bg-blue-500 text-white"></Button>
                             </div>
                             <Divider class="w-full bg-surface-200"></Divider>
                             <ul class="my-8 list-none p-0 flex text-surface-900 dark:text-surface-0 flex-col px-8">
@@ -402,7 +402,7 @@ const openDemo = () => {
                                     <span class="text-5xl font-bold mr-2 text-surface-900 dark:text-surface-0">R$499</span>
                                     <span class="text-surface-600 dark:text-surface-200">por ano</span>
                                 </div>
-                                <Button @click="openWhatsApp('anual')" id="anual" label="Quero Contratar" class="p-button-rounded border-0 mt-4 font-light leading-tight bg-blue-500 text-white"></Button>
+                                <Button @click="openWhatsApp('anual')" label="Quero Contratar" class="p-button-rounded border-0 mt-4 font-light leading-tight bg-blue-500 text-white"></Button>
                             </div>
                             <Divider class="w-full bg-surface-200"></Divider>
                             <ul class="my-8 list-none p-0 flex text-surface-900 dark:text-surface-0 flex-col px-8">
