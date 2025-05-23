@@ -1,0 +1,115 @@
+# .github/workflows/auto-comment-pr.yml
+
+# Nome do Workflow: Este nome aparecerá na aba "Actions" do seu repositório GitHub.
+name: Auto Comment on New PR
+
+# Gatilho (Trigger): Define quando este workflow será executado.
+on:
+  # Evento: pull_request
+  pull_request:
+    # Tipos: Especifica que o workflow deve rodar apenas quando uma PR for 'opened' (aberta).
+    # Outros tipos comuns incluem 'reopened', 'synchronize' (quando novos commits são adicionados), 'closed'.
+    types: [opened, synchronize]
+
+# Trabalhos (Jobs): Define uma ou mais tarefas que o workflow executará.
+jobs:
+  # Nome do Job: Um nome descritivo para o trabalho.
+  add-comment:
+    # Runner: Especifica o tipo de máquina virtual que executará o job.
+    # 'ubuntu-latest' é uma escolha comum e geralmente a mais atualizada.
+    runs-on: ubuntu-latest
+
+    # Passos (Steps): Sequência de tarefas que compõem o job.
+    steps:
+      # Passo 1: Atualizar o corpo da Pull Request.
+      - name: Update PR Body with Commit List
+        # Ação utilizada: actions/github-script@v7
+        # Esta ação permite executar scripts que podem interagir com a API do GitHub.
+        uses: actions/github-script@v7
+        with:
+          # Token do GitHub: Necessário para autenticar e autorizar a action a interagir com seu repositório.
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          # Script: O código JavaScript que será executado.
+          script: |
+            const emojiMap = {
+              'feat:': '✨',
+              'fix:': '🐛',
+              'docs:': '📝',
+              'style:': '💅',
+              'refactor:': '♻️',
+              'test:': '✅',
+              'perf:': '🚀',
+              'chore:': '🔧',
+              'ci:': '⚙️',
+              'build:': '🧱',
+              'revert:': '⏪',
+              'sync:': '🔄' // Adicionado para merge commits
+            };
+
+            const { data: commits } = await github.rest.pulls.listCommits({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+            });
+
+            let commitDetails = "Nenhum commit encontrado.";
+            if (commits && commits.length > 0) {
+              commitDetails = commits.map(commitData => {
+                const fullMessage = commitData.commit.message.split('\n')[0]; // Pega apenas a primeira linha
+                const commitUrl = commitData.html_url; // URL do commit
+                let formattedMessage = ''; 
+                let prefixMatched = false;
+
+                // Verificar primeiro se é um commit de merge
+                if (fullMessage.toLowerCase().startsWith('merge branch')) {
+                  formattedMessage = `${emojiMap['sync:']} **sync:** [${fullMessage}](${commitUrl})`;
+                  prefixMatched = true; // Consideramos como um prefixo correspondido para pular o loop abaixo
+                } else {
+                  // Se não for merge, procurar por outros prefixos semânticos
+                  for (const prefix in emojiMap) {
+                    // Ignorar 'sync:' aqui, pois já foi tratado
+                    if (prefix === 'sync:') continue; 
+                    
+                    if (fullMessage.toLowerCase().startsWith(prefix)) {
+                      const messageBody = fullMessage.substring(prefix.length).trim();
+                      formattedMessage = `${emojiMap[prefix]} **${prefix}** [${messageBody}](${commitUrl})`;
+                      prefixMatched = true;
+                      break;
+                    }
+                  }
+                }
+
+                if (!prefixMatched) {
+                  // Fallback para commits sem semântica conhecida e que não são merge
+                  formattedMessage = `📄 **misc:** [${fullMessage}](${commitUrl})`;
+                }
+                
+                return formattedMessage;
+              }).join('\n');
+            }
+
+            const descriptionSection = `
+            ### Descrição
+
+            ${commitDetails}
+            `;
+
+            const checklistContent = `
+
+            ---
+
+            #### 📌 Lembretes:
+            - [ ] Conferir branch de destino.
+            - [ ] Adicionar labels (se aplicável).
+            - [ ] Atualizar documentação (se aplicável).
+            `;
+
+            const finalPrBody = descriptionSection + checklistContent;
+
+            await github.rest.pulls.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+              body: finalPrBody
+            });
+            console.log(`Corpo da PR #${context.issue.number} atualizado com a lista de commits e checklist.`);
