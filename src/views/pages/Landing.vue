@@ -366,7 +366,7 @@ const openDemo = () => {
                             <div class="text-surface-900 dark:text-surface-0 text-center my-8 mb-2 text-3xl">Mensal</div>
                             <div class="my-8 flex flex-col items-center gap-4">
                                 <div class="flex items-center">
-                                    <span class="text-5xl font-bold mr-2 text-surface-900 dark:text-surface-0">R$49</span>
+                                    <span class="text-5xl font-bold mr-2 text-surface-900 dark:text-surface-0">R$40</span>
                                     <span class="text-surface-600 dark:text-surface-200">por mês</span>
                                 </div>
                                 <Button @click="openWhatsApp('mensal')" label="Quero Contratar" class="p-button-rounded border-0 mt-4 font-light leading-tight bg-blue-500 text-white"></Button>
@@ -399,7 +399,7 @@ const openDemo = () => {
                             <div class="text-surface-900 dark:text-surface-0 text-center my-8 mb-2 text-3xl">Anual</div>
                             <div class="my-8 flex flex-col items-center gap-4">
                                 <div class="flex items-center">
-                                    <span class="text-5xl font-bold mr-2 text-surface-900 dark:text-surface-0">R$499</span>
+                                    <span class="text-5xl font-bold mr-2 text-surface-900 dark:text-surface-0">R$400</span>
                                     <span class="text-surface-600 dark:text-surface-200">por ano</span>
                                 </div>
                                 <Button @click="openWhatsApp('anual')" label="Quero Contratar" class="p-button-rounded border-0 mt-4 font-light leading-tight bg-blue-500 text-white"></Button>
