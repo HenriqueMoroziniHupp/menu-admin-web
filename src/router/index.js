@@ -13,6 +13,7 @@ const router = createRouter({
                 {
                     path: '/',
                     name: 'dashboard',
+                    redirect: '/products',
                     component: () => import('@/views/Dashboard.vue')
                 },
                 {
@@ -97,11 +98,11 @@ router.beforeEach((to, from) => {
     const authStore = useAuthStore()
     const userStore = useUserStore()
 
-    if (to.name === 'login' && authStore.isAuthenticated) return { path: '/' }
+    if (to.name === 'login' && authStore.isAuthenticated) return { path: '/products' }
 
     if (to.meta.requiresAuth && !authStore.isAuthenticated && to.name !== 'login') return { name: 'login' }
 
-    if (to.meta.requireMaster && userStore.user.role !== 'superadmin') return { path: '/' }
+    if (to.meta.requireMaster && userStore.user.role !== 'superadmin') return { path: '/products' }
 })
 
 export default router
