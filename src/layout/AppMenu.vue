@@ -21,7 +21,7 @@ const model = ref([
     {
         label: 'Home',
         items: [
-            { label: t('DASHBOARD.MODULE'), icon: 'pi pi-fw pi-home', to: '/' },
+            // { label: t('DASHBOARD.MODULE'), icon: 'pi pi-fw pi-home', to: '/' },
             { label: t('SETTINGS.MODULE'), icon: 'pi pi-fw pi-cog', to: '/settings' },
             { label: t('CATEGORIES.MODULE'), icon: 'pi pi-fw pi-clone', to: '/categories' },
             { label: t('PRODUCTS.MODULE'), icon: 'pi pi-fw pi-list', to: '/products' },
