@@ -4,10 +4,13 @@ import App from './App.vue'
 import { definePreset } from '@primevue/themes'
 import Aura from '@primevue/themes/aura'
 import PrimeVue from 'primevue/config'
-import VueGtag from 'vue-gtag'
-
+import { configure } from 'vue-gtag'
 import '@/assets/styles.scss'
 import '@/assets/tailwind.css'
+
+configure({
+    tagId: 'G-MDT8EWFGZ8'
+})
 
 const MyPreset = definePreset(Aura, {
     semantic: {
@@ -35,9 +38,6 @@ app.use(PrimeVue, {
             darkModeSelector: '.app-dark'
         }
     }
-})
-.use(VueGtag, {
-    config: { id: 'G-MDT8EWFGZ8' }
 })
 
 app.mount('#app')
