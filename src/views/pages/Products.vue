@@ -132,7 +132,8 @@ const openDelete = (item: IProduct) => {
 };
 
 const hideDialog = () => {
-    product.value = resetProduct()
+    product.value = {} as IProduct
+    productTemp.value = {} as IProduct
     imageSelected.value = null
     editorDialog.value = false;
     submitted.value = false;
